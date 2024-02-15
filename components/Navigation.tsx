@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function Navigation() {
   return (
     <header>
@@ -16,9 +18,12 @@ function Navigation() {
               <div className="row align-items-center">
                 <div className="col-10 col-md-11 col-lg-11">
                   <div className="text-lg-right top-right-bar mt-2 mt-lg-0 ">
-                    <button className="btn btn-success float-right">
+                    <Link
+                      href="/wakaf"
+                      className="btn btn-success float-right text-white"
+                    >
                       Wakaf Sekarang
-                    </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-2 col-md-1 col-lg-1">
@@ -41,9 +46,9 @@ function Navigation() {
       </div>
       <nav className="navbar navbar-expand-lg navigation" id="navbar">
         <div className="container">
-          <a className="navbar-brand text-dark h1 font-weight-bold" href="/">
+          <Link className="navbar-brand text-dark h1 font-weight-bold" href="/">
             <h1 className="text-new-primary">Al Fatih 2</h1>
-          </a>
+          </Link>
 
           <button
             className="navbar-toggler collapsed"
@@ -60,30 +65,30 @@ function Navigation() {
           <div className="collapse navbar-collapse" id="navbarmain">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" href="/">
                   Beranda
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/about">
+                <Link className="nav-link" href="/about">
                   About
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/donasi">
-                  Donasi
-                </a>
+                <Link className="nav-link" href="/donasi">
+                  Wakaf
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/blogs">
+                <Link className="nav-link" href="/blogs">
                   Blog
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="/contact">
+                <Link className="nav-link" href="/contact">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
