@@ -3,7 +3,7 @@
 import FeatureCard from "@/components/AboutComponent/FeatureCard";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/footer";
-import TabPaneComponent from "@/components/partials/bootstrapComponents/TabPaneComponent";
+import TabPaneComponent from "@/components/partials/bootstrapComponents/FormDonasi";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
