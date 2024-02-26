@@ -1,6 +1,5 @@
 "use client";
 
-import { InputMask } from "@react-input/mask";
 import { useState } from "react";
 import ListPaketWakaf from "./ListPaketWakaf";
 import Link from "next/link";
@@ -9,35 +8,36 @@ const Datas = [
   {
     id: 1,
     name: "Paket 1",
-    price: 250000,
+    price: 300000,
   },
   {
     id: 2,
     name: "Paket 2",
-    price: 500000,
+    price: 600000,
   },
   {
     id: 3,
     name: "Paket 3",
-    price: 750000,
+    price: 1200000,
   },
   {
     id: 4,
     name: "Paket 4",
-    price: 1000000,
+    price: 1800000,
   },
 ];
 const FormDonasi = () => {
-  const [TotalWakaf, setTotalWakaf] = useState(250000);
+  const [TotalWakaf, setTotalWakaf] = useState(300000);
+  const [PaketWakaf, setPaketWakaf] = useState("");
   const handleAddWakaf = () => {
-    setTotalWakaf(TotalWakaf + 250000);
+    setTotalWakaf(TotalWakaf + 300000);
   };
 
   const handleMinWakaf = () => {
     if (TotalWakaf == 1) {
       setTotalWakaf(1);
     } else {
-      setTotalWakaf(TotalWakaf - 250000);
+      setTotalWakaf(TotalWakaf - 300000);
     }
   };
 
@@ -72,7 +72,7 @@ const FormDonasi = () => {
                   -
                 </button>
                 <h5 className="text-white">
-                  {TotalWakaf ? (1 ? TotalWakaf / 250000 : 0 / 250000) : 0}
+                  {TotalWakaf ? (1 ? TotalWakaf / 300000 : 0 / 300000) : 0}
                 </h5>
                 <button
                   type="button"
