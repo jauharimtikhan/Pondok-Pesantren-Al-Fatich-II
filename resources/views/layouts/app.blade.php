@@ -94,6 +94,25 @@
                 title: msg
             });
         }
+
+        function DeleteData(datas) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success mx-2",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            return swalWithBootstrapButtons.fire({
+                title: datas.title,
+                text: datas.text,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: datas.confirmButtonText,
+                cancelButtonText: datas.cancelButtonText,
+                reverseButtons: true
+            })
+        }
     </script>
 
     @stack('js')

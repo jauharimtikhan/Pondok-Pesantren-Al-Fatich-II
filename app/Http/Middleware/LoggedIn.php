@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoggedIn
@@ -16,6 +17,10 @@ class LoggedIn
      */
     public function handle(Request $request, Closure $next)
     {
+        $user = DB::table('users')->where('id', Logged()['id'])->first();
+        if (!$user) {
+            return redirect('/');
+        }
         if (Logged()) {
             return $next($request);
         }

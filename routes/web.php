@@ -38,6 +38,11 @@ Route::middleware('LoggedIn')->group(function () {
 
     // Route Kategori
     Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
+    Route::get('/kategori/get', [CategoryController::class, 'get'])->name('kategori.get');
+    Route::get('/kategori/getbyid/{id}', [CategoryController::class, 'getById'])->name('kategori.getById');
+    Route::post('/kategori/add', [CategoryController::class, 'create'])->name('kategori.add');
+    Route::post('/kategori/edit', [CategoryController::class, 'update'])->name('kategori.edit');
+    Route::delete('/kategori/delete/{id}', [CategoryController::class, 'destroy'])->name('kategori.delete');
 });
 
 

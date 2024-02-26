@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Tokens;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,16 @@ class LoggedOut
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Logged()) {
-            // return $next($request);
-            return redirect('/home');
+        $authorize = $request->header("Authorization");
+        $token = Tokens::where("token", $authorize)->first();
+        if ($token) {
+            return $next($request);
+        } else {
+            return response()->json([
+                'status' => false,
+                'statusCode' => 401,
+                'message' => 'Unauthorized'
+            ], 401);
         }
     }
 }
