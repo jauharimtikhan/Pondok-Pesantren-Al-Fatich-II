@@ -20,10 +20,12 @@
                 <span>Manajemen Artikel</span>
             </a>
 
-            <ul class="submenu ">
+            <ul class="submenu " id="mnSub">
                 <li class="submenu-item" id="mnSubKategoriPost">
                     <a href="{{ route('kategori') }}" class="submenu-link">Kategori Artikel</a>
                 </li>
+                <li class="submenu-item" id="mnSubPost"><a href="{{ route('artikel') }}"
+                        class="submenu-link">Artikel</a></li>
             </ul>
         </li>
     </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,15 @@ use Ramsey\Uuid\Uuid;
 
 class AuthController extends Controller
 {
+    public function index(): View
+    {
+        return view('auth.login');
+    }
 
+    public function registerView(): View
+    {
+        return view('auth.register');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -75,8 +84,14 @@ class AuthController extends Controller
         if (!Hash::check($request->password, $user->password)) {
             return redirect('/')->witherrors(['error' => 'Password salah'])->withInput();
         }
-        $request->session()->put('user', $user);
-        return redirect('/home');
+        // $request->session()->put('user', $user);
+        // return redirect('/home');
+
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return redirect('/')->witherrors(['error' => 'Email atau Password salah'])->withInput();
+        }
+        $request->session()->regenerate();
+        return redirect()->route('home');
     }
 
 
@@ -87,7 +102,8 @@ class AuthController extends Controller
     public function destroy(Request $request)
     {
 
-        $request->session()->forget('user');
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
         return redirect()->route('/');
     }
 }

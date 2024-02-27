@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('/');
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
 
-Route::middleware('LoggedIn')->group(function () {
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/', 'index')->name('/')->middleware('guest');
+    Route::get('/register', 'registerView')->name('register');
+    Route::post('/login',  'authenticate')->name('login');
+    Route::post('/register', 'create')->name('register');
+    Route::get('/logout', 'destroy')->name('logout');
+});
+
+Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('pages.home');
     })->name('home');
@@ -43,10 +46,8 @@ Route::middleware('LoggedIn')->group(function () {
     Route::post('/kategori/add', [CategoryController::class, 'create'])->name('kategori.add');
     Route::post('/kategori/edit', [CategoryController::class, 'update'])->name('kategori.edit');
     Route::delete('/kategori/delete/{id}', [CategoryController::class, 'destroy'])->name('kategori.delete');
+
+    // Route Artikel
+    Route::get('/artikel', [PostController::class, 'index'])->name('artikel');
+    Route::get('/artikel/add', [PostController::class, 'addView'])->name('artikel.add');
 });
-
-
-
-Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
-Route::post('/register', [AuthController::class, 'create'])->name('register');
-Route::get('/logout', [AuthController::class, 'destroy'])->name('logout');

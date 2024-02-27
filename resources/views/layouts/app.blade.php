@@ -15,17 +15,19 @@
 
     <link rel="stylesheet" href="{{ asset('assets') }}/compiled/css/app.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/compiled/css/app-dark.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/filepond/filepond.css">
+    <link rel="stylesheet"
+        href="{{ asset('assets') }}/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css">
     <link
         href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.0/b-3.0.0/b-colvis-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/sl-2.0.0/datatables.min.css"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.0/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="assets/extensions/choices.js/public/assets/styles/choices.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/choices.js/public/assets/styles/choices.css">
 
+    @stack('css')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script
         src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.0/b-3.0.0/b-colvis-3.0.0/b-html5-3.0.0/b-print-3.0.0/r-3.0.0/sl-2.0.0/datatables.min.js">
     </script>
@@ -50,10 +52,33 @@
     <script src="{{ asset('assets') }}/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('assets') }}/static/js/initTheme.js"></script>
 
-    <script src="{{ asset('assets') }}/compiled/js/app.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="{{ asset('assets') }}/extensions/choices.js/public/assets/scripts/choices.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script
+        src="{{ asset('assets') }}/extensions/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js">
+    </script>
+    <script
+        src="{{ asset('assets') }}/extensions/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js">
+    </script>
+    <script src="{{ asset('assets') }}/extensions/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
+    <script
+        src="{{ asset('assets') }}/extensions/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js">
+    </script>
+    <script src="{{ asset('assets') }}/extensions/filepond-plugin-image-filter/filepond-plugin-image-filter.min.js">
+    </script>
+    <script src="{{ asset('assets') }}/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js">
+    </script>
+    <script src="{{ asset('assets') }}/extensions/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js">
+    </script>
+    <script src="{{ asset('assets') }}/extensions/filepond/filepond.js"></script>
+    <script src="{{ asset('assets') }}/static/js/pages/filepond.js"></script>
+    <script src="https://cdn.tiny.cloud/1/jms2tweywgkzz1rnsadif6d4hoxe24xqkvmrqstu4e9ov9ff/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+
+    <script src="{{ asset('assets') }}/compiled/js/app.js"></script>
     <script>
         let choices = document.querySelectorAll(".choices");
         let initChoice;

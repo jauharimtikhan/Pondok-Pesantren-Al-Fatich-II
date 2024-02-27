@@ -50,7 +50,7 @@
                         @csrf
                         <div class="form-group mb-3">
                             <label for="name" class="form-label">Nama Kategori</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <input type="text" name="name" autocomplete="on" id="name" class="form-control">
                             <span class="text-danger name"></span>
                         </div>
                 </div>
@@ -66,7 +66,6 @@
     </div>
 
     {{-- Modal Edit --}}
-
     <div class="modal fade modal-borderless" id="modaledit" tabindex="-1" data-bs-backdrop="static"
         data-bs-keyboard="false" role="dialog" aria-labelledby="modaledittitle" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
@@ -76,12 +75,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" class="form-edit">
+                    <form action="" method="post" class="form-edit" autocomplete="off">
                         @csrf
                         <input type="hidden" name="id" id="idedit">
                         <div class="form-group mb-3">
                             <label for="name" class="form-label">Nama Kategori</label>
-                            <input type="text" name="name" id="nameedit" class="form-control">
+                            <input autocomplete="off" type="text" name="name" id="nameedit" class="form-control">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -94,10 +93,12 @@
             </div>
         </div>
     </div>
+    {{-- End Modal Edit --}}
 @endsection
 @push('js')
     <script>
         $('#mnPost').addClass('active')
+        $('#mnSub').addClass('active')
         $('#mnSubKategoriPost').addClass('active')
         getCategories()
         let table = $('#tableKategoriPost').DataTable({

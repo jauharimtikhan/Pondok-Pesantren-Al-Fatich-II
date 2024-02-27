@@ -53,20 +53,22 @@
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" placeholder="Name" class="form-control" id="name" name="name">
+                                <input autocomplete="on" type="text" placeholder="Name" class="form-control"
+                                    id="name" name="name">
                                 <span class="text-danger name"></span>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" name="email" id="email" placeholder="Email"
+                                <input autocomplete="on" type="text" name="email" id="email" placeholder="Email"
                                     class="form-control">
                                 <span class="text-danger email"></span>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group flex-nowrap">
-                                    <input type="text" name="password" id="password" class="form-control"
-                                        placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input autocomplete="on" type="text" name="password" id="password"
+                                        class="form-control" placeholder="Password" aria-label="Username"
+                                        aria-describedby="basic-addon1">
                                     <span class="input-group-text" style="cursor: pointer;" id="generate">
                                         🔄
                                     </span>
@@ -112,19 +114,20 @@
                             <input type="hidden" name="checkpass" id="checkpass">
                             <div class="form-group mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" placeholder="Name" class="form-control" id="nameedit"
-                                    name="name">
+                                <input autocomplete="off" type="text" placeholder="Name" class="form-control"
+                                    id="nameedit" name="name">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" name="email" id="emailedit" placeholder="Email"
-                                    class="form-control">
+                                <input autocomplete="off" type="text" name="email" id="emailedit"
+                                    placeholder="Email" class="form-control">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group flex-nowrap">
-                                    <input type="text" name="password" id="passwordedit" class="form-control"
-                                        placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input autocomplete="off" type="text" name="password" id="passwordedit"
+                                        class="form-control" placeholder="Password" aria-label="Username"
+                                        aria-describedby="basic-addon1">
                                     <span class="input-group-text" style="cursor: pointer;" id="generate">
                                         🔄
                                     </span>
