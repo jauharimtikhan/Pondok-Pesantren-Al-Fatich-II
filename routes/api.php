@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PaymentController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\WakafController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('LoggedOut')->group(function () {
+    // Route Payment
     Route::post('/payment', [PaymentController::class, 'store']);
+    Route::get('/payment_status', [PaymentController::class, 'getStatusPayment']);
+    Route::post('/payment/update_amount', [PaymentController::class, 'updateLastAmount']);
+
+    // Route List Wakaf
+    Route::get('/wakaf', [WakafController::class, 'getWakafPagination']);
+    Route::get('/wakaf/{id}', [WakafController::class, 'getWakafById']);
+
+    // Route List Paket Wakaf
+    Route::get('/paket_wakaf/{id}', [WakafController::class, 'getPaketWakafApi']);
 });

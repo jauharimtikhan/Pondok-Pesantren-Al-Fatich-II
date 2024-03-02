@@ -8,6 +8,10 @@ for (let i = 0; i < choices.length; i++) {
             maxItemCount: -1,
             removeItemButton: true,
             allowHTML: true,
+            allowHTML: true,
+            noResultsText: "Tidak Ada Hasil",
+            noChoicesText: "Tidak Ada Pilihan ",
+            itemSelectText: "Tekan Untuk Memilih",
         });
     } else {
         initChoice = new Choices(choices[i]);

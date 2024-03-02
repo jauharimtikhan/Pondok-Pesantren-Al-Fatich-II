@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WakafController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,4 +51,18 @@ Route::middleware('auth')->group(function () {
     // Route Artikel
     Route::get('/artikel', [PostController::class, 'index'])->name('artikel');
     Route::get('/artikel/add', [PostController::class, 'addView'])->name('artikel.add');
+
+    // Route Wakaf
+    Route::get('/wakaf', [WakafController::class, 'index'])->name('wakaf');
+    Route::get('/paket_wakaf', [WakafController::class, 'ViewPaketWakaf'])->name('paket_wakaf');
+    Route::get('/wakaf/get', [WakafController::class, 'get'])->name('wakaf.get');
+    Route::get('/wakaf/getbyid/{id}', [WakafController::class, 'getById'])->name('wakaf.getById');
+    Route::post('/wakaf/add', [WakafController::class, 'create'])->name('wakaf.add');
+    Route::post('/wakaf/edit', [WakafController::class, 'update'])->name('wakaf.edit');
+    Route::post('/paket_wakaf/add', [WakafController::class, 'create_paket_wakaf'])->name('paket_wakaf.add');
+    Route::get('/paket_wakaf/get', [WakafController::class, 'getPaketWakaf'])->name('paket_wakaf.get');
+    Route::get('/pakte_wakaf/{id}', [WakafController::class, 'getPaketById'])->name('paket_wakaf.getById');
+    Route::post('/paket_wakaf/edit', [WakafController::class, 'update_paket_wakaf'])->name('paket_wakaf.edit');
+    Route::delete('/paket_wakaf/delete/{id}', [WakafController::class, 'paket_wakaf_destroy'])->name('paket_wakaf.delete');
+    Route::delete('/wakaf/delete/{id}', [WakafController::class, 'destroy'])->name('wakaf.delete');
 });
