@@ -10,13 +10,9 @@ const AboutSection = () => {
           <div className="row align-items-center">
             <div className="col-lg-4 col-sm-6">
               <div className="about-img">
+                <img src="images/about-1.jpg" alt="" className="img-fluid" />
                 <img
-                  src="images/about/img-1.jpg"
-                  alt=""
-                  className="img-fluid"
-                />
-                <img
-                  src="images/about/img-2.jpg"
+                  src="images/about-2.jpg"
                   alt=""
                   className="img-fluid mt-4"
                 />
@@ -24,29 +20,25 @@ const AboutSection = () => {
             </div>
             <div className="col-lg-4 col-sm-6">
               <div className="about-img mt-4 mt-lg-0">
-                <img
-                  src="images/about/img-3.jpg"
-                  alt=""
-                  className="img-fluid"
-                />
+                <img src="images/about-2.jpg" alt="" className="img-fluid" />
               </div>
             </div>
             <div className="col-lg-4">
               <div className="about-content pl-4 mt-4 mt-lg-0">
-                <h2 className="title-color">
-                  Personal care <br />& healthy living
-                </h2>
+                <h2 className="title-color">Tentang Kami</h2>
                 <p className="mt-4 mb-5">
-                  We provide best leading medicle service Nulla perferendis
-                  veniam deleniti ipsum officia dolores repellat laudantium
-                  obcaecati neque.
+                  Yayasan Pendidikan Islam Al Fatich 2 adalah lembaga pendidikan
+                  yang berkomitmen untuk memberikan pendidikan berkualitas
+                  dengan nilai-nilai Islam yang kuat. Terletak di Sentul Timur,
+                  Sentul, Kecamatan Tembelang, Kabupaten Jombang, Jawa Timur
+                  61452
                 </p>
 
                 <a
-                  href="service.html"
+                  href="/about"
                   className="btn btn-new-main-2 btn-round-full btn-icon text-new-main-2"
                 >
-                  Services
+                  Tentang Kami
                   <i className="icofont-simple-right ml-3"></i>
                 </a>
               </div>

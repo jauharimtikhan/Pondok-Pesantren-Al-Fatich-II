@@ -14,11 +14,13 @@ function Footer() {
             <div className="widget mb-5 mb-lg-0">
               <div className="logo mb-4">
                 <Image src={Logos} alt="" className="img-fluid" width={80} />
-                <span className="h4">Al FAtih 2</span>
+                <span className="h4">PP Al Fatich 2</span>
               </div>
               <p>
-                Tempora dolorem voluptatum nam vero assumenda voluptate, facilis
-                ad eos obcaecati tenetur veritatis eveniet distinctio possimus.
+                Yayasan Pendidikan Islam Al Fatich 2 adalah lembaga pendidikan
+                yang berkomitmen untuk memberikan pendidikan berkualitas dengan
+                nilai-nilai Islam yang kuat. Terletak di Sentul Timur, Sentul,
+                Kecamatan Tembelang, Kabupaten Jombang, Jawa Timur 61452
               </p>
 
               <ul className="list-inline footer-socials mt-4">
@@ -52,24 +54,24 @@ function Footer() {
 
           <div className="col-lg-2 col-md-6 col-sm-6">
             <div className="widget mb-5 mb-lg-0">
-              <h4 className="text-capitalize mb-3">Department</h4>
+              <h4 className="text-capitalize mb-3">Tautan Cepat</h4>
               <div className="divider mb-4"></div>
 
               <ul className="list-unstyled footer-menu lh-35">
                 <li>
-                  <a href="#">Surgery </a>
+                  <a href="/">Beranda</a>
                 </li>
                 <li>
-                  <a href="#">Wome's Health</a>
+                  <a href="/about">Tentang Kami</a>
                 </li>
                 <li>
-                  <a href="#">Radiology</a>
+                  <a href="/donasi">Wakaf</a>
                 </li>
                 <li>
-                  <a href="#">Cardioc</a>
+                  <a href="/blogs">Artikel</a>
                 </li>
                 <li>
-                  <a href="#">Medicine</a>
+                  <a href="/contact">Kontak Kami</a>
                 </li>
               </ul>
             </div>
@@ -77,24 +79,21 @@ function Footer() {
 
           <div className="col-lg-2 col-md-6 col-sm-6">
             <div className="widget mb-5 mb-lg-0">
-              <h4 className="text-capitalize mb-3">Support</h4>
+              <h4 className="text-capitalize mb-3">Bantuan</h4>
               <div className="divider mb-4"></div>
 
               <ul className="list-unstyled footer-menu lh-35">
                 <li>
-                  <a href="#">Terms & Conditions</a>
+                  <a href="#">Syarat & Ketentuan</a>
                 </li>
                 <li>
-                  <a href="#">Privacy Policy</a>
+                  <a href="#">Kebijakan pribadi</a>
                 </li>
                 <li>
-                  <a href="#">Company Support </a>
+                  <a href="#">Dukungan Perusahaan </a>
                 </li>
                 <li>
-                  <a href="#">FAQuestions</a>
-                </li>
-                <li>
-                  <a href="#">Company Licence</a>
+                  <a href="#">Lisensi Perusahaan</a>
                 </li>
               </ul>
             </div>
@@ -102,35 +101,50 @@ function Footer() {
 
           <div className="col-lg-3 col-md-6 col-sm-6">
             <div className="widget widget-contact mb-5 mb-lg-0">
-              <h4 className="text-capitalize mb-3">Get in Touch</h4>
+              <h4 className="text-capitalize mb-3">Kontak</h4>
               <div className="divider mb-4"></div>
 
               <div className="footer-contact-block mb-4">
                 <div className="icon d-flex align-items-center">
                   <i className="icofont-email mr-3"></i>
-                  <span className="h6 mb-0">Support Available for 24/7</span>
+                  <span className="h6 mb-0">Email Admin Kami</span>
                 </div>
-                <h4 className="mt-2">
-                  <a href="tel:+23-345-67890">Support@email.com</a>
-                </h4>
+                <h5 className="mt-2">
+                  <a
+                    target="_blank"
+                    className="text-break"
+                    href="mailto:pondokpesantrenalfatcih@gmail.com"
+                  >
+                    pondokpesantrenalfatcih@gmail.com
+                  </a>
+                </h5>
               </div>
 
               <div className="footer-contact-block">
                 <div className="icon d-flex align-items-center">
-                  <i className="icofont-support mr-3"></i>
-                  <span className="h6 mb-0">Mon to Fri : 08:30 - 18:00</span>
+                  <i className="icofont-whatsapp mr-3"></i>
+                  <span className="h6 mb-0">Whatsapp Admin Kami</span>
                 </div>
                 <h4 className="mt-2">
-                  <a href="tel:+23-345-67890">+23-456-6588</a>
+                  <a href="#">+62 823 1234 567</a>
                 </h4>
               </div>
               <div className="footer-contact-block mt-3">
                 <div className="icon d-flex align-items-center">
                   <i className="icofont-location-pin mr-3"></i>
-                  <span className="h6 mb-0">
-                    Sentul Timur, Sentul, Kec. Tembelang, Kabupaten Jombang,
-                    Jawa Timur 61452
-                  </span>
+                  <span className="h6 mb-0">Alamat Pondok Pesantren</span>
+                </div>
+                <div className="mt-2 rounded">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15823.648785543863!2d112.23289028866321!3d-7.474948105103801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7815f4b4b1b267%3A0x48851718a39bd78b!2sSentul%20Timur%2C%20Sentul%2C%20Kec.%20Tembelang%2C%20Kabupaten%20Jombang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1709377946847!5m2!1sid!2sid"
+                    width={200}
+                    height={200}
+                    className="rounded-lg"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
               </div>
             </div>
@@ -141,26 +155,12 @@ function Footer() {
           <div className="row align-items-center justify-content-between">
             <div className="col-lg-6">
               <div className="copyright">
-                &copy; Copyright Al Fatih
+                &copy; Copyright - {new Date().getFullYear()} PP. Al Fatich 2
                 <span className="text-color"></span> by
                 <a href="#" target="_blank">
                   {" "}
-                  Jauhar Imtikhan
+                  Tim PKM UNWAHA
                 </a>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="subscribe-form text-lg-right mt-5 mt-lg-0">
-                <form action="#" className="subscribe">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Your Email address"
-                  />
-                  <a href="#" className="btn btn-main-2 btn-round-full">
-                    Subscribe
-                  </a>
-                </form>
               </div>
             </div>
           </div>

@@ -21,15 +21,14 @@ const page = () => {
                 data-aos="fade-up"
                 data-aos-duration="250"
               >
-                <span className="text-white">Contact Us</span>
-                <h1 className="text-capitalize mb-5 text-lg">Get in Touch</h1>
+                <h1 className="text-capitalize mb-5 text-lg">Hubungi Kami</h1>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section contact-info pb-0">
+      <section className="section contact-info pb-0 mb-4 ">
         <div className="container">
           <div className="row">
             <div
@@ -42,8 +41,8 @@ const page = () => {
                   className="icofont-live-support "
                   style={{ color: "#016a70" }}
                 ></i>
-                <h5>Call Us</h5>
-                +823-4565-13456
+                <h5>Whatsapp</h5>
+                +6282 1111 1111
               </div>
             </div>
             <div
@@ -56,8 +55,8 @@ const page = () => {
                   className="icofont-support-faq"
                   style={{ color: "#016a70" }}
                 ></i>
-                <h5>Email Us</h5>
-                contact@mail.com
+                <h5>Email</h5>
+                pondokpesantrenalfatcih@gmail.com
               </div>
             </div>
             <div
@@ -70,122 +69,10 @@ const page = () => {
                   className="icofont-location-pin"
                   style={{ color: "#016a70" }}
                 ></i>
-                <h5>Location</h5>
+                <h5>Lokasi</h5>
                 Sentul Timur, Sentul, Kec. Tembelang, Kabupaten Jombang, Jawa
                 Timur 61452
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="contact-form-wrap section"
-        data-aos="fade-up"
-        data-aos-duration="1200"
-      >
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-6">
-              <div className="section-title text-center">
-                <h2 className="text-md mb-2">Contact us</h2>
-                <div className="divider mx-auto my-4"></div>
-                <p className="mb-5">
-                  Laboriosam exercitationem molestias beatae eos pariatur,
-                  similique, excepturi mollitia sit perferendis maiores ratione
-                  aliquam?
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12">
-              <form
-                id="contact-form"
-                className="contact__form "
-                method="post"
-                action="mail.php"
-              >
-                <div className="row">
-                  <div className="col-12">
-                    <div
-                      className="alert alert-success contact__msg"
-                      style={{ display: "none" }}
-                      role="alert"
-                    >
-                      Your message was sent successfully.
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="form-group">
-                      <input
-                        name="name"
-                        id="name"
-                        type="text"
-                        className="form-control"
-                        placeholder="Your Full Name"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-lg-6">
-                    <div className="form-group">
-                      <input
-                        name="email"
-                        id="email"
-                        type="email"
-                        className="form-control"
-                        placeholder="Your Email Address"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="form-group">
-                      <input
-                        name="subject"
-                        id="subject"
-                        type="text"
-                        className="form-control"
-                        placeholder="Your Query Topic"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="form-group">
-                      <input
-                        name="phone"
-                        id="phone"
-                        type="text"
-                        className="form-control"
-                        placeholder="Your Phone Number"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-group-2 mb-4">
-                  <textarea
-                    name="message"
-                    id="message"
-                    className="form-control"
-                    rows={8}
-                    placeholder="Your Message"
-                  ></textarea>
-                </div>
-
-                <div className="text-center">
-                  <button
-                    className="btn btn-new-primary"
-                    name="submit"
-                    type="submit"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
         </div>

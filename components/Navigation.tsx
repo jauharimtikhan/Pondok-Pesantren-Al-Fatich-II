@@ -19,7 +19,7 @@ function Navigation() {
                 <div className="col-10 col-md-11 col-lg-11">
                   <div className="text-lg-right top-right-bar mt-2 mt-lg-0 ">
                     <Link
-                      href="/wakaf"
+                      href="/donasi"
                       className="btn btn-success float-right text-white"
                     >
                       Wakaf Sekarang
@@ -47,7 +47,7 @@ function Navigation() {
       <nav className="navbar navbar-expand-lg navigation" id="navbar">
         <div className="container">
           <Link className="navbar-brand text-dark h1 font-weight-bold" href="/">
-            <h1 className="text-new-primary">Al Fatih 2</h1>
+            <h1 className="text-new-primary">PP Al Fatich 2</h1>
           </Link>
 
           <button
@@ -71,7 +71,7 @@ function Navigation() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/about">
-                  About
+                  Tentang Kami
                 </Link>
               </li>
               <li className="nav-item">
@@ -79,15 +79,15 @@ function Navigation() {
                   Wakaf
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" href="/blogs">
                   Blog
                 </Link>
-              </li>
+              </li> */}
 
               <li className="nav-item">
                 <Link className="nav-link" href="/contact">
-                  Contact
+                  Kontak
                 </Link>
               </li>
             </ul>

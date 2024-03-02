@@ -30,7 +30,7 @@ export default function Home() {
 
       <ServiceSection />
 
-      <AppointmentSection />
+      {/* <AppointmentSection /> */}
 
       <TestimonialSection />
 

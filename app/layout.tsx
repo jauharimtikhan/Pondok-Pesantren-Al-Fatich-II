@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "Dibuat sepenuh hati dan cinta oleh tim Mahasiswa UNWAHA Jombang",
   authors: {
-    name: "Alfatih",
+    name: "PP. Al Fatich 2",
   },
   icons: {
     icon: [
@@ -55,9 +55,9 @@ export default function RootLayout({
         <Script src="/plugins/slick-carousel/slick/slick.min.js"></Script>
         <Script src="/plugins/counterup/jquery.waypoints.min.js"></Script>
         {/* <Script src="/plugins/shuffle/shuffle.min.js"></Script> */}
-        <Script src="/plugins/counterup/jquery.counterup.min.js"></Script>
+        {/* <Script src="/plugins/counterup/jquery.counterup.min.js"></Script> */}
         <Script src="/plugins/google-map/map.js"></Script>
-        <Script src="/js/script.js"></Script>
+        <Script src="./js/script.js"></Script>
         {children}
       </body>
     </html>

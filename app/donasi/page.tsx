@@ -1,17 +1,41 @@
 "use client";
 
 import FeatureCard from "@/components/AboutComponent/FeatureCard";
+import Card from "@/components/DonasiComponent/Card";
 import Navigation from "@/components/Navigation";
+import Pagination from "@/components/Pagination";
 import Footer from "@/components/footer";
-import TabPaneComponent from "@/components/partials/bootstrapComponents/FormDonasi";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const page = () => {
+  const [donasi, setDonasi] = useState([]);
+  const [paginate, setPaginate]: any = useState([]);
+  const [pesan, setPesan] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const handleFetch = async () => {
+    setPesan(true);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/wakaf?page=${page}&perPage=10`,
+      {
+        headers: {
+          Authorization: `${process.env.NEXT_PUBLIC_API_KEY}`,
+        },
+      }
+    );
+    const data = await response.json();
+    // console.log(data);
+
+    setPaginate(data.result);
+    setDonasi(data.result.data);
+    setPesan(false);
+  };
+
   useEffect(() => {
     AOS.init();
-  }, []);
+    handleFetch();
+  }, [page]);
   return (
     <>
       <Navigation />
@@ -52,48 +76,75 @@ const page = () => {
                 kami selaku penyelenggara program ini akan mendistribusi kan
                 sumbangan anda ke yang membutuhkan.
               </p>
+              <p>
+                Silahkan pilih salah satu program yang sedang berjalan di bawah
+                ini!
+              </p>
             </div>
           </div>
         </div>
       </section>
-      <div className="d-flex justify-content-center">
-        <Link href="/wakaf" className="btn btn-success btn-lg text-white mb-4">
-          {" "}
-          Wakaf Sekarang
-        </Link>
-      </div>
+      {/* <div className="d-flex justify-content-center">
+        {donasi.map((item: any) =>
+          item.is_featured > 0 ? (
+            <Link
+              key={item.id}
+              href={`/wakaf?campaign_id=${item.id}&multiple=${}`}
+              className="btn btn-success btn-lg text-white mb-4"
+            >
+              {" "}
+              Wakaf Sekarang
+            </Link>
+          ) : (
+            ""
+          )
+        )}
+      </div> */}
       <section
         className="fetaure-page"
         data-aos="fade-up"
         data-aos-duration="200"
       >
+        {pesan === true ? (
+          <div className="d-flex justify-content-center align-items-center">
+            <div className="spinner-border text-success" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="container">
           <div className="row">
-            <FeatureCard data-aos="fade-up" data-aos-duration="400" />
-            <FeatureCard data-aos="fade-up" data-aos-duration="800" />
-            <FeatureCard data-aos="fade-up" data-aos-duration="1200" />
-            <FeatureCard data-aos="fade-up" data-aos-duration="1600" />
+            {donasi.map((item: any) =>
+              donasi.length > 0 ? (
+                <Card
+                  key={item.id}
+                  id={item.id}
+                  title={item.name}
+                  description={item.description}
+                  img={item.image}
+                  data-aos="fade-up"
+                  data-aos-duration="400"
+                />
+              ) : (
+                <p className="text-center">Tidak ada donasi</p>
+              )
+            )}
           </div>
         </div>
       </section>
-      <div className="row mt-5 ml-2 mb-5">
-        <div className="col-lg-8 ">
-          <nav className="pagination py-2 d-inline-block">
-            <div className="nav-links">
-              <span aria-current="page" className="page-numbers current">
-                1
-              </span>
-              <a className="page-numbers" href="#">
-                2
-              </a>
-              <a className="page-numbers" href="#">
-                3
-              </a>
-              <a className="page-numbers" href="#">
-                <i className="icofont-thin-double-right"></i>
-              </a>
-            </div>
-          </nav>
+      <div className="row mt-5  mb-5">
+        <div className="col-lg-12 d-flex justify-content-center">
+          {donasi?.length > 0 ? (
+            <Pagination
+              page={page}
+              totalPages={paginate.total}
+              setPage={setPage}
+            />
+          ) : (
+            <p className="text-center"></p>
+          )}
         </div>
       </div>
       <Footer />

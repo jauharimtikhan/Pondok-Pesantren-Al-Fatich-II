@@ -145,6 +145,48 @@
     ],
   });
 
+  $(".kegiatan-pondok-wrap-2").slick({
+    slidesToShow: 4,
+    slidesToScroll: 2,
+    infinite: true,
+    dots: true,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  });
+
   var map;
 
   function initialize() {
@@ -167,10 +209,10 @@
 
   // Counter
 
-  $(".counter-stat span").counterUp({
-    delay: 10,
-    time: 1000,
-  });
+  // $(".counter-stat span").counterUp({
+  //   delay: 10,
+  //   time: 1000,
+  // });
 
   // Shuffle js filter and masonry
   // var Shuffle = window.Shuffle;
