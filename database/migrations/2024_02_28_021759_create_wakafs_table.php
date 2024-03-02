@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('last_amount')->nullable();
             $table->string('link');
             $table->string('image');
+            $table->boolean('is_featured')->default(false);
             $table->dateTime('expire_date');
             $table->timestamps();
         });
