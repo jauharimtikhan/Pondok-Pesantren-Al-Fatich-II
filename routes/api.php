@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\WakafController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,8 @@ Route::middleware('LoggedOut')->group(function () {
     Route::post('/payment', [PaymentController::class, 'store']);
     Route::get('/payment_status', [PaymentController::class, 'getStatusPayment']);
     Route::post('/payment/update_amount', [PaymentController::class, 'updateLastAmount']);
+    Route::post('/payment/create', [TransactionController::class, 'create']);
+    Route::post('/payment/update', [TransactionController::class, 'update']);
 
     // Route List Wakaf
     Route::get('/wakaf', [WakafController::class, 'getWakafPagination']);
@@ -27,4 +31,13 @@ Route::middleware('LoggedOut')->group(function () {
 
     // Route List Paket Wakaf
     Route::get('/paket_wakaf/{id}', [WakafController::class, 'getPaketWakafApi']);
+
+    Route::get('/test', function (Request $request) {
+        $sum = "250000" + "250000.00";
+        return response()->json([
+            'status' => true,
+            'statusCode' => 200,
+            'data' => $sum
+        ]);
+    });
 });

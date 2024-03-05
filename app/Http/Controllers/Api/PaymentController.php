@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Donatur;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Midtrans\Snap;
@@ -24,6 +25,8 @@ class PaymentController extends Controller
     {
 
         $check_donatur = DB::table('donaturs')->where('phone', $request->phone)->first();
+        $checkPayment = DB::table('transactions')->where('donatur_id', $check_donatur->id)->first();
+        $check_wakaf = DB::table('wakafs')->where('id', $request->wakaf_id)->first();
         if (!$check_donatur) {
             $data = [
                 'id' => Uuid::uuid4()->toString(),
@@ -32,44 +35,64 @@ class PaymentController extends Controller
                 'wakaf_id' => $request->wakaf_id
             ];
             Donatur::create($data);
-        }
-        $params = [
-            'transaction_details' => [
-                'order_id' => 'WAKAF-' . random_int(100000000, 999999999),
-                'gross_amount' => $request->total,
-            ],
-            'customer_details' => [
-                'first_name' => $request->name,
-                'phone' => $request->phone,
-            ],
-            'item_details' => [
-                [
-                    'id'            => random_int(0, 100),
-                    'price'         => $request->total,
-                    'quantity'      => 1,
-                    'name'          => 'Wakaf kepada ' . config('app.name'),
-                    'brand'         => 'Wakaf',
-                    'category'      => 'Wakaf',
-                    'merchant_name' => config('app.name'),
-                ]
-            ]
-        ];
+        } else {
+            if ($checkPayment->status == "pending") {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 400,
+                    'message' => 'Anda sudah melakukan transaksi'
+                ], 400);
+            } else {
+
+                $dataPayment = [
+                    'id' => Uuid::uuid4()->toString(),
+                    'donatur_id' => $check_donatur->id,
+                    'wakaf_id' => $request->wakaf_id,
+                    'status' => 'pending'
+                ];
+                Transaction::create($dataPayment);
+                $params = [
+                    'transaction_details' => [
+                        'order_id' => 'WAKAF-' . random_int(100000000, 999999999),
+                        'gross_amount' => $request->total,
+                    ],
+                    'customer_details' => [
+                        'first_name' => $request->name,
+                        'phone' => $request->phone,
+                    ],
+                    'item_details' => [
+                        [
+                            'id'            => random_int(0, 100),
+                            'price'         => $request->total,
+                            'quantity'      => 1,
+                            'name'          => 'Wakaf kepada ' . config('app.name'),
+                            'brand'         => 'Wakaf',
+                            'category'      => 'Wakaf',
+                            'merchant_name' => config('app.name'),
+                        ]
+                    ],
+                    'callbacks' => [
+                        'finish' => getenv('FRONTEND_URL') . '?wakaf_id=' . $request->wakaf_id . '&donatur_id=' . $check_donatur->id . '&last_amount=' . $check_wakaf->last_amount
+                    ]
+                ];
 
 
-        try {
-            $snapTokens = Snap::getSnapToken($params);
-            \Midtrans\Config::$overrideNotifUrl = "https://07b8-180-247-170-16.ngrok-free.app/paymentsuccess?wakaf_id=" . $request->wakaf_id . "&donatur_id=" . $check_donatur->id;
-            return response()->json([
-                'status' => true,
-                'statusCode' => 200,
-                'snap_token' => $snapTokens
-            ], 200);
-        } catch (\Exception $th) {
-            return response()->json([
-                'status' => false,
-                'statusCode' => 400,
-                'snap_token' => $th->getMessage()
-            ], 400);
+                try {
+                    $snapTokens = Snap::getSnapToken($params);
+
+                    return response()->json([
+                        'status' => true,
+                        'statusCode' => 200,
+                        'snap_token' => $snapTokens
+                    ], 200);
+                } catch (\Exception $th) {
+                    return response()->json([
+                        'status' => false,
+                        'statusCode' => 400,
+                        'errors' => $th->getMessage()
+                    ], 400);
+                }
+            }
         }
     }
 

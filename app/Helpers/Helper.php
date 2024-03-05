@@ -19,6 +19,15 @@ if (!function_exists('Logged')) {
 if (!function_exists('RP')) {
     function RP($string)
     {
-        return  preg_replace('/[^0-9]/', '', $string);
+        $angka = str_replace(["Rp. ", ".", ','], "", $string);
+
+        return  intval($angka);
+    }
+}
+
+if (!function_exists('convertRp')) {
+    function convertRp($string)
+    {
+        return number_format($string, 0, ',', '.');
     }
 }
