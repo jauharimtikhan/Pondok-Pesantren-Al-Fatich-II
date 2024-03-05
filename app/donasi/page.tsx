@@ -41,7 +41,9 @@ const page = () => {
       <Navigation />
       <section
         className="page-title bg-1"
-        style={{ background: 'url("/images/bg/22.jpg") no-repeat 50% 50%' }}
+        style={{
+          background: 'url("/images/logo/logo-alfatih.png") no-repeat 50% 50%',
+        }}
       >
         <div className="overlay"></div>
         <div className="container">

@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
-import Link from "next/navigation";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 interface PaginationProps {
@@ -43,9 +43,13 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <nav className="pagination py-2 d-inline-block">
       <div className="nav-links">
-        <a className="page-numbers" onClick={handlePrevPage} href={prevPages}>
+        <Link
+          className="page-numbers"
+          onClick={handlePrevPage}
+          href={prevPages}
+        >
           <i className="icofont-thin-double-left"></i>
-        </a>
+        </Link>
         <span aria-current="page" className={`page-numbers current`}>
           {page}
         </span>
@@ -53,9 +57,9 @@ const Pagination: React.FC<PaginationProps> = ({
           <u>dari</u>
         </span>
         <span className="page-numbers">{totalPages ?? 0}</span>
-        <a className="page-numbers" onClick={handleNextPage} href={nextPages}>
+        <Link className="page-numbers" onClick={handleNextPage} href={nextPages}>
           <i className="icofont-thin-double-right"></i>
-        </a>
+        </Link>
       </div>
     </nav>
   );

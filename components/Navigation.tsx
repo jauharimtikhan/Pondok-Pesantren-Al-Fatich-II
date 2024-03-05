@@ -46,8 +46,17 @@ function Navigation() {
       </div>
       <nav className="navbar navbar-expand-lg navigation" id="navbar">
         <div className="container">
-          <Link className="navbar-brand text-dark h1 font-weight-bold" href="/">
-            <h1 className="text-new-primary">PP Al Fatich 2</h1>
+          <Link
+            className="navbar-brand text-dark h1 font-weight-bold d-none d-md-block d-lg-block"
+            href="/"
+          >
+            <h1 className="text-new-primary">Pon Pes Al Fatich 2</h1>
+          </Link>
+          <Link
+            className="navbar-brand text-dark h4 font-weight-bold d-block d-md-none d-lg-none"
+            href="/"
+          >
+            <h4 className="text-new-primary">Pon Pes Al Fatich 2</h4>
           </Link>
 
           <button

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PartnersComponents from "../partials/PartnersComponents";
 import AOS from "aos";
+import Image from "next/image";
 
 const ClientSection = () => {
   useEffect(() => {
@@ -23,8 +24,11 @@ const ClientSection = () => {
 
         <div className="container">
           <div className="d-flex justify-content-center">
-            <img
-              src="../images/laziznu.png"
+            <Image
+              width={300}
+              height={300}
+              priority
+              src="/images/laziznu.png"
               alt=""
               className="img-fluid"
               style={{ width: "30%" }}

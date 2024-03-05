@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const SidebarContent = () => {
   return (
     <>
@@ -21,21 +23,23 @@ const SidebarContent = () => {
             <div className="py-2">
               <span className="text-sm text-muted">03 Mar 2018</span>
               <h6 className="my-2">
-                <a href="#">Thoughtful living in los Angeles</a>
+                <Link href="#">Thoughtful living in los Angeles</Link>
               </h6>
             </div>
 
             <div className="py-2">
               <span className="text-sm text-muted">03 Mar 2018</span>
               <h6 className="my-2">
-                <a href="#">Vivamus molestie gravida turpis.</a>
+                <Link href="#">Vivamus molestie gravida turpis.</Link>
               </h6>
             </div>
 
             <div className="py-2">
               <span className="text-sm text-muted">03 Mar 2018</span>
               <h6 className="my-2">
-                <a href="#">Fusce lobortis lorem at ipsum semper sagittis</a>
+                <Link href="#">
+                  Fusce lobortis lorem at ipsum semper sagittis
+                </Link>
               </h6>
             </div>
           </div>
@@ -45,23 +49,23 @@ const SidebarContent = () => {
 
             <ul className="list-unstyled">
               <li className="align-items-center">
-                <a href="#">Medicine</a>
+                <Link href="#">Medicine</Link>
                 <span>(14)</span>
               </li>
               <li className="align-items-center">
-                <a href="#">Equipments</a>
+                <Link href="#">Equipments</Link>
                 <span>(2)</span>
               </li>
               <li className="align-items-center">
-                <a href="#">Heart</a>
+                <Link href="#">Heart</Link>
                 <span>(10)</span>
               </li>
               <li className="align-items-center">
-                <a href="#">Free counselling</a>
+                <Link href="#">Free counselling</Link>
                 <span>(5)</span>
               </li>
               <li className="align-items-center">
-                <a href="#">Lab test</a>
+                <Link href="#">Lab test</Link>
                 <span>(5)</span>
               </li>
             </ul>
@@ -70,15 +74,15 @@ const SidebarContent = () => {
           <div className="sidebar-widget tags mb-3">
             <h5 className="mb-4">Tags</h5>
 
-            <a href="#">Doctors</a>
-            <a href="#">agency</a>
-            <a href="#">company</a>
-            <a href="#">medicine</a>
-            <a href="#">surgery</a>
-            <a href="#">Marketing</a>
-            <a href="#">Social Media</a>
-            <a href="#">Branding</a>
-            <a href="#">Laboratory</a>
+            <Link href="#">Doctors</Link>
+            <Link href="#">agency</Link>
+            <Link href="#">company</Link>
+            <Link href="#">medicine</Link>
+            <Link href="#">surgery</Link>
+            <Link href="#">Marketing</Link>
+            <Link href="#">Social Media</Link>
+            <Link href="#">Branding</Link>
+            <Link href="#">Laboratory</Link>
           </div>
 
           <div className="sidebar-widget schedule-widget mb-3">

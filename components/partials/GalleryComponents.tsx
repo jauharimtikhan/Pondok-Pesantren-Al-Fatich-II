@@ -1,12 +1,16 @@
+import Image from "next/image";
 import React from "react";
 
 const GalleryComponents = () => {
   return (
-    <div className="col-6 col-md-4 col-lg-3 my-3 mx-3">
-      <img
-        src="images/about/about-1.jpg"
+    <div className="col-6 col-md-4 col-lg-3 my-1 ">
+      <Image
+        width={600}
+        height={400}
+        priority
+        src="/images/about-2.jpg"
         alt=""
-        className="rounded img-fluid"
+        className="rounded-full img-fluid box-shadow-1"
       />
     </div>
   );

@@ -131,7 +131,7 @@ const page = () => {
                     <span>Dana Terkumpul</span>
                     <span>
                       {wakafById.data_wakaf?.last_amount
-                        ? wakafById.data_wakaf.last_amount
+                        ? ConvertRP(wakafById.data_wakaf.last_amount)
                         : "Rp. 0"}
                     </span>
                   </li>

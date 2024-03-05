@@ -77,13 +77,6 @@ const about = () => {
             <GalleryComponents />
             <GalleryComponents />
             <GalleryComponents />
-            <GalleryComponents />
-            <GalleryComponents />
-            <GalleryComponents />
-            <GalleryComponents />
-            <GalleryComponents />
-            <GalleryComponents />
-            <GalleryComponents />
           </div>
         </div>
       </section>

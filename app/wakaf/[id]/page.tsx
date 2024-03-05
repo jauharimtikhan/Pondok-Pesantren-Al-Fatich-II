@@ -27,54 +27,84 @@ const Continue = () => {
   const handleFormSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/payment`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `${process.env.NEXT_PUBLIC_API_KEY}`,
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(formdata),
+        }
+      );
+
+      const data = await response.json();
+      setTimeout(() => {
+        (window as any).snap.pay(data.snap_token, {
+          onSuccess: function (result: any) {
+            toast.success("Pembayaran Berhasil", {
+              duration: 3000,
+              position: "top-center",
+            });
+          },
+          onPending: function (result: any) {
+            toast.success("Pembayaran Sedang Diproses", {
+              duration: 3000,
+              position: "top-center",
+            });
+            console.log(result);
+          },
+          onError: function (result: any) {
+            toast.error("Pembayaran Gagal", {
+              duration: 3000,
+              position: "top-center",
+            });
+          },
+          onClose: function () {
+            toast.error("Anda Mengakhiri Transaksi", {
+              duration: 3000,
+              position: "top-center",
+            });
+          },
+        });
+      }, 2000);
+      if (data.statusCode == 400) {
+        toast.error(data.message, {
+          duration: 3000,
+          position: "top-center",
+        });
+      }
+
+      setLoader(false);
+    } catch (err: any) {
+      toast.error(err, {
+        duration: 3000,
+        position: "top-center",
+      });
+    }
+  };
+
+  const handleCreatePayments = async (FromData: any) => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/payment`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/payment/create`,
       {
         method: "POST",
         headers: {
           Authorization: `${process.env.NEXT_PUBLIC_API_KEY}`,
           "content-type": "application/json",
         },
-        body: JSON.stringify(formdata),
+        body: JSON.stringify(FromData),
       }
     );
 
     const data = await response.json();
+    console.log(data);
 
-    (window as any).snap.pay(data.snap_token, {
-      onSuccess: function (result: any) {
-        toast.success("Pembayaran Berhasil", {
-          duration: 3000,
-          position: "top-center",
-        });
-        console.log(result);
-      },
-      onPending: function (result: any) {
-        /* You may add your own implementation here */
-        toast.success("Pembayaran Sedang Diproses", {
-          duration: 3000,
-          position: "top-center",
-        });
-        console.log(result);
-      },
-      onError: function (result: any) {
-        /* You may add your own implementation here */
-        toast.error("Pembayaran Gagal", {
-          duration: 3000,
-          position: "top-center",
-        });
-        console.log(result);
-      },
-      onClose: function () {
-        // alert("you closed the popup without finishing the payment");
-        /* You may add your own implementation here */
-        toast.error("Anda Mengakhiri Transaksi", {
-          duration: 3000,
-          position: "top-center",
-        });
-      },
-    });
-    setLoader(false);
+    // if()
+    // callback
   };
 
   // console.log(total);

@@ -40,6 +40,7 @@ const wakaf = () => {
     );
 
     const data = await response.json();
+    console.log(data);
 
     setWakafById(data.result);
     setLoading(false);
@@ -73,23 +74,23 @@ const wakaf = () => {
       const billion = Math.floor(number / 1000000000);
       const million = Math.round((number % 1000000000) / 1000000);
       if (million === 0) {
-        result = `${billion}M/orang`;
+        result = `${billion}M`;
       } else {
-        result = `${billion}.${million}M/orang`;
+        result = `${billion}.${million}M`;
       }
     } else if (number >= 1000000) {
       const million = Math.floor(number / 1000000);
       const thousand = Math.round((number % 1000000) / 1000);
       if (thousand === 0) {
-        result = `${million}JT/orang`;
+        result = `${million}JT`;
       } else {
-        result = `${million}.${thousand}JT/orang`;
+        result = `${million}.${thousand}JT`;
       }
     } else if (number >= 1000) {
       const thousand = Math.floor(number / 1000);
-      result = `${thousand}K/orang`;
+      result = `${thousand}K`;
     } else {
-      result = `${number}/orang`;
+      result = `${number}`;
     }
 
     return result;

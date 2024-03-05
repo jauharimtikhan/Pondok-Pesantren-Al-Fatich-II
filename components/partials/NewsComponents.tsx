@@ -7,7 +7,7 @@ const NewsComponents = () => {
       <div className="card">
         <div className="card-body">
           <div className="row">
-            <div className="col-7">
+            <div className="col-7" style={{ cursor: "pointer" }}>
               <Image
                 src="/images/blog/blog-1.jpg"
                 width={600}
@@ -17,8 +17,10 @@ const NewsComponents = () => {
               />
             </div>
             <div className="col-5">
-              <h3 className="card-title">Berita Terkini</h3>
-              <p className="text-dot">
+              <h3 className="card-title" style={{ cursor: "pointer" }}>
+                Berita Terkini
+              </h3>
+              <p className="text-truncate" style={{ cursor: "pointer" }}>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi
                 similique culpa enim aliquid, obcaecati saepe esse. Impedit
                 vitae laborum quaerat officia, mollitia atque nisi veniam

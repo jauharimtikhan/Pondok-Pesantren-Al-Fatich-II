@@ -1,6 +1,7 @@
 "use client";
 import Logos from "@/public/images/logo/logo-alfatih.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const handleTop = () => {
   window.scrollTo(0, 0);
@@ -12,9 +13,14 @@ function Footer() {
         <div className="row">
           <div className="col-lg-4 mr-auto col-sm-6">
             <div className="widget mb-5 mb-lg-0">
-              <div className="logo mb-4">
-                <Image src={Logos} alt="" className="img-fluid" width={80} />
-                <span className="h4">PP Al Fatich 2</span>
+              <div className="logo mb-4 d-flex align-items-center">
+                <Image
+                  src={Logos}
+                  alt=""
+                  className="img-fluid d-none d-md-block d-lg-block"
+                  width={80}
+                />
+                <span className="h5">Pon Pes Al Fatich 2</span>
               </div>
               <p>
                 Yayasan Pendidikan Islam Al Fatich 2 adalah lembaga pendidikan
@@ -25,28 +31,28 @@ function Footer() {
 
               <ul className="list-inline footer-socials mt-4">
                 <li className="list-inline-item">
-                  <a href="#">
+                  <Link href="#">
                     <i
                       className="icofont-facebook"
                       style={{ color: "white" }}
                     ></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="list-inline-item">
-                  <a href="#">
+                  <Link href="#">
                     <i
                       className="icofont-twitter"
                       style={{ color: "white" }}
                     ></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="list-inline-item">
-                  <a href="#">
+                  <Link href="#">
                     <i
                       className="icofont-linkedin"
                       style={{ color: "white" }}
                     ></i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -59,19 +65,19 @@ function Footer() {
 
               <ul className="list-unstyled footer-menu lh-35">
                 <li>
-                  <a href="/">Beranda</a>
+                  <Link href="/">Beranda</Link>
                 </li>
                 <li>
-                  <a href="/about">Tentang Kami</a>
+                  <Link href="/about">Tentang Kami</Link>
                 </li>
                 <li>
-                  <a href="/donasi">Wakaf</a>
+                  <Link href="/donasi">Wakaf</Link>
                 </li>
                 <li>
-                  <a href="/blogs">Artikel</a>
+                  <Link href="/blogs">Artikel</Link>
                 </li>
                 <li>
-                  <a href="/contact">Kontak Kami</a>
+                  <Link href="/contact">Kontak Kami</Link>
                 </li>
               </ul>
             </div>
@@ -84,16 +90,16 @@ function Footer() {
 
               <ul className="list-unstyled footer-menu lh-35">
                 <li>
-                  <a href="#">Syarat & Ketentuan</a>
+                  <Link href="#">Syarat & Ketentuan</Link>
                 </li>
                 <li>
-                  <a href="#">Kebijakan pribadi</a>
+                  <Link href="#">Kebijakan pribadi</Link>
                 </li>
                 <li>
-                  <a href="#">Dukungan Perusahaan </a>
+                  <Link href="#">Dukungan Perusahaan </Link>
                 </li>
                 <li>
-                  <a href="#">Lisensi Perusahaan</a>
+                  <Link href="#">Lisensi Perusahaan</Link>
                 </li>
               </ul>
             </div>
@@ -110,13 +116,13 @@ function Footer() {
                   <span className="h6 mb-0">Email Admin Kami</span>
                 </div>
                 <h5 className="mt-2">
-                  <a
+                  <Link
                     target="_blank"
                     className="text-break"
                     href="mailto:pondokpesantrenalfatcih@gmail.com"
                   >
                     pondokpesantrenalfatcih@gmail.com
-                  </a>
+                  </Link>
                 </h5>
               </div>
 
@@ -126,7 +132,7 @@ function Footer() {
                   <span className="h6 mb-0">Whatsapp Admin Kami</span>
                 </div>
                 <h4 className="mt-2">
-                  <a href="#">+62 823 1234 567</a>
+                  <Link href="#">+62 823 1234 567</Link>
                 </h4>
               </div>
               <div className="footer-contact-block mt-3">
@@ -157,10 +163,9 @@ function Footer() {
               <div className="copyright">
                 &copy; Copyright - {new Date().getFullYear()} PP. Al Fatich 2
                 <span className="text-color"></span> by
-                <a href="#" target="_blank">
-                  {" "}
+                <Link href="#" target="_blank">
                   Tim PKM UNWAHA
-                </a>
+                </Link>
               </div>
             </div>
           </div>

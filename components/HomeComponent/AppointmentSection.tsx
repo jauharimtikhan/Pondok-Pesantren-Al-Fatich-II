@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const AppointmentSection = () => {
@@ -12,7 +14,10 @@ const AppointmentSection = () => {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="appoinment-content">
-                <img
+                <Image
+                  width={600}
+                  height={400}
+                  priority
                   src="images/about/img-3.jpg"
                   alt=""
                   className="img-fluid"
@@ -132,13 +137,13 @@ const AppointmentSection = () => {
                     ></textarea>
                   </div>
 
-                  <a
+                  <Link
                     className="btn btn-main btn-round-full"
                     href="appoinment.html"
                   >
                     Make Appoinment{" "}
                     <i className="icofont-simple-right ml-2"></i>
-                  </a>
+                  </Link>
                 </form>
               </div>
             </div>

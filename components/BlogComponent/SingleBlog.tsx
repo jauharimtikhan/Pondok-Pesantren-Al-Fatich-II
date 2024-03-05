@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const SingleBlog = () => {
@@ -5,13 +7,16 @@ const SingleBlog = () => {
     <div className="col-lg-12 col-md-12 mb-5">
       <div className="blog-item">
         <div className="blog-thumb">
-          <a href="/blog/091238/medical">
-            <img
-              src="images/blog/blog-1.jpg"
+          <Link href="/blog/091238/medical">
+            <Image
+              width={600}
+              height={400}
+              priority
+              src="/images/blog/blog-1.jpg"
               alt=""
               className="img-fluid rounded"
             />
-          </a>
+          </Link>
         </div>
 
         <div className="blog-item-content">
@@ -25,9 +30,9 @@ const SingleBlog = () => {
           </div>
 
           <h2 className="mt-3 mb-3">
-            <a href="/blog/091238/medical">
+            <Link href="/blog/091238/medical">
               Choose quality service over cheap service all type of things
-            </a>
+            </Link>
           </h2>
 
           <p className="mb-4">
@@ -37,12 +42,12 @@ const SingleBlog = () => {
             porro, dicta ad.
           </p>
 
-          <a
+          <Link
             href="/blog/091238/medical"
             className="btn btn-main btn-icon btn-round-full"
           >
             Read More <i className="icofont-simple-right ml-2  "></i>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import "../partials/styles/campaigncomponents.module.css";
+import Link from "next/link";
 
 interface CampaignComponentsProps {
   progres: number;
@@ -21,7 +22,7 @@ const CampaignComponents: React.FC<CampaignComponentsProps> = ({
 }) => {
   return (
     <div className="col-12 col-md-4 col-lg-3">
-      <div className="card rounded custom-card">
+      <div className="card rounded custom-card-2">
         <div className="card-image-top p-2">
           <Image
             src={image}
@@ -31,16 +32,16 @@ const CampaignComponents: React.FC<CampaignComponentsProps> = ({
             className="rounded custom-image-program"
           />
         </div>
-        <div className="card-body custom-card-body">
+        <div className="card-body custom-card-2-body">
           <p>
             <span className={`badge badge-${badgeClass}`}> {badgeText} </span>
           </p>
-          <a
+          <Link
             href={link}
             style={{ textDecoration: progres === 0 ? "line-through" : "" }}
           >
             <p className="h4 tet-break text-wrap">{title}</p>
-          </a>
+          </Link>
 
           {progres === 0 ? (
             <></>

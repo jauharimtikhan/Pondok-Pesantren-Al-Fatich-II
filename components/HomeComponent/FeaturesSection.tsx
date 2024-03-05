@@ -12,7 +12,7 @@ const FeaturesSection = () => {
                 style={{ gap: "35px" }}
               >
                 <CampaignComponents
-                  progres={70}
+                  progres={1}
                   image="/images/bangunan-2.jpg"
                   badgeClass="success"
                   badgeText="Sedang Berlangsung"

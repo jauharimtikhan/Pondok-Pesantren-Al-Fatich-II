@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Link from "next/link";
 const blog = () => {
   useEffect(() => {
     AOS.init();
@@ -19,7 +20,7 @@ const blog = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="block text-center">
-                <span className="text-white">Our blog</span>
+                <span className="text-white">Artikel</span>
                 <h1 className="text-capitalize mb-5 text-lg">Blog articles</h1>
               </div>
             </div>
@@ -53,15 +54,15 @@ const blog = () => {
                   <span aria-current="page" className="page-numbers current">
                     1
                   </span>
-                  <a className="page-numbers" href="#">
+                  <Link className="page-numbers" href="#">
                     2
-                  </a>
-                  <a className="page-numbers" href="#">
+                  </Link>
+                  <Link className="page-numbers" href="#">
                     3
-                  </a>
-                  <a className="page-numbers" href="#">
+                  </Link>
+                  <Link className="page-numbers" href="#">
                     <i className="icofont-thin-double-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </nav>
             </div>

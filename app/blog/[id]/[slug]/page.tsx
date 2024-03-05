@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 const page = () => {
   const params = useParams();
   const { id, slug } = params;
@@ -177,7 +179,10 @@ const page = () => {
                       <li className="mb-5">
                         <div className="comment-area-box">
                           <div className="comment-thumb float-left">
-                            <img
+                            <Image
+                              width={600}
+                              height={400}
+                              priority
                               alt=""
                               src="/images/blog/testimonial1.jpg"
                               className="img-fluid rounded"
@@ -192,10 +197,10 @@ const page = () => {
                             </span>
                           </div>
                           <div className="comment-meta mt-2">
-                            <a href="#">
+                            <Link href="#">
                               <i className="icofont-reply mr-2 text-muted"></i>
                               Reply
-                            </a>
+                            </Link>
                           </div>
 
                           <div className="comment-content mt-3">
@@ -212,7 +217,10 @@ const page = () => {
                       <li>
                         <div className="comment-area-box">
                           <div className="comment-thumb float-left">
-                            <img
+                            <Image
+                              width={600}
+                              height={400}
+                              priority
                               alt=""
                               src="/images/blog/testimonial2.jpg"
                               className="img-fluid rounded"
@@ -228,10 +236,10 @@ const page = () => {
                           </div>
 
                           <div className="comment-meta mt-2">
-                            <a href="#">
+                            <Link href="#">
                               <i className="icofont-reply mr-2 text-muted"></i>
                               Reply{" "}
-                            </a>
+                            </Link>
                           </div>
 
                           <div className="comment-content mt-3">
