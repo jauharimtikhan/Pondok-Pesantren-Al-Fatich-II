@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const page = () => {
+const Page = () => {
   const params = useParams();
   const { id, slug } = params;
   useEffect(() => {
@@ -42,7 +42,10 @@ const page = () => {
               <div className="row">
                 <div className="col-lg-12 mb-5">
                   <div className="single-blog-item">
-                    <img
+                    <Image
+                      width={500}
+                      height={500}
+                      priority
                       src="/images/blog/blog-1.jpg"
                       alt=""
                       className="img-fluid rounded"
@@ -310,4 +313,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

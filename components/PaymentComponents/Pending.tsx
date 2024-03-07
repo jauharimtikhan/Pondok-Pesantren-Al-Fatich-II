@@ -26,7 +26,6 @@ const Pending: React.FC<PendigProps> = ({
     ribuan = ribuan.join(".").split("").reverse().join("");
     return "Rp " + ribuan;
   }
-
   const handleUpdateAmount = async () => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/payment/update`;
     const response = await fetch(url, {
@@ -56,9 +55,7 @@ const Pending: React.FC<PendigProps> = ({
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      handleUpdateAmount();
-    }, 2000);
+    handleUpdateAmount();
   }, []);
   return (
     <>

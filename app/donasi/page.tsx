@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
-const page = () => {
+const Page = () => {
   const [donasi, setDonasi] = useState([]);
   const [paginate, setPaginate]: any = useState([]);
   const [pesan, setPesan] = useState(false);
@@ -154,4 +154,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

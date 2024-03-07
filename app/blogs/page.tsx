@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
-const blog = () => {
+const Blog = () => {
   useEffect(() => {
     AOS.init();
   }, []);
@@ -74,4 +74,4 @@ const blog = () => {
   );
 };
 
-export default blog;
+export default Blog;

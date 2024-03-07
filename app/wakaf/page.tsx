@@ -5,7 +5,7 @@ import FormDonasi from "@/components/partials/bootstrapComponents/FormDonasi";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const wakaf = () => {
+const Wakaf = () => {
   const [paketWakaf, setPaketWakaf]: any = useState([]);
   const [wakafById, setWakafById]: any = useState([]);
   const [loading, setLoading] = useState(false);
@@ -165,4 +165,4 @@ const wakaf = () => {
   );
 };
 
-export default wakaf;
+export default Wakaf;

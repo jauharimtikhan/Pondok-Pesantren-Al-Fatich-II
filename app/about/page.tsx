@@ -7,7 +7,7 @@ import KegiatanPondokComponents from "@/components/partials/KegiatanPondokCompon
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-const about = () => {
+const About = () => {
   useEffect(() => {
     AOS.init();
   }, []);
@@ -117,4 +117,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;

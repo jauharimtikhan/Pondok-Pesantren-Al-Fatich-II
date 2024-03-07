@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-const paymentsuccess = () => {
+const Paymentsuccess = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("order_id");
   const donaturId: any = searchParams.get("donatur_id");
@@ -127,4 +127,4 @@ const paymentsuccess = () => {
   );
 };
 
-export default paymentsuccess;
+export default Paymentsuccess;

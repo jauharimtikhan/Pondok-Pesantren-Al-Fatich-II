@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-const page = () => {
+const Page = () => {
   const { id } = useParams();
   const [wakafById, setWakafById]: any = useState([]);
   const [loading, setLoading] = useState(true);
@@ -170,4 +170,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

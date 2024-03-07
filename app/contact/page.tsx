@@ -4,7 +4,7 @@ import Footer from "@/components/footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-const page = () => {
+const Contact = () => {
   useEffect(() => {
     AOS.init();
   }, []);
@@ -83,4 +83,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Contact;

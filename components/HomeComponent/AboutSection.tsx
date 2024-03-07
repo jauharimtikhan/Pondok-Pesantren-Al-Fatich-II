@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const AboutSection = () => {
   return (
     <>
@@ -10,8 +12,18 @@ const AboutSection = () => {
           <div className="row align-items-center">
             <div className="col-lg-4 col-sm-6">
               <div className="about-img">
-                <img src="images/about-1.jpg" alt="" className="img-fluid" />
-                <img
+                <Image
+                  width={500}
+                  height={500}
+                  priority
+                  src="/images/about-1.jpg"
+                  alt=""
+                  className="img-fluid"
+                />
+                <Image
+                  width={500}
+                  height={500}
+                  priority
                   src="images/about-2.jpg"
                   alt=""
                   className="img-fluid mt-4"
@@ -20,7 +32,14 @@ const AboutSection = () => {
             </div>
             <div className="col-lg-4 col-sm-6">
               <div className="about-img mt-4 mt-lg-0">
-                <img src="images/about-2.jpg" alt="" className="img-fluid" />
+                <Image
+                  width={500}
+                  height={500}
+                  priority
+                  src="/images/about-2.jpg"
+                  alt=""
+                  className="img-fluid"
+                />
               </div>
             </div>
             <div className="col-lg-4">
