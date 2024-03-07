@@ -47,10 +47,10 @@ const Pending: React.FC<PendigProps> = ({
     const datas = await response.json();
     if (datas.statusCode == 200) {
       if (datas.message == "Pending") {
-        toast.error(datas.message, {
-          duration: 3000,
-          position: "top-center",
-        });
+        // toast.error(datas.message, {
+        //   duration: 3000,
+        //   position: "top-center",
+        // });
       }
     }
   };
@@ -62,10 +62,10 @@ const Pending: React.FC<PendigProps> = ({
   }, []);
   return (
     <>
-      <Toaster />
+      {/* <Toaster /> */}
       <div className="card">
         <div className="card-body">
-          <h6 className="">Bayar Sebelum : {data.expiry_time}</h6>
+          <h6 className="text-right">Bayar Sebelum : {data.expiry_time}</h6>
           <div className="p-2 d-flex justify-content-center">
             <div className="custom-card">
               <div className="custom-card-icon">
@@ -114,6 +114,13 @@ const Pending: React.FC<PendigProps> = ({
                 </p>
                 <small className="mt-0 text-danger">
                   *Silahkan melakukan pembayaran sesuai nominal yang tertera
+                </small>
+                <br />
+                <small className="text-danger mt-1">
+                  *jika anda sudah melakukan pembayaran,{" "}
+                  <b>
+                    mohon refresh halaman ini untuk mendownload file sertifikat!
+                  </b>
                 </small>
               </div>
             </div>

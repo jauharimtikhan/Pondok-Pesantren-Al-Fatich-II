@@ -11,11 +11,25 @@ const page = () => {
   const [wakafById, setWakafById]: any = useState([]);
   const [loading, setLoading] = useState(true);
 
-  function ConvertRP(angka: number) {
-    let reverse = angka.toString().split("").reverse().join("");
-    let ribuan: any = reverse.match(/\d{1,3}/g);
-    ribuan = ribuan.join(".").split("").reverse().join("");
-    return "Rp " + ribuan;
+  function ConvertRP(number: number) {
+    let result = "";
+
+    // Check if the number is greater than or equal to 1 billion
+    if (number >= 1000000000) {
+      const billion = Math.floor(number / 1000000000);
+      const million = Math.round((number % 1000000000) / 1000000);
+      if (million === 0) {
+        result = `${billion}M`;
+      } else {
+        result = `${billion}.${million}M`;
+      }
+    } else {
+      result = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(number);
+    }
+    return result;
   }
 
   useEffect(() => {

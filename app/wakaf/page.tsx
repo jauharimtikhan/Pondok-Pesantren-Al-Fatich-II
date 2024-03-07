@@ -136,19 +136,23 @@ const wakaf = () => {
                 <li className="form-group">
                   <span className="">Total Donatur</span>
                   <span className=" float-right">
-                    {wakafById?.total_donatur
+                    {wakafById?.total_donatur == null
+                      ? "0"
+                      : formatDonatur(wakafById.total_donatur)
                       ? formatDonatur(wakafById.total_donatur)
                       : "Loading..."}
                   </span>
                 </li>
                 <li className="form-group">
-                  <span className="text-success">
+                  <small className="text-success">
                     <b>Dana Terkumpul</b>
-                  </span>
-                  <span className=" float-right">
-                    {wakafById.data_wakaf?.last_amount
-                      ? wakafById.data_wakaf.last_amount
-                      : "Rp. 0"}
+                  </small>
+                  <span className="float-right">
+                    {wakafById.data_wakaf?.last_amount == null
+                      ? "Rp. 0"
+                      : ConvertRP(wakafById.data_wakaf.last_amount)
+                      ? ConvertRP(wakafById.data_wakaf.last_amount)
+                      : "Loading..."}
                   </span>
                 </li>
               </ul>

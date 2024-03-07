@@ -1943,4 +1943,8 @@ button[type="button"]:focus,
   background-color: var(--primary-new) !important;
 }
 
+.text-right {
+  text-align: right;
+}
+
 /*# sourceMappingURL=maps/style.css.map */

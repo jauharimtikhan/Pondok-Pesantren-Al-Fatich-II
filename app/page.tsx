@@ -28,7 +28,7 @@ export default function Home() {
 
       <CtaSection />
 
-      <ServiceSection />
+      {/* <ServiceSection /> */}
 
       {/* <AppointmentSection /> */}
 

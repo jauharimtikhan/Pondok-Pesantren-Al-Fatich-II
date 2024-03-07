@@ -3,7 +3,7 @@ const CtaSection = () => {
   return (
     <>
       <section
-        className="cta-section"
+        className="cta-section mt-2"
         data-aos="fade-up"
         data-aos-duration="800"
       >

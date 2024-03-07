@@ -76,6 +76,7 @@ const Continue = () => {
           duration: 3000,
           position: "top-center",
         });
+        router.push(`${data.url}`);
       }
 
       setLoader(false);
@@ -85,26 +86,6 @@ const Continue = () => {
         position: "top-center",
       });
     }
-  };
-
-  const handleCreatePayments = async (FromData: any) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/payment/create`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `${process.env.NEXT_PUBLIC_API_KEY}`,
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(FromData),
-      }
-    );
-
-    const data = await response.json();
-    console.log(data);
-
-    // if()
-    // callback
   };
 
   // console.log(total);

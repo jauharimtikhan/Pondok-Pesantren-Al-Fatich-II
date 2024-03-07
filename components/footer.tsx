@@ -96,10 +96,10 @@ function Footer() {
                   <Link href="#">Kebijakan pribadi</Link>
                 </li>
                 <li>
-                  <Link href="#">Dukungan Perusahaan </Link>
+                  <Link href="#">Dukungan Yayasan </Link>
                 </li>
                 <li>
-                  <Link href="#">Lisensi Perusahaan</Link>
+                  <Link href="#">Lisensi Yayasan</Link>
                 </li>
               </ul>
             </div>
@@ -142,10 +142,10 @@ function Footer() {
                 </div>
                 <div className="mt-2 rounded">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15823.648785543863!2d112.23289028866321!3d-7.474948105103801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7815f4b4b1b267%3A0x48851718a39bd78b!2sSentul%20Timur%2C%20Sentul%2C%20Kec.%20Tembelang%2C%20Kabupaten%20Jombang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1709377946847!5m2!1sid!2sid"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.9628967694307!2d112.24065767442814!3d-7.469349373633645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e781533f549e425%3A0x927fd1e15d6799cc!2sPP%20AL%20FATICH%20II%20BAHRUL%20ULUM!5e0!3m2!1sid!2sid!4v1709705974269!5m2!1sid!2sid"
                     width={200}
                     height={200}
-                    className="rounded-lg"
+                    className="rounded-full"
                     style={{ border: 0 }}
                     allowFullScreen={false}
                     loading="lazy"
@@ -162,7 +162,7 @@ function Footer() {
             <div className="col-lg-6">
               <div className="copyright">
                 &copy; Copyright - {new Date().getFullYear()} PP. Al Fatich 2
-                <span className="text-color"></span> by
+                <span className="text-color"></span> by{" "}
                 <Link href="#" target="_blank">
                   Tim PKM UNWAHA
                 </Link>

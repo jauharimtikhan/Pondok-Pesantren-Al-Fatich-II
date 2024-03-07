@@ -68,10 +68,10 @@ const Success: React.FC<SuccessProps> = ({
     });
     const datas = await response.json();
     if (datas.statusCode == 200) {
-      toast.success(datas.message, {
-        duration: 3000,
-        position: "top-center",
-      });
+      // toast.success(datas.message, {
+      //   duration: 3000,
+      //   position: "top-center",
+      // });
     }
   };
 
