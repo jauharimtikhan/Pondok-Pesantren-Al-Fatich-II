@@ -14,7 +14,9 @@ class Donatur extends Model
         'id',
         'name',
         'phone',
-        'wakaf_id'
+        'amount',
+        'wakaf_id',
+        'order_id'
     ];
 
 

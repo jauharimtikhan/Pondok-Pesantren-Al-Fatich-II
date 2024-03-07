@@ -14,6 +14,13 @@
             </a>
         </li>
 
+        <li class="sidebar-item  {{ request()->routeIs('program') ? 'active' : '' }}">
+            <a href="{{ route('program') }}" class='sidebar-link'>
+                <i class="bi bi-window-stack"></i>
+                <span>Program</span>
+            </a>
+        </li>
+
         <li class="sidebar-item has-sub" id="mnPost">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-file-post"></i>

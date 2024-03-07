@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WakafController;
 use Illuminate\Support\Facades\Route;
@@ -65,4 +66,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/paket_wakaf/edit', [WakafController::class, 'update_paket_wakaf'])->name('paket_wakaf.edit');
     Route::delete('/paket_wakaf/delete/{id}', [WakafController::class, 'paket_wakaf_destroy'])->name('paket_wakaf.delete');
     Route::delete('/wakaf/delete/{id}', [WakafController::class, 'destroy'])->name('wakaf.delete');
+
+    // Route Program
+    Route::get('/program', [ProgramController::class, 'index'])->name('program');
+    Route::get('/program/get', [ProgramController::class, 'get'])->name('program.get');
+    Route::get('program/getById/{id}', [ProgramController::class, 'getById'])->name('program.getById');
+    Route::post('/program,/add', [ProgramController::class, 'create'])->name('program.add');
+    Route::post('/program/edit', [ProgramController::class, 'update'])->name('program.edit');
+    Route::delete('program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.delete');
 });
