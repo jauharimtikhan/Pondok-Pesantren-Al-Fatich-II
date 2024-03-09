@@ -123,12 +123,12 @@ const Success: React.FC<SuccessProps> = ({
               </Link>
             </div>
             <div className="col-12 col-md-6 col-lg-6 my-1">
-              <button
-                onClick={handleDownload}
+              <Link
+                href="https://wa.me/628155172595?text=Assalamualaikum%20Saya%20Donatur%20Dari%20Program%20Wakaf%20Tanah%20Pada%20Pondok%20Pesantren%20Al-Fatich%20II,%20Saya%20Ingin%20Meminta%20File%20Ucapan%20Terimakasih!"
                 className="btn btn-new-primary btn-block text-white"
               >
                 Download Sertifikat
-              </button>
+              </Link>
             </div>
           </div>
         </div>
