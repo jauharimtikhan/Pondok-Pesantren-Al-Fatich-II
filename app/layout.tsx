@@ -8,6 +8,7 @@ import "../public/plugins/slick-carousel/slick/slick-theme.css";
 import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 import NextTopLoader from "nextjs-toploader";
+import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Pondok Pesantren Al Fatich 2",
   description:
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,10 +56,8 @@ export default function RootLayout({
         <Script src="/plugins/counterup/jquery.easing.js"></Script>
         <Script src="/plugins/slick-carousel/slick/slick.min.js"></Script>
         <Script src="/plugins/counterup/jquery.waypoints.min.js"></Script>
-        {/* <Script src="/plugins/shuffle/shuffle.min.js"></Script> */}
-        {/* <Script src="/plugins/counterup/jquery.counterup.min.js"></Script> */}
         <Script src="/plugins/google-map/map.js"></Script>
-        <Script src="./js/script.js"></Script>
+        <Script src="/js/script.js"></Script>
         {children}
       </body>
     </html>

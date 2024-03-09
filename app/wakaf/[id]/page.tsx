@@ -90,7 +90,7 @@ const Continue = () => {
 
   // console.log(total);
   useEffect(() => {
-    const SnapUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const SnapUrl = `${process.env.NEXT_PUBLIC_MIDTRANS_URL}`;
     const clientKey: any = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
 
     const script = document.createElement("script");

@@ -81,11 +81,11 @@ const Page = () => {
                 {wakafById.data_wakaf?.image ? (
                   <Image
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${wakafById.data_wakaf?.image}`}
-                    className="img-fluid"
+                    className="img-fluid rounded"
                     alt="Detail wakaf"
                     style={{ height: "auto", width: "auto" }}
-                    width={250}
-                    height={250}
+                    width={6000}
+                    height={4000}
                   />
                 ) : (
                   <p>Loading Gambar</p>
@@ -96,7 +96,7 @@ const Page = () => {
 
           <div className="row">
             <div className="col-lg-8">
-              <div className="department-content mt-5">
+              <div className="department-content mt-5 ">
                 <h3 className="text-md">
                   {wakafById.data_wakaf?.name
                     ? wakafById.data_wakaf.name
@@ -121,7 +121,7 @@ const Page = () => {
               </div>
             </div>
             <div className="col-lg-4">
-              <div className="sidebar-widget schedule-widget mt-5">
+              <div className="sidebar-widget schedule-widget mt-5 rounded-full">
                 <h5 className="mb-4">Informasi Terkait Wakaf</h5>
 
                 <ul className="list-unstyled">

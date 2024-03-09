@@ -7,7 +7,7 @@ const PartnersComponents = () => {
         width={100}
         height={100}
         priority
-        src="../images/laziznu.png"
+        src="/images/laziznu.png"
         alt=""
         className=""
         style={{ width: "100%" }}

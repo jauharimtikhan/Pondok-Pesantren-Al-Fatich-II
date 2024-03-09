@@ -24,7 +24,7 @@ const AboutSection = () => {
                   width={500}
                   height={500}
                   priority
-                  src="images/about-2.jpg"
+                  src="/images/about-2.jpg"
                   alt=""
                   className="img-fluid mt-4"
                 />
@@ -36,7 +36,7 @@ const AboutSection = () => {
                   width={500}
                   height={500}
                   priority
-                  src="/images/about-2.jpg"
+                  src="/images/gallery (2).JPG"
                   alt=""
                   className="img-fluid"
                 />

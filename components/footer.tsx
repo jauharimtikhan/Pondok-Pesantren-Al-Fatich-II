@@ -74,9 +74,6 @@ function Footer() {
                   <Link href="/donasi">Wakaf</Link>
                 </li>
                 <li>
-                  <Link href="/blogs">Artikel</Link>
-                </li>
-                <li>
                   <Link href="/contact">Kontak Kami</Link>
                 </li>
               </ul>
@@ -119,9 +116,9 @@ function Footer() {
                   <Link
                     target="_blank"
                     className="text-break"
-                    href="mailto:pondokpesantrenalfatcih@gmail.com"
+                    href="mailto:admin@alfatich.my.id"
                   >
-                    pondokpesantrenalfatcih@gmail.com
+                    admin@alfatich.my.id
                   </Link>
                 </h5>
               </div>
@@ -132,7 +129,9 @@ function Footer() {
                   <span className="h6 mb-0">Whatsapp Admin Kami</span>
                 </div>
                 <h4 className="mt-2">
-                  <Link href="#">+62 823 1234 567</Link>
+                  <Link href="https://wa.me/628155172595" target="_blank">
+                    +6281-5517-2595
+                  </Link>
                 </h4>
               </div>
               <div className="footer-contact-block mt-3">

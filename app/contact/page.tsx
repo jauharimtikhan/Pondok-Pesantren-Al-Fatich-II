@@ -42,7 +42,7 @@ const Contact = () => {
                   style={{ color: "#016a70" }}
                 ></i>
                 <h5>Whatsapp</h5>
-                +6282 1111 1111
+                +6281-5517-2595
               </div>
             </div>
             <div
@@ -56,7 +56,7 @@ const Contact = () => {
                   style={{ color: "#016a70" }}
                 ></i>
                 <h5>Email</h5>
-                pondokpesantrenalfatcih@gmail.com
+                admin@alfatich.my.id
               </div>
             </div>
             <div

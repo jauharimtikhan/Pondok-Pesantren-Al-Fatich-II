@@ -15,7 +15,7 @@ const ClientSection = () => {
           <div className="row justify-content-center">
             <div className="col-lg-7">
               <div className="section-title text-center">
-                <h2>Kerja Sama Dengan</h2>
+                <h2>Partner Kami</h2>
                 <div className="divider mx-auto my-4"></div>
               </div>
             </div>

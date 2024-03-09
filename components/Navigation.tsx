@@ -19,7 +19,7 @@ function Navigation() {
                 <div className="col-10 col-md-11 col-lg-11">
                   <div className="text-lg-right top-right-bar mt-2 mt-lg-0 ">
                     <Link
-                      href="/donasi"
+                      href="/donasi/0c632281-0021-43b2-9028-f911fb6f73fe"
                       className="btn btn-success float-right text-white"
                     >
                       Wakaf Sekarang
