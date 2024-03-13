@@ -19,15 +19,20 @@ if (!function_exists('Logged')) {
 if (!function_exists('RP')) {
     function RP($string)
     {
-        $angka = str_replace(["Rp. ", ".", ','], "", $string);
+        $pos = strrpos($string, ',');
+        if ($pos !== false) {
+            $string = substr($string, 0, $pos + 4);
+        }
 
-        return  intval($angka);
+        return  preg_replace('/[^0-9]/', '', $string);
     }
 }
 
 if (!function_exists('convertRp')) {
     function convertRp($string)
     {
-        return number_format($string, 0, ',', '.');
+        $number = intval($string);
+        $formattedPrice = number_format($number, 2, ',', '.');
+        return "Rp" . $formattedPrice;
     }
 }

@@ -21,6 +21,13 @@
             </a>
         </li>
 
+        <li class="sidebar-item  {{ request()->routeIs('kegiatan') ? 'active' : '' }}">
+            <a href="{{ route('kegiatan') }}" class='sidebar-link'>
+                <i class="bi bi-calendar-event-fill"></i>
+                <span>Kegiatan Pondok</span>
+            </a>
+        </li>
+
         <li class="sidebar-item has-sub" id="mnPost">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-file-post"></i>

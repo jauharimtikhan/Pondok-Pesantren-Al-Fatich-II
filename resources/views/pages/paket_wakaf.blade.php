@@ -223,17 +223,23 @@
             })
         }
 
-
-
-
         $('.form-add').submit(function(e) {
             e.preventDefault();
+            const hP = $('#harga_paket').maskMoney()
+            const harga_paket = cleanMaskMoney(hP)
+            const hKp = $('#harga_kelipatan_paket').maskMoney()
+            const harga_kelipatan_paket = cleanMaskMoney(hKp)
+
             $.ajax({
                 url: '{{ route('paket_wakaf.add') }}',
                 method: 'post',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    nama_paket: $('#nama_paket').val(),
+                    harga_paket: harga_paket,
+                    harga_kelipatan_paket: harga_kelipatan_paket,
+                    campaign_wakaf: $('#campaign_wakaf').val(),
+                },
                 beforeSend: function() {
                     $('button[type="submit"]').attr('disabled', 'disabled')
                 },
@@ -276,8 +282,6 @@
                         $('#campaign_wakaf_edit option[value="' + val.id_wakaf + '"]').prop('selected',
                             true);
                     })
-                },
-                complete: function() {
                     $('#harga_paket_edit').maskMoney()
                     $('#harga_kelipatan_paket_edit').maskMoney()
                 }
@@ -286,12 +290,22 @@
 
         $('.form-edit').submit(function(e) {
             e.preventDefault();
+            const hP = $('#harga_paket_edit').maskMoney()
+            const harga_paket = cleanMaskMoney(hP)
+            const hKp = $('#harga_kelipatan_paket_edit').maskMoney()
+            const harga_kelipatan_paket = cleanMaskMoney(hKp)
             $.ajax({
                 url: '{{ route('paket_wakaf.edit') }}',
                 method: 'post',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id_paket_edit: $('#id_paket_edit').val(),
+                    nama_paket_edit: $('#nama_paket_edit').val(),
+                    harga_paket_edit: harga_paket,
+                    harga_kelipatan_paket_edit: harga_kelipatan_paket,
+                    campaign_wakaf_edit: $('#campaign_wakaf_edit').val(),
+                },
+
                 beforeSend: function() {
                     $('button[type=submit]').attr('disabled', 'disabled');
                 },
@@ -344,8 +358,6 @@
                     Toast('Anda membatalkan tindakan!', 'info')
                 }
             })
-
-
         }
     </script>
 @endpush

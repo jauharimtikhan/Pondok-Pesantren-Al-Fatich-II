@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('LoggedOut')->group(function () {
     // Route Payment
-    Route::post('/payment', [PaymentController::class, 'getSnapToken']);
+    Route::post('/payment', [PaymentController::class, 'getSnapToken'])->name('payment.getToken');
     Route::get('/payment_status', [PaymentController::class, 'getStatusPayment']);
     Route::post('/payment/update_amount', [PaymentController::class, 'updateLastAmount']);
     Route::post('/payment/create', [TransactionController::class, 'create']);

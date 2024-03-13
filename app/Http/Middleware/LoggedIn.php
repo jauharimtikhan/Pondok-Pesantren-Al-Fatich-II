@@ -19,11 +19,11 @@ class LoggedIn
     {
         $user = DB::table('users')->where('id', Logged()['id'])->first();
         if (!$user) {
-            return redirect('/');
+            return redirect('login');
         }
         if (Logged()) {
             return $next($request);
         }
-        return redirect('/');
+        return redirect('login');
     }
 }

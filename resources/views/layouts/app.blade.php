@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Al Fatih Admin Panel</title>
     <link rel="shortcut icon" href="{{ asset('assets') }}/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -149,6 +150,39 @@
             let ribuan = reverse.match(/\d{1,3}/g);
             ribuan = ribuan.join(".").split("").reverse().join("");
             return "Rp " + ribuan;
+        }
+
+        function formatRupiah(number) {
+            let result = "";
+
+            if (number >= 1000000000) {
+                const billion = Math.floor(number / 1000000000);
+                const million = Math.round((number % 1000000000) / 1000000);
+                if (million === 0) {
+                    result = `${billion} M`;
+                } else {
+                    result = `${billion}.${million} M`;
+                }
+            } else if (number >= 1000000) {
+                const million = Math.floor(number / 1000000);
+                const thousand = Math.round((number % 1000000) / 1000);
+                if (thousand === 0) {
+                    result = `${million} JT`;
+                } else {
+                    result = `${million}.${thousand} JT`;
+                }
+            } else if (number >= 1000) {
+                const thousand = Math.floor(number / 1000);
+                result = `${thousand} K`;
+            } else {
+                result = `${number}`;
+            }
+
+            return result;
+        }
+
+        function cleanMaskMoney(number) {
+            return number.maskMoney('unmasked')[0]
         }
     </script>
 

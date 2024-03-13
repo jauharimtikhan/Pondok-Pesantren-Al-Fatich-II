@@ -1,27 +1,20 @@
 <?php
 
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WakafController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/', 'index')->name('/')->middleware('guest');
+    Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::get('/register', 'registerView')->name('register');
     Route::post('/login',  'authenticate')->name('login');
     Route::post('/register', 'create')->name('register');
@@ -34,44 +27,82 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     // Route User
-    Route::get('/user', [UserController::class, 'store'])->name('user');
-    Route::post('/user/add', [UserController::class, 'create'])->name('user.add');
-    Route::post('/user/edit', [UserController::class, 'update'])->name('user.edit');
-    Route::get('/user/get', [UserController::class, 'get'])->name('user.get');
-    Route::get('/user/get/{id}', [UserController::class, 'getById'])->name('user.getById');
-    Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user',  'store')->name('user');
+        Route::post('/user/add',  'create')->name('user.add');
+        Route::post('/user/edit',  'update')->name('user.edit');
+        Route::get('/user/get',  'get')->name('user.get');
+        Route::get('/user/get/{id}',  'getById')->name('user.getById');
+        Route::delete('/user/delete/{id}',  'destroy')->name('user.delete');
+    });
 
     // Route Kategori
-    Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
-    Route::get('/kategori/get', [CategoryController::class, 'get'])->name('kategori.get');
-    Route::get('/kategori/getbyid/{id}', [CategoryController::class, 'getById'])->name('kategori.getById');
-    Route::post('/kategori/add', [CategoryController::class, 'create'])->name('kategori.add');
-    Route::post('/kategori/edit', [CategoryController::class, 'update'])->name('kategori.edit');
-    Route::delete('/kategori/delete/{id}', [CategoryController::class, 'destroy'])->name('kategori.delete');
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/kategori',  'index')->name('kategori');
+        Route::get('/kategori/get',  'get')->name('kategori.get');
+        Route::get('/kategori/getbyid/{id}',  'getById')->name('kategori.getById');
+        Route::post('/kategori/add',  'create')->name('kategori.add');
+        Route::post('/kategori/edit',  'update')->name('kategori.edit');
+        Route::delete('/kategori/delete/{id}',  'destroy')->name('kategori.delete');
+    });
 
     // Route Artikel
-    Route::get('/artikel', [PostController::class, 'index'])->name('artikel');
-    Route::get('/artikel/add', [PostController::class, 'addView'])->name('artikel.add');
+    Route::controller(PostController::class)->group(function () {
+        Route::get('/artikel',  'index')->name('artikel');
+        Route::get('/artikel/add',  'addView')->name('artikel.add');
+    });
 
     // Route Wakaf
-    Route::get('/wakaf', [WakafController::class, 'index'])->name('wakaf');
-    Route::get('/paket_wakaf', [WakafController::class, 'ViewPaketWakaf'])->name('paket_wakaf');
-    Route::get('/wakaf/get', [WakafController::class, 'get'])->name('wakaf.get');
-    Route::get('/wakaf/getbyid/{id}', [WakafController::class, 'getById'])->name('wakaf.getById');
-    Route::post('/wakaf/add', [WakafController::class, 'create'])->name('wakaf.add');
-    Route::post('/wakaf/edit', [WakafController::class, 'update'])->name('wakaf.edit');
-    Route::post('/paket_wakaf/add', [WakafController::class, 'create_paket_wakaf'])->name('paket_wakaf.add');
-    Route::get('/paket_wakaf/get', [WakafController::class, 'getPaketWakaf'])->name('paket_wakaf.get');
-    Route::get('/pakte_wakaf/{id}', [WakafController::class, 'getPaketById'])->name('paket_wakaf.getById');
-    Route::post('/paket_wakaf/edit', [WakafController::class, 'update_paket_wakaf'])->name('paket_wakaf.edit');
-    Route::delete('/paket_wakaf/delete/{id}', [WakafController::class, 'paket_wakaf_destroy'])->name('paket_wakaf.delete');
-    Route::delete('/wakaf/delete/{id}', [WakafController::class, 'destroy'])->name('wakaf.delete');
+    Route::controller(WakafController::class)->group(function () {
+        Route::get('/wakaf',  'index')->name('wakaf');
+        Route::get('/paket_wakaf',  'ViewPaketWakaf')->name('paket_wakaf');
+        Route::get('/wakaf/get',  'get')->name('wakaf.get');
+        Route::get('/wakaf/getbyid/{id}',  'getById')->name('wakaf.getById');
+        Route::post('/wakaf/add',  'create')->name('wakaf.add');
+        Route::post('/wakaf/edit',  'update')->name('wakaf.edit');
+        Route::post('/paket_wakaf/add',  'create_paket_wakaf')->name('paket_wakaf.add');
+        Route::get('/paket_wakaf/get',  'getPaketWakaf')->name('paket_wakaf.get');
+        Route::get('/pakte_wakaf/{id}',  'getPaketById')->name('paket_wakaf.getById');
+        Route::post('/paket_wakaf/edit',  'update_paket_wakaf')->name('paket_wakaf.edit');
+        Route::delete('/paket_wakaf/delete/{id}',  'paket_wakaf_destroy')->name('paket_wakaf.delete');
+        Route::delete('/wakaf/delete/{id}',  'destroy')->name('wakaf.delete');
+    });
 
     // Route Program
-    Route::get('/program', [ProgramController::class, 'index'])->name('program');
-    Route::get('/program/get', [ProgramController::class, 'get'])->name('program.get');
-    Route::get('program/getById/{id}', [ProgramController::class, 'getById'])->name('program.getById');
-    Route::post('/program,/add', [ProgramController::class, 'create'])->name('program.add');
-    Route::post('/program/edit', [ProgramController::class, 'update'])->name('program.edit');
-    Route::delete('program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.delete');
+    Route::controller(ProgramController::class)->group(function () {
+        Route::get('/program',  'index')->name('program');
+        Route::get('/program/get',  'get')->name('program.get');
+        Route::get('program/getById/{id}',  'getById')->name('program.getById');
+        Route::post('/program,/add',  'create')->name('program.add');
+        Route::post('/program/edit',  'update')->name('program.edit');
+        Route::delete('program/delete/{id}',  'destroy')->name('program.delete');
+    });
+
+    // Route Kegiatan
+    Route::controller(KegiatanController::class)->group(function () {
+        Route::get('/kegiatan', 'index')->name('kegiatan');
+        Route::get('/kegiatan/get', 'store')->name('kegiatan.get');
+        Route::get('/kegiatan/getById/{id}', 'show')->name('kegiatan.getById');
+        Route::post('/kegiatan/add', 'create')->name('kegiatan.add');
+        Route::post('/kegiatan/update', 'update')->name('kegiatan.update');
+        Route::delete('/kegiatan/delete/{id}', 'destroy')->name('kegiatan.delete');
+    });
+});
+
+// Route Guest
+Route::middleware('web')->group(function () {
+    Route::controller(LandingPageController::class)->group(function () {
+        Route::get('/', 'index')->name('/');
+        Route::get('/artikel/landing_page', 'artikel')->name('artikel.landing_page');
+        Route::get('/artikel/landing_page/{id}', 'artikelById')->name('artikelById.landing_page');
+    });
+
+    Route::controller(WakafController::class)->group(function () {
+        Route::get('/wakaf/landing_page', 'viewsWakaf')->name('wakaf.landing_page');
+        Route::get('/wakaf/landing_page/{id}', 'viewsWakafById')->name('wakaf.landing_page.id');
+        Route::get('/wakaf/landing_page/form/{id}', 'viewsFormWakaf')->name('wakaf.landing_page.form');
+    });
+
+    Route::get('/payment_success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment_failed', [PaymentController::class, 'failed'])->name('payment.failed');
 });

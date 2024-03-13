@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaketWakaf;
 use App\Models\Wakaf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -24,6 +25,32 @@ class WakafController extends Controller
     public function ViewPaketWakaf(): View
     {
         return view('pages.paket_wakaf');
+    }
+
+    public function viewsWakaf(): View
+    {
+        $wakafs = DB::table('wakafs')->orderBy('created_at', 'asc')->paginate(10);
+
+
+        return view('home.pages.wakafs', compact('wakafs'));
+    }
+
+    public function viewsWakafById(string $id): View
+    {
+        $details_wakaf = DB::table("wakafs")->where('id', $id)->get();
+        $totalDonaturs = DB::table("donaturs")->where('wakaf_id', $id)->count();
+        return view('home.pages.wakaf-single', compact('details_wakaf', 'totalDonaturs'));
+    }
+
+    public function viewsFormWakaf(string $id): View
+    {
+        $paket_wakafs = DB::table('paket_wakafs')->where('wakaf_id', $id)->orderBy('created_at', 'asc')->get();
+        $sql = "SELECT DISTINCT multiple_price AS total FROM paket_wakafs WHERE wakaf_id = '$id'";
+        $total_prices = DB::select($sql);
+        $totalDonaturs = DB::table("donaturs")->where('wakaf_id', $id)->count();
+        $sqls = "SELECT target, last_amount, id FROM wakafs WHERE id = '$id'";
+        $targets = DB::select($sqls);
+        return view('home.pages.form-wakaf', compact('paket_wakafs', 'total_prices', 'totalDonaturs', 'targets'));
     }
 
     public function get()
@@ -55,7 +82,7 @@ class WakafController extends Controller
             'tanggal_berakhir' => 'required',
             'benefit' => 'required',
             'deskripsi' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ], [
             'required' => ':attribute harus diisi'
         ]);
@@ -184,13 +211,13 @@ class WakafController extends Controller
         $data = [
             'id' => Uuid::uuid4()->toString(),
             'name' => $request->nama_paket,
-            'price' => RP($request->harga_paket),
-            'multiple_price' => RP($request->harga_kelipatan_paket),
+            'price' => $request->harga_paket,
+            'multiple_price' => $request->harga_kelipatan_paket,
             'wakaf_id' => $request->campaign_wakaf,
             'created_at' => date('Y-m-d H:i:s'),
         ];
         try {
-            DB::table('paket_wakafs')->insert($data);
+            PaketWakaf::create($data);
             return response()->json([
                 'status' => true,
                 'statusCode' => 200,
@@ -239,13 +266,13 @@ class WakafController extends Controller
     {
         $data = [
             'name' => $request->nama_paket_edit,
-            'price' => RP($request->harga_paket_edit),
-            'multiple_price' => RP($request->harga_kelipatan_paket_edit),
+            'price' => $request->harga_paket_edit,
+            'multiple_price' => $request->harga_kelipatan_paket_edit,
             'wakaf_id' => $request->campaign_wakaf_edit,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         try {
-            DB::table('paket_wakafs')->where('id', $request->id_paket_edit)->update($data);
+            PaketWakaf::where('id', $request->id_paket_edit)->update($data);
             return response()->json([
                 'status' => true,
                 'statusCode' => 200,

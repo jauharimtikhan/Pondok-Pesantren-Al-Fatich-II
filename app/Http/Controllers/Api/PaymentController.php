@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Donatur;
 use App\Models\Transaction;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Midtrans\Snap;
@@ -101,6 +102,8 @@ class PaymentController extends Controller
         $params = $request->query('order_id');
         $orderId = $params;
         $guzzele = new \GuzzleHttp\Client();
+
+
         $response = $guzzele->request('GET', 'https://api.sandbox.midtrans.com/v2/' . $orderId . '/status', [
             'headers' => [
                 'accept' => 'application/json',
@@ -382,5 +385,14 @@ class PaymentController extends Controller
                 }
             }
         }
+    }
+
+    public function success(Request $request): View
+    {
+        $wakaf_id = $request->query('wakaf_id');
+        $donatur_id = $request->query('donatur_id');
+        $order_id = $request->query('order_id');
+        $last_amount = $request->query('last_amount');
+        return view('home.pages.paymentsuccess', compact('wakaf_id', 'donatur_id', 'order_id', 'last_amount'));
     }
 }

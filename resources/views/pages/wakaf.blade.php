@@ -198,7 +198,10 @@
         $('#mnWakafs').addClass('active')
         $('#mnListWakafs').addClass('active')
         getWakaf();
-
+        const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+        })
         $('#target').maskMoney()
         let table = $('#tableWakaf').DataTable({
             lengthChange: false,
@@ -227,10 +230,10 @@
                     $.each(res.data, function(key, val) {
                         let id = val.id
                         let judul = val.name;
-                        let target = val.target;
+                        let target = formatRupiah(val.target);
                         let uang_terkumpul = ""
                         if (val.last_amount) {
-                            uang_terkumpul += val.last_amount;
+                            uang_terkumpul += formatRupiah(val.last_amount);
                         } else {
                             uang_terkumpul += 'Rp. 0';
                         }
@@ -252,6 +255,8 @@
 
         $('.form-add').submit(function(e) {
             e.preventDefault();
+            const t = $('#target').maskMoney()
+            const cleanTarget = cleanMaskMoney(t)
             $.ajax({
                 url: '{{ route('wakaf.add') }}',
                 method: 'post',
@@ -315,11 +320,11 @@
                         acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg"],
                         fileValidateTypeDetectType: (source, type) =>
                             new Promise((resolve, reject) => {
-                                // Do custom type detection here and return with promise
                                 resolve(type);
                             }),
                         storeAsFile: true,
                     }).addFile(`{{ asset('${data[0].image}') }}`)
+                    $('#target_edit').maskMoney()
                 }
             })
         }

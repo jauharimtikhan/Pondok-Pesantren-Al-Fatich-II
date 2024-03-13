@@ -53,7 +53,7 @@ class AuthController extends Controller
             'role' => 'user',
         ]);
 
-        return redirect('/')->with('msg_success', 'Registrasi Berhasil');
+        return redirect('login')->with('msg_success', 'Registrasi Berhasil');
     }
 
     /**
@@ -71,7 +71,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/')
+            return redirect('login')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -79,16 +79,16 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            return redirect('/')->withErrors(['error' => 'Email tidak terdaftar'])->withInput();
+            return redirect('login')->withErrors(['error' => 'Email tidak terdaftar'])->withInput();
         }
         if (!Hash::check($request->password, $user->password)) {
-            return redirect('/')->witherrors(['error' => 'Password salah'])->withInput();
+            return redirect('login')->witherrors(['error' => 'Password salah'])->withInput();
         }
         // $request->session()->put('user', $user);
         // return redirect('/home');
 
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/')->witherrors(['error' => 'Email atau Password salah'])->withInput();
+            return redirect('login')->witherrors(['error' => 'Email atau Password salah'])->withInput();
         }
         $request->session()->regenerate();
         return redirect()->route('home');
@@ -104,6 +104,6 @@ class AuthController extends Controller
 
         Auth::guard('web')->logout();
         $request->session()->invalidate();
-        return redirect()->route('/');
+        return redirect()->route('login');
     }
 }
