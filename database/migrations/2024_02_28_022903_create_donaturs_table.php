@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donaturs', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('phone');
             $table->string('wakaf_id')->references('id')->on('wakafs');

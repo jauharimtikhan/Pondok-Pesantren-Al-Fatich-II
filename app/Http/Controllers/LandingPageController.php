@@ -41,12 +41,7 @@ class LandingPageController extends Controller
     {
         $query = $request->keyword;
 
-        $sql = "SELECT *, p.created_at, p.updated_at, p.id AS artikel_id , pm.path, c.name AS kategori, u.name AS author 
-        FROM posts p 
-        JOIN post_media pm ON pm.post_id = p.id
-        JOIN categories c ON c.id = p.category_id
-        JOIN users u ON u.id = p.user_id 
-        WHERE p.title LIKE '%{$query}%'";
+        $sql = "SELECT title, id FROM posts WHERE title LIKE '%{$query}%'";
         $artikels = DB::select($sql);
         if (isset($query)) {
             if ($artikels) {

@@ -359,16 +359,20 @@
                 },
                 success: function(res) {
                     if (res.statusCode == 200) {
-                        $('#renderSearch').empty();
+                        $('#renderSearch').html('');
                         if (res.result.length > 1) {
                             $.each(res.result, function(key, val) {
+                                const url = `{{ route('artikelById.landing_page', ':id') }}`
+                                    .replace(':id', val.id)
                                 const components =
-                                    `<li class="list-group-item">${val.title}</li>`
+                                    `<li class="list-group-item"><a href="${url}">${val.title}</a></li>`
                                 $('#renderSearch').append(components)
                             })
                         } else {
-                            console.log(res.result);
-                            const components = `<li class="list-group-item">${res.result[0].title}</li>`
+                            const url = `{{ route('artikelById.landing_page', ':id') }}`
+                                .replace(':id', res.result[0].id)
+                            const components =
+                                `<li class="list-group-item"><a href="${url}">${res.result[0].title}</a></li>`
                             $('#renderSearch').append(components)
                         }
 
