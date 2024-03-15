@@ -7,6 +7,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WakafController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,11 @@ Route::middleware('auth')->group(function () {
     Route::controller(PostController::class)->group(function () {
         Route::get('/artikel',  'index')->name('artikel');
         Route::get('/artikel/add',  'addView')->name('artikel.add');
+        Route::get('/artikel/edit/{id}',  'editView')->name('artikel.edit');
+        Route::post('/artikel/upload_image',  'uploadImage')->name('artikel.upload_image');
+        Route::post('/artikel/create', 'create')->name('artikel.create');
+        Route::post('/artikel/update', 'update')->name('artikel.update');
+        Route::delete('/artikel/delete/{id}', 'destroy')->name('artikel.delete');
     });
 
     // Route Wakaf
@@ -87,6 +93,17 @@ Route::middleware('auth')->group(function () {
         Route::post('/kegiatan/update', 'update')->name('kegiatan.update');
         Route::delete('/kegiatan/delete/{id}', 'destroy')->name('kegiatan.delete');
     });
+
+    // Route Settings
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('/settings', 'index')->name('settings');
+        Route::get('/setting/get', 'create')->name('settings.get');
+        Route::post('/settings/update/{id}', 'update')->name('settings.update');
+
+        // Route Specific Changed Password
+        Route::get('/settings/change_password', 'changePassword')->name('settings.change_password');
+        Route::post('/settings/change_password/store', 'changePasswordStore')->name('settings.change_password.store');
+    });
 });
 
 // Route Guest
@@ -95,6 +112,7 @@ Route::middleware('web')->group(function () {
         Route::get('/', 'index')->name('/');
         Route::get('/artikel/landing_page', 'artikel')->name('artikel.landing_page');
         Route::get('/artikel/landing_page/{id}', 'artikelById')->name('artikelById.landing_page');
+        Route::post('/artikel/search', 'search')->name('artikel.search');
     });
 
     Route::controller(WakafController::class)->group(function () {

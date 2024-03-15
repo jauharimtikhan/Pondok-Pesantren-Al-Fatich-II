@@ -17,7 +17,7 @@
         </div>
 
         <section class="section">
-            <form action="" method="post">
+            <form action="" method="post" class="form-add">
                 @csrf
                 <div class="row">
                     <div class="col-12 col-md-8 col-lg-8">
@@ -27,15 +27,17 @@
                                     <label for="title" class="form-label">Title</label>
                                     <input type="text" name="title" autocomplete="on" placeholder="Title"
                                         id="title" class="form-control">
+                                    <span class="text-danger title"></span>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="kategori" class="form-label">Kategori</label>
-                                    <label for="kategori" id="addKategoriLabel" class="form-label text-danger"
-                                        style="cursor: pointer">Tambah
+                                    <label for="kategori" id="addKategoriLabel"
+                                        class="form-label text-white badge bg-warning" style="cursor: pointer">Tambah
                                         Kategori</label>
                                     <select name="kategori" id="kategori" class=" form-select">
                                         <option value="">--Pilih Kategori--</option>
                                     </select>
+                                    <span class="text-danger kategori"></span>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +45,8 @@
                             <div class="card-body">
                                 <div class="form-group mb-3">
                                     <label for="full" class="form-label">Content</label>
-                                    <textarea name="content" id="full"></textarea>
+                                    <textarea name="content" id="full" style="opacity: 0.5"></textarea>
+                                    <span class="text-danger content"></span>
                                 </div>
                             </div>
                         </div>
@@ -55,21 +58,25 @@
                                     <label for="slug" class="form-label">Slug</label>
                                     <input type="text" name="slug" id="slug" autocomplete="on"
                                         placeholder="Otomatis terisi" class="form-control" />
+                                    <span class="text-danger slug"></span>
                                 </div>
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-3 d-flex flex-column">
                                     <label for="metadescription" class="form-label">Meta Tag</label>
-                                    <select multiple name="metadescription" id="metadescription" class="form-control">
-                                    </select>
+                                    <select multiple name="metadescription[]" id="metadescription"
+                                        class="form-control"></select>
+                                    <span class="text-danger metadescription"></span>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="thumbnail" class="form-label">Thumbnail</label>
                                     <input type="file" name="thumbnail" id="thumbnail" class="image-preview-filepond">
+                                    <span class="text-danger thumbnail"></span>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group mb-3">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="featured">
+                                                <input class="form-check-input" name="is_featured" value="0"
+                                                    type="checkbox" id="featured">
                                                 <label class="form-check-label" for="featured">Featured</label>
                                             </div>
                                         </div>
@@ -77,7 +84,8 @@
                                     <div class="col-6">
                                         <div class="form-group mb-3">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="published" checked>
+                                                <input class="form-check-input" value="0" name="is_published"
+                                                    type="checkbox" id="published">
                                                 <label class="form-check-label" for="published">Publish</label>
                                             </div>
                                         </div>
@@ -88,11 +96,11 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-12 col-md-6 col-lg-6">
-                                    <button type="button" class="btn btn-warning text-white btn-md"><i
-                                            class="bi bi-arrow-left"></i> Kembali</button>
+                                <div class="col-6 col-md-6 col-lg-6">
+                                    <a href="{{ route('artikel') }}" class="btn btn-warning text-white btn-md"><i
+                                            class="bi bi-arrow-left"></i> Kembali</a>
                                 </div>
-                                <div class="col-12 col-md-6 col-lg-6">
+                                <div class="col-6 col-md-6 col-lg-6">
                                     <button type="submit" class="btn btn-success btn-md float-end">Publish <i
                                             class="bi bi-cloud-plus"></i></button>
                                 </div>
@@ -100,7 +108,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
         </section>
     </div>
@@ -141,12 +148,34 @@
 @push('js')
     <script type="text/javascript">
         $(document).ready(function() {
+            if (document.readyState == 'loading') {
+                $('#full').addClass('d-none')
+            }
+
             getKategori();
             $('#mnPost').addClass('active')
             $('#mnSub').addClass('active')
             $('#mnSubPost').addClass('active')
             $('#addKategoriLabel').click(function() {
                 $('#modalAddKategori').modal('show')
+            })
+
+            $('#featured').change((e) => {
+                const state = e.target.checked;
+                if (state) {
+                    $('#featured').val(1);
+                } else {
+                    $('#featured').val(0);
+                }
+            })
+
+            $('#published').change((e) => {
+                const state = e.target.checked;
+                if (state) {
+                    $('#published').val(1);
+                } else {
+                    $('#published').val(0);
+                }
             })
 
             $('.form-add-kategori').submit(function(e) {
@@ -182,6 +211,36 @@
                     }
                 })
             })
+
+            $('.form-add').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{{ route('artikel.create') }}',
+                    method: 'post',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                        $('button[type="submit"]').prop('disabled', true);
+                    },
+                    success: function(res) {
+                        Toast(res.message, 'success').then((success) => {
+                            window.location.reload();
+                        })
+                    },
+                    complete: function() {
+                        $('button[type="submit"]').prop('disabled', false);
+                    },
+                    error: function(err) {
+                        if (err.status == 422) {
+                            $('span.text-danger').text('');
+                            $.each(err.responseJSON.errors, function(prefix, val) {
+                                $('.' + prefix).text(val[0]);
+                            })
+                        }
+                    }
+                })
+            })
         })
 
         $('#title').keyup(function() {
@@ -191,7 +250,6 @@
 
         $('#metadescription').select2({
             tags: true,
-
         })
 
         function getKategori() {
@@ -199,6 +257,7 @@
                 url: '{{ route('kategori.get') }}',
                 method: 'get',
                 success: function(res) {
+                    // console.log(res);
                     $('#kategori').empty()
                     $.each(res.data, function(key, val) {
                         $('#kategori').append($('<option>', {
@@ -210,22 +269,61 @@
             })
         }
 
+        const upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '{{ route('artikel.upload_image') }}');
+
+            xhr.upload.onprogress = (e) => {
+                progress(e.loaded / e.total * 100);
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 403) {
+                    reject({
+                        message: 'HTTP Error: ' + xhr.status,
+                        remove: true
+                    });
+                    return;
+                }
+
+                if (xhr.status < 200 || xhr.status >= 300) {
+                    reject('HTTP Error: ' + xhr.status);
+                    return;
+                }
+
+                const json = JSON.parse(xhr.responseText);
+
+                if (!json || typeof json.location != 'string') {
+                    reject('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+
+                resolve(json.location);
+            };
+
+            xhr.onerror = () => {
+                reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+            };
+
+            const formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+            formData.append('_token', '{{ csrf_token() }}');
+            xhr.send(formData);
+        });
 
         tinymce.init({
             selector: '#full',
             plugins: 'image code preview',
-            toolbar: `undo redo | link image | code | bold italic | 
-            alignleft aligncenter alignright alignjustify |
-             bullist numlist outdent indent | removeformat | preview`,
-            /* enable title field in the Image dialog*/
+            toolbar: `undo redo | blocks fontfamily fontsize |
+             bold italic underline strikethrough | link image media table | 
+             align lineheight | numlist bullist indent outdent | emoticons charmap
+              | removeformat | ltr rtl | fullscreen`,
             image_title: true,
-            /* enable automatic uploads of images represented by blob or data URIs*/
             automatic_uploads: true,
-            /*
-              URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
-              images_upload_url: 'postAcceptor.php',
-              here we add custom filepicker only to Image dialog
-            */
+            images_upload_url: '{{ route('artikel.upload_image') }}',
+            images_upload_handler: upload_handler,
+            images_reuse_filename: true,
             file_picker_types: 'image',
             /* and here's our custom image picker*/
             file_picker_callback: (cb, value, meta) => {
@@ -238,18 +336,12 @@
 
                     const reader = new FileReader();
                     reader.addEventListener('load', () => {
-                        /*
-                          Note: Now we need to register the blob in TinyMCEs image blob
-                          registry. In the next release this part hopefully won't be
-                          necessary, as we are looking to handle it internally.
-                        */
                         const id = 'blobid' + (new Date()).getTime();
                         const blobCache = tinymce.activeEditor.editorUpload.blobCache;
                         const base64 = reader.result.split(',')[1];
                         const blobInfo = blobCache.create(id, file, base64);
                         blobCache.add(blobInfo);
 
-                        /* call the callback and populate the Title field with the file name */
                         cb(blobInfo.blobUri(), {
                             title: file.name
                         });
@@ -262,55 +354,4 @@
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
         });
     </script>
-@endpush
-
-@push('css')
-    <style>
-        /* Mengatur lebar Select2 */
-        .select2-container {
-            width: 200px;
-            /* Atur sesuai kebutuhan */
-        }
-
-        /* Mengatur warna latar belakang dan warna teks pilihan yang dipilih */
-        .select2-selection__rendered {
-            background-color: #f0f0f0;
-            /* Warna latar belakang */
-            color: #333;
-            /* Warna teks */
-        }
-
-        /* Mengatur border radius */
-        .select2-selection__rendered {
-            border-radius: 5px;
-            /* Atur sesuai kebutuhan */
-        }
-
-        /* Mengatur tampilan panah dropdown */
-        .select2-selection__arrow {
-            height: 100%;
-            /* Tinggi */
-            top: 50%;
-            /* Posisi vertikal */
-        }
-
-        /* Mengatur warna panah dropdown */
-        .select2-selection__arrow b {
-            border-color: #555 transparent transparent;
-            /* Warna border */
-        }
-
-        /* Mengatur tampilan dropdown menu */
-        .select2-results__option {
-            padding: 8px 12px;
-            background-color: #333
-                /* Padding */
-        }
-
-        /* Mengatur warna latar belakang hover pada pilihan dropdown */
-        .select2-results__option--highlighted {
-            background-color: #474747;
-            /* Warna latar belakang */
-        }
-    </style>
 @endpush

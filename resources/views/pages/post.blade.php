@@ -24,12 +24,33 @@
                             <th width="10%">No</th>
                             <th>Title</th>
                             <th>Kategori</th>
+                            <th>Author</th>
                             <th>Tanggal Dibuat</th>
                             <th>Tanggal Diupdate</th>
                             <th class="text-center" width="20%">Actions</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        <?php $no = 1; ?>
+                        @foreach ($posts as $post)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->kategori }}</td>
+                                <td>{{ $post->author }}</td>
+                                <td>{{ $post->created_at }}</td>
+                                <td>{{ $post->updated_at }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center " style="gap: 9px;">
+                                        <a href="{{ route('artikel.edit', $post->id) }}"
+                                            class="btn btn-warning text-white"><i class="bi bi-pencil-square"></i></a>
+                                        <button class="btn btn-danger" type="button" data-id="{{ $post->id }}"
+                                            onclick="deleteData(this)"><i class="bi bi-trash3-fill"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
 
@@ -58,5 +79,38 @@
                 }
             },
         })
+
+        function deleteData(el) {
+            let id = $(el).data('id')
+            const datas = {
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                title: 'Apakah anda yakin?',
+                text: 'Ingin menghapus data ini, Anda tidak dapat mengembalikannya!'
+            }
+
+            DeleteData(datas).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('artikel.delete', ':id') }}'.replace(':id', id),
+                        method: 'delete',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(res) {
+                            if (res.statusCode == 200) {
+                                Toast(res.message, 'success').then((success) => {
+                                    window.location.reload()
+                                })
+                            }
+                        }
+                    })
+                } else if (
+                    result.dismis == Swal.DismissReason.Cancel
+                ) {
+                    Toast('Anda membatalkan tindakan!', 'info')
+                }
+            })
+        }
     </script>
 @endpush

@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function get()
     {
-        $categories = DB::table('categories')->get();
+        $categories = Categories::all();
         return response()->json([
             'status' => true,
             'statusCode' => 200,

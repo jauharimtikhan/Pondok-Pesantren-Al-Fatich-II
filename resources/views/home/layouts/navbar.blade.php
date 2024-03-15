@@ -22,10 +22,10 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a href="{{ route('/') }}">Beranda</a></li>
-                <li><a href="#tentangkami">Tentang Kami</a></li>
+                <li><a href="{{ route('/') }}#tentangkami">Tentang Kami</a></li>
                 <li><a href="{{ route('wakaf.landing_page') }}">Wakaf</a></li>
                 <li><a href="{{ route('artikel.landing_page') }}">Artikel</a></li>
-                <li><a href="#contact">Kontak</a></li>
+                <li><a href="{{ route('/') }}#contact">Kontak</a></li>
             </ul>
         </nav>
 

@@ -25,4 +25,9 @@ class Wakaf extends Model
     {
         return $this->hasMany(Wakaf::class);
     }
+
+    public function testimonials(): HasMany
+    {
+        return $this->hasMany(Testimonials::class);
+    }
 }

@@ -7,7 +7,7 @@
             <div class="container position-relative">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h2>{{ $id }}</h2>
+                        <h2>{{ $artikel[0]->title }}</h2>
                     </div>
                 </div>
             </div>
@@ -16,6 +16,7 @@
             <div class="container">
                 <ol>
                     <li><a href="{{ route('/') }}">Beranda</a></li>
+                    <li><a href="{{ route('artikel.landing_page') }}">Artikel</a></li>
                     <li>Detail Artikel</li>
                 </ol>
             </div>
@@ -33,124 +34,69 @@
                     <article class="blog-details">
 
                         <div class="post-img">
-                            <img src="{{ asset('assets-landing-page') }}/img/blog/blog-1.jpg" alt=""
-                                class="img-fluid">
+                            <img src="{{ $artikel[0]->path }}" alt="" class="img-fluid">
                         </div>
 
-                        <h2 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia
-                        </h2>
+                        <h2 class="title">{{ $artikel[0]->title }}</h2>
 
                         <div class="meta-top">
                             <ul>
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                        href="blog-details.html">John Doe</a></li>
+                                        href="javascript:void(0)">{{ Ucfirst($artikel[0]->author) }}</a></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                        href="blog-details.html"><time datetime="2020-01-01">Jan 1, 2022</time></a></li>
-                                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                        href="blog-details.html">12 Comments</a></li>
+                                        href="javascript:void(0)"><time
+                                            datetime="{{ $artikel[0]->updated_at }}">{{ $artikel[0]->updated_at }}</time></a>
+                                </li>
+                                {{-- <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
+                                        href="javascript:void(0)">12 Comments</a></li> --}}
                             </ul>
-                        </div><!-- End meta top -->
+                        </div>
 
                         <div class="content">
-                            <p>
-                                Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi
-                                praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                                Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est
-                                cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis
-                                dolore.
-                            </p>
+                            <?php
+                            $content = $artikel[0]->content;
+                            
+                            $news = str_replace(['../../', '../'], getenv('ASSET_URL') . '/', $content);
+                            $new = htmlspecialchars_decode($news);
+                            $blockQuote = '<blockquote><p>Iklan Google Ads</p></blockquote>';
+                            
+                            $result = str_replace('[:iklan]', $blockQuote, $new);
+                            echo $result;
+                            ?>
 
-                            <p>
-                                Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in
-                                accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et voluptate
-                                cupiditate.
-                            </p>
-
-                            <blockquote>
-                                <p>
-                                    Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi aut. Aut
-                                    eos aliquam doloribus minus autem quos.
-                                </p>
-                            </blockquote>
-
-                            <p>
-                                Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore
-                                provident voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta
-                                est suscipit perspiciatis. Voluptate ex rerum assumenda dolores nihil quaerat.
-                                Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti velit
-                                quisquam rerum. Omnis dolorum exercitationem harum qui qui blanditiis neque.
-                                Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto voluptatem
-                                magni. Vel magnam quod et tempora deleniti error rerum nihil tempora.
-                            </p>
-
-                            <h3>Et quae iure vel ut odit alias.</h3>
-                            <p>
-                                Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit ut rerum
-                                atque. Optio provident dolores atque voluptatem rem excepturi molestiae qui. Voluptatem
-                                laborum omnis ullam quibusdam perspiciatis nulla nostrum. Voluptatum est libero eum
-                                nesciunt aliquid qui.
-                                Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus quia aut
-                                ratione aspernatur dolor. Sint harum eveniet dicta exercitationem minima. Exercitationem
-                                omnis asperiores natus aperiam dolor consequatur id ex sed. Quibusdam rerum dolores sint
-                                consequatur quidem ea.
-                                Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit voluptatem. Cum
-                                quibusdam voluptatem voluptatem accusamus mollitia aut atque aut.
-                            </p>
-                            <img src="{{ asset('assets-landing-page') }}/img/blog/blog-inside-post.jpg" class="img-fluid"
-                                alt="">
-
-                            <h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
-                            <p>
-                                Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum. In
-                                assumenda quia quae a id praesentium. Quos deleniti libero sed occaecati aut porro
-                                autem. Consectetur sed excepturi sint non placeat quia repellat incidunt labore. Autem
-                                facilis hic dolorum dolores vel.
-                                Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo omnis
-                                quibusdam esse. Ex libero illum iusto totam et ut aut blanditiis. Veritatis numquam ut
-                                illum ut a quam vitae.
-                            </p>
-                            <p>
-                                Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa voluptas
-                                incidunt. Nulla sit eaque mollitia nisi asperiores est veniam.
-                            </p>
-
-                        </div><!-- End post content -->
+                        </div>
 
                         <div class="meta-bottom">
                             <i class="bi bi-folder"></i>
                             <ul class="cats">
-                                <li><a href="#">Business</a></li>
+                                <li><a href="javascript:void(0)">{{ $artikel[0]->kategori }}</a></li>
                             </ul>
 
                             <i class="bi bi-tags"></i>
                             <ul class="tags">
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
+                                <?php $tags = explode(',', $artikel[0]->meta_description); ?>
+                                @if (is_array($tags))
+                                    @foreach ($tags as $tag)
+                                        <li><a href="javascript:void(0)">{{ $tag }}</a></li>
+                                    @endforeach
+                                @endif
                             </ul>
-                        </div><!-- End meta bottom -->
+                        </div>
 
-                    </article><!-- End blog post -->
+                    </article>
 
                     <div class="post-author d-flex align-items-center">
-                        <img src="{{ asset('assets-landing-page') }}/img/blog/blog-author.jpg"
-                            class="rounded-circle flex-shrink-0" alt="">
+                        <img src="{{ asset('assets-landing-page') }}/img/profile-pic.svg"
+                            class="rounded-circle flex-shrink-0" alt="author-img" width="80" height="80">
                         <div>
-                            <h4>Jane Smith</h4>
-                            <div class="social-links">
-                                <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-                                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                            </div>
+                            <h4>{{ Ucfirst($artikel[0]->author) }}</h4>
                             <p>
-                                Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium.
-                                Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium
-                                ut unde voluptas.
+                                Admin Pondok Pesantren Al Fatih
                             </p>
                         </div>
                     </div><!-- End post author -->
 
-                    <div class="comments">
+                    {{-- <div class="comments">
 
                         <h4 class="comments-count">8 Comments</h4>
 
@@ -191,7 +137,8 @@
                             <div id="comment-reply-1" class="comment comment-reply">
                                 <div class="d-flex">
                                     <div class="comment-img"><img
-                                            src="{{ asset('assets-landing-page') }}/img/blog/comments-3.jpg" alt="">
+                                            src="{{ asset('assets-landing-page') }}/img/blog/comments-3.jpg"
+                                            alt="">
                                     </div>
                                     <div>
                                         <h5><a href="">Lynda Small</a> <a href="#" class="reply"><i
@@ -311,7 +258,7 @@
 
                         </div>
 
-                    </div><!-- End blog comments -->
+                    </div> --}}
 
                 </div>
 
@@ -321,94 +268,69 @@
 
                         <div class="sidebar-item search-form">
                             <h3 class="sidebar-title">Search</h3>
-                            <form action="" class="mt-3">
-                                <input type="text">
-                                <button type="submit"><i class="bi bi-search"></i></button>
+                            <form action="" class="mt-3" id="form-search">
+                                @csrf
+                                <input type="text" name="keyword">
+                                <button type="submit"><i class="bi bi-search" id="icon-search"></i>
+                                    <div class="spinner-border text-white spinner-border-sm d-none" id="loading"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </button>
                             </form>
+                            <ul class="list-group mt-3" id="renderSearch">
+
+                            </ul>
                         </div><!-- End sidebar search formn-->
 
                         <div class="sidebar-item categories">
-                            <h3 class="sidebar-title">Categories</h3>
+                            <h3 class="sidebar-title">Kategori Artikel</h3>
                             <ul class="mt-3">
-                                <li><a href="#">General <span>(25)</span></a></li>
-                                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                                <li><a href="#">Travel <span>(5)</span></a></li>
-                                <li><a href="#">Design <span>(22)</span></a></li>
-                                <li><a href="#">Creative <span>(8)</span></a></li>
-                                <li><a href="#">Educaion <span>(14)</span></a></li>
+                                <?php $categories = DB::table('categories')->get(); ?>
+                                @foreach ($categories as $category)
+                                    <li><a href="javascript:void(0)">{{ $category->name }} </a></li>
+                                @endforeach
                             </ul>
                         </div><!-- End sidebar categories-->
 
                         <div class="sidebar-item recent-posts">
-                            <h3 class="sidebar-title">Recent Posts</h3>
+                            <h3 class="sidebar-title">Artikel Terbaru</h3>
 
                             <div class="mt-3">
-
-                                <div class="post-item mt-3">
-                                    <img src="{{ asset('assets-landing-page') }}/img/blog/blog-recent-1.jpg"
-                                        alt="">
-                                    <div>
-                                        <h4><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="{{ asset('assets-landing-page') }}/img/blog/blog-recent-2.jpg"
-                                        alt="">
-                                    <div>
-                                        <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="{{ asset('assets-landing-page') }}/img/blog/blog-recent-3.jpg"
-                                        alt="">
-                                    <div>
-                                        <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati
-                                                ut</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="{{ asset('assets-landing-page') }}/img/blog/blog-recent-4.jpg"
-                                        alt="">
-                                    <div>
-                                        <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
-
-                                <div class="post-item">
-                                    <img src="{{ asset('assets-landing-page') }}/img/blog/blog-recent-5.jpg"
-                                        alt="">
-                                    <div>
-                                        <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a>
-                                        </h4>
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </div>
-                                </div><!-- End recent post item-->
+                                <?php
+                                $all = 'SELECT *, p.created_at, p.updated_at, p.id AS artikel_id , pm.path, c.name AS kategori, u.name AS author FROM posts p JOIN post_media pm ON pm.post_id = p.id JOIN categories c ON c.id = p.category_id JOIN users u ON u.id = p.user_id ORDER BY p.updated_at DESC LIMIT 6';
+                                $recents = DB::select($all);
+                                ?>
+                                @if ($recents > 1)
+                                    @foreach ($recents as $recent)
+                                        <div class="post-item mt-3">
+                                            <img src="{{ $recent->path }}" alt="recent artikel" class="rounded">
+                                            <div>
+                                                <h4><a href="{{ route('artikelById.landing_page', $recent->artikel_id) }}">{{ $recent->title }}
+                                                    </a>
+                                                </h4>
+                                                <time
+                                                    datetime="{{ $recent->updated_at }}">{{ $recent->updated_at }}</time>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
 
                             </div>
 
                         </div><!-- End sidebar recent posts-->
 
                         <div class="sidebar-item tags">
-                            <h3 class="sidebar-title">Tags</h3>
+                            <h3 class="sidebar-title">Tag</h3>
                             <ul class="mt-3">
-                                <li><a href="#">App</a></li>
-                                <li><a href="#">IT</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Mac</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Office</a></li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Studio</a></li>
-                                <li><a href="#">Smart</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
+                                <?php $ta = $artikel[0]->meta_description;
+                                $t = explode(',', $ta);
+                                ?>
+                                @if (is_array($t))
+                                    @foreach ($t as $tr)
+                                        <li><a href="javascript:void(0)">{{ $tr }}</a></li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div><!-- End sidebar tags-->
 
@@ -418,5 +340,53 @@
             </div>
 
         </div>
-    </section><!-- End Blog Details Section -->
+    </section>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        $('#form-search').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '{{ route('artikel.search') }}',
+                method: 'post',
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    $('#icon-search').addClass('d-none');
+                    $('#loading').removeClass('d-none');
+                },
+                success: function(res) {
+                    if (res.statusCode == 200) {
+                        $('#renderSearch').empty();
+                        if (res.result.length > 1) {
+                            $.each(res.result, function(key, val) {
+                                const components =
+                                    `<li class="list-group-item">${val.title}</li>`
+                                $('#renderSearch').append(components)
+                            })
+                        } else {
+                            console.log(res.result);
+                            const components = `<li class="list-group-item">${res.result[0].title}</li>`
+                            $('#renderSearch').append(components)
+                        }
+
+                    }
+                },
+                complete: function() {
+                    $('#icon-search').removeClass('d-none');
+                    $('#loading').addClass('d-none');
+                },
+                error: function(err) {
+                    console.error(err)
+                    if (err.status == 404) {
+                        const components =
+                            `<li class="list-group-item text-danger">${err.responseJSON.message}</li>`
+                        $('#renderSearch').append(components)
+                    }
+                }
+            })
+        })
+    </script>
+@endpush

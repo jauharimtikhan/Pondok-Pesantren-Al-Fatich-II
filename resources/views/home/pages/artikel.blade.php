@@ -29,16 +29,11 @@
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
             <div class="row gy-4 posts-list">
-                @include('home.components.posts.artikels')
+                @foreach ($artikels as $artikel)
+                    @include('home.components.posts.artikels', ['artikel' => $artikel])
+                @endforeach
             </div>
         </div>
-
-        <div class="blog-pagination">
-            <ul class="justify-content-center">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-            </ul>
-        </div>
+        {{ $pagination->links() }}
     </section>
 @endsection
