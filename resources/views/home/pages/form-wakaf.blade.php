@@ -79,7 +79,7 @@
 
     <div class="modal fade" id="modalSubmit" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
         role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -112,7 +112,7 @@
     </div>
 @endsection
 @push('js')
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+    <script type="text/javascript" src="{{ getenv('MIDTRANS_URL') }}/snap/snap.js"
         data-client-key="{{ getenv('MIDTRANS_CLIENT_KEY') }}"></script>
     <script type="text/javascript">
         const btnAdd = $('#btnAdd');
@@ -178,7 +178,7 @@
         $('.form-checkout-wakaf').submit(function(e) {
             e.preventDefault();
             $.ajax({
-                url: 'http://localhost:8000/api/payment',
+                url: '{{ getenv('API_URL') }}payment',
                 method: 'post',
                 headers: {
                     'Authorization': 'Bearer {{ getenv('API_KEY') }}'
@@ -192,24 +192,39 @@
                 success: function(data) {
                     if (data.statusCode == 200) {
                         $('#modalSubmit').modal('hide');
-                        snap.pay(data.snap_token, {
-                            onSuccess: function(result) {
-                                console.log('success');
-                                console.log(result);
-                            },
-                            onPending: function(result) {
-                                console.log('pending');
-                                console.log(result);
-                            },
-                            onError: function(result) {
-                                console.log('error');
-                                console.log(result);
-                            },
-                            onClose: function() {
-                                Toast('warning', 'Anda Membatalkan Transaksi', 2000, 'top')
-                            }
-                        })
                     }
+                    snap.pay(data.snap_token, {
+                        onSuccess: function(result) {
+                            Toast(2000).fire({
+                                icon: 'success',
+                                title: 'Pembayaran Berhasil'
+                            }).then((success) => {
+                                window.location.replace = result.finish_redirect
+                            })
+                            // console.log(result);
+                        },
+                        onPending: function(result) {
+                            Toast(2000).fire({
+                                icon: 'error',
+                                title: 'Pembayaran Tertunda'
+                            }).then((success) => {
+                                window.location.replace = result.finish_redirect
+                            })
+                            // console.log(result);
+                        },
+                        onError: function(result) {
+                            Toast(2000).fire({
+                                icon: 'success',
+                                title: 'Pembayaran Error'
+                            }).then((success) => {
+                                window.location.href = result.finish_redirect
+                            })
+                            // console.log(result);
+                        },
+                        onClose: function() {
+                            Toast('warning', 'Anda Membatalkan Transaksi', 2000, 'top')
+                        }
+                    })
                 },
                 complete: function() {
                     $('button[type="submit"]').prop('disabled', false);
@@ -254,6 +269,19 @@
             }
 
             return result;
+        }
+
+        async function updateStatusPayment(tr_id, tr_status, order_id, gr) {
+            const formData = {
+
+            }
+            const response = await fetch('{{ getenv('API_URL') }}payment/update/order_id', {
+                headers: {
+                    'Authorization': 'Bearer {{ getenv('API_KEY') }}',
+                }
+            })
+            const data = await response.json();
+
         }
     </script>
 @endpush

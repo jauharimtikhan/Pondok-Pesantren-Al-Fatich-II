@@ -124,3 +124,5 @@ Route::middleware('web')->group(function () {
     Route::get('/payment_success', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/payment_failed', [PaymentController::class, 'failed'])->name('payment.failed');
 });
+
+Route::get('/test', [KegiatanController::class, 'test']);

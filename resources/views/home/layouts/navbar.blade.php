@@ -17,7 +17,7 @@
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="{{ route('/') }}" class="logo d-flex align-items-center">
-            <h1>Pon Pes Alfatich 2</h1>
+            <h1>Pon Pes Alfatich II</h1>
         </a>
         <nav id="navbar" class="navbar">
             <ul>

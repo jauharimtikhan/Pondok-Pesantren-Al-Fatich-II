@@ -4,7 +4,7 @@
         <div class="row gy-4">
             <div class="col-lg-5 col-md-12 footer-info">
                 <a href="{{ route('/') }}" class="logo d-flex align-items-center">
-                    <span>Pon Pes Al Fatich 2</span>
+                    <span>Pon Pes Al Fatich II</span>
                 </a>
                 <p>Yayasan Pendidikan Islam Al Fatich 2 adalah lembaga pendidikan yang berkomitmen untuk memberikan
                     pendidikan berkualitas dengan nilai-nilai Islam yang kuat. Terletak di Sentul Timur, Sentul,

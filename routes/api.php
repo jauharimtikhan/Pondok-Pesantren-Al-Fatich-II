@@ -20,11 +20,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('LoggedOut')->group(function () {
     // Route Payment
-    Route::post('/payment', [PaymentController::class, 'getSnapToken'])->name('payment.getToken');
-    Route::get('/payment_status', [PaymentController::class, 'getStatusPayment']);
-    Route::post('/payment/update_amount', [PaymentController::class, 'updateLastAmount']);
-    Route::post('/payment/create', [TransactionController::class, 'create']);
-    Route::post('/payment/update', [TransactionController::class, 'update']);
+    Route::controller(PaymentController::class)->group(function () {
+        Route::post('/payment', 'getSnapToken');
+        Route::get('/payment_status', 'getStatusPayment');
+        Route::post('/payment/update_amount', 'updateLastAmount');
+    });
+
+    // Route Transaction
+    Route::controller(TransactionController::class)->group(function () {
+        Route::post('/payment/create', 'create');
+        Route::post('/payment/update', 'update');
+        Route::post('/payment/update/order_id', 'updateOrderId');
+    });
 
     // Route List Wakaf
     Route::get('/wakaf', [WakafController::class, 'getWakafPagination']);

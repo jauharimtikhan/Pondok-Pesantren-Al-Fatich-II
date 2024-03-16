@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Kegiatan extends Model
 {
     use HasFactory, HasUuids;
-
     protected $fillable = [
         'id', 'name', 'description', 'image'
     ];

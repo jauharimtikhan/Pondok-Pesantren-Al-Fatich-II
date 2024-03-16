@@ -36,3 +36,23 @@ if (!function_exists('convertRp')) {
         return "Rp" . $formattedPrice;
     }
 }
+
+if (!function_exists("convertToWebp")) {
+    function convertToWebp($inputFile, $outputFile)
+    {
+        $image = imagecreatefromstring(file_get_contents($inputFile));
+
+        if ($image !== false) {
+            $success = imagewebp($image, $outputFile, 80); // 80 adalah kualitas WebP, bisa disesuaikan
+            imagedestroy($image);
+
+            if ($success) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}

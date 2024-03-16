@@ -191,7 +191,7 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    $('button[type="submit"]').attr('disabled', 'disabled')
+                    $('button[type="submit"]').text('Loading...').attr('disabled', 'disabled')
                 },
                 success: function(res) {
                     if (res.statusCode == 200) {
@@ -204,7 +204,7 @@
                     }
                 },
                 complete: function() {
-                    $('button[type="submit"]').removeAttr('disabled', 'disabled')
+                    $('button[type="submit"]').text('Buat').removeAttr('disabled', 'disabled')
                 },
                 error: function(err) {
                     console.log({
@@ -237,7 +237,7 @@
                         allowImageFilter: false,
                         allowImageExifOrientation: false,
                         allowImageCrop: false,
-                        acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg"],
+                        acceptedFileTypes: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
                         fileValidateTypeDetectType: (source, type) =>
                             new Promise((resolve, reject) => {
                                 resolve(type);

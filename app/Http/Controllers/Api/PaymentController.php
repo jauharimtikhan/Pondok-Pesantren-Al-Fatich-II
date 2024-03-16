@@ -22,80 +22,6 @@ class PaymentController extends Controller
         \Midtrans\Config::$is3ds        = config('services.midtrans.is3ds');
     }
 
-    public function store(Request $request)
-    {
-
-        $check_donatur = DB::table('donaturs')->where('phone', $request->phone)->first();
-        $check_wakaf = DB::table('wakafs')->where('id', $request->wakaf_id)->first();
-        if (!$check_donatur) {
-            $data = [
-                'id' => Uuid::uuid4()->toString(),
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'wakaf_id' => $request->wakaf_id
-            ];
-            Donatur::create($data);
-        } else {
-            $checkPayment = DB::table('transactions')->where('donatur_id', $check_donatur->id)->first();
-            $dataPayment = [
-                'id' => Uuid::uuid4()->toString(),
-                'donatur_id' => $check_donatur->id,
-                'wakaf_id' => $request->wakaf_id,
-                'status' => 'pending'
-            ];
-            Transaction::create($dataPayment);
-
-            if ($checkPayment->status == "pending") {
-                return response()->json([
-                    'status' => false,
-                    'statusCode' => 400,
-                    'message' => 'Anda sudah melakukan transaksi'
-                ], 400);
-            }
-
-            $params = [
-                'transaction_details' => [
-                    'order_id' => 'WAKAF-' . random_int(100000000, 999999999),
-                    'gross_amount' => $request->total,
-                ],
-                'customer_details' => [
-                    'first_name' => $request->name,
-                    'phone' => $request->phone,
-                ],
-                'item_details' => [
-                    [
-                        'id'            => random_int(0, 100),
-                        'price'         => $request->total,
-                        'quantity'      => 1,
-                        'name'          => 'Wakaf kepada ' . config('app.name'),
-                        'brand'         => 'Wakaf',
-                        'category'      => 'Wakaf',
-                        'merchant_name' => config('app.name'),
-                    ]
-                ],
-                'callbacks' => [
-                    'finish' => getenv('FRONTEND_URL') . '?wakaf_id=' . $request->wakaf_id . '&donatur_id=' . $check_donatur->id . '&last_amount=' . $check_wakaf->last_amount
-                ]
-            ];
-
-
-            try {
-                $snapTokens = Snap::getSnapToken($params);
-
-                return response()->json([
-                    'status' => true,
-                    'statusCode' => 200,
-                    'snap_token' => $snapTokens
-                ], 200);
-            } catch (\Exception $th) {
-                return response()->json([
-                    'status' => false,
-                    'statusCode' => 400,
-                    'errors' => 'Something went wrong'
-                ], 400);
-            }
-        }
-    }
 
     public function getStatusPayment(Request $request)
     {
@@ -319,20 +245,22 @@ class PaymentController extends Controller
                 }
             } else {
                 $double_check_payment = DB::table('transactions')->where('status', 'pending')->where('donatur_id', $check_donatur->id)->first();
-                $updateOrderId = [
-                    'order_id' => $order_id
-                ];
 
-                DB::table('donaturs')->where('id', $check_donatur->id)->update($updateOrderId);
+                if (!$double_check_payment) {
+                    $updateOrderId = [
+                        'order_id' => $order_id
+                    ];
+
+                    DB::table('donaturs')->where('id', $check_donatur->id)->update($updateOrderId);
+                }
                 $double_check_donatur = DB::table('donaturs')->where('id', $check_donatur->id)->first();
 
-                // if($check_donatur->order_id == $double_check_)
                 if ($double_check_payment) {
                     return response()->json([
                         'status' => false,
                         'statusCode' => 400,
                         'message' => 'Anda sudah melakukan transaksi',
-                        'url' => getenv('FRONTEND_URL') . '?wakaf_id=' . $request->wakaf_id . '&donatur_id=' . $check_donatur->id . '&last_amount=' . $check_wakaf->last_amount . '&order_id=' . $check_donatur->order_id
+                        'url' => getenv('FRONTEND_URL') . '?wakaf_id=' . $request->wakaf_id . '&donatur_id=' . $check_donatur->id . '&last_amount=' . $check_wakaf->last_amount . '&order_id=' . $double_check_donatur->order_id
                     ], 400);
                 } else {
 

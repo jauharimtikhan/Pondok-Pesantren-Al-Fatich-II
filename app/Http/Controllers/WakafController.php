@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
 use Ramsey\Uuid\Uuid;
 
 
@@ -107,11 +108,13 @@ class WakafController extends Controller
 
         if ($request->has('image')) {
             $file = $request->file('image');
-            $ext = $file->getClientOriginalExtension();
-            $name = time() . '-' . random_int(100, 999) . '.' . $ext;
-            $path = 'storage/uploads/wakaf/';
-            $file->move($path, $name);
-            $data['image'] = $path . $name;
+            $name = time() . '-' . random_int(100, 999) . '.webp';
+            $outputFile = 'storage/uploads/wakaf/' . $name;
+            $manager = ImageManager::gd();
+            $image = $manager->read($file);
+            $image->save(quality: 10);
+            $image->save($outputFile);
+            $data['image'] = $outputFile;
         }
 
         try {
@@ -145,14 +148,17 @@ class WakafController extends Controller
 
         if ($request->has('image_edit')) {
             $file = $request->file('image_edit');
-            $ext = $file->getClientOriginalExtension();
-            $name = time() . '-' . random_int(100, 999) . '.' . $ext;
-            $path = 'storage/uploads/wakaf/';
-            $file->move($path, $name);
-            if (File::exists($check_file->image)) {
-                File::delete($check_file->image);
+            $name = time() . '-' . random_int(100, 999) . '.webp';
+            $outputFile = "storage/uploads/wakaf/$name";
+            $manager = ImageManager::gd();
+            $image = $manager->read($file);
+            $image->save(quality: 10);
+            $image->save($outputFile);
+
+            if (file_exists($check_file->image)) {
+                unlink($check_file->image);
             }
-            $dataUpdate['image'] = $path . $name;
+            $dataUpdate['image'] = $outputFile;
         }
 
         try {
@@ -173,19 +179,25 @@ class WakafController extends Controller
 
     public function destroy(string $id)
     {
-        try {
-            DB::table('wakafs')->where('id', $id)->delete();
-            return response()->json([
-                'status' => true,
-                'statusCode' => 200,
-                'message' => 'Berhasil menghapus data wakaf!'
-            ]);
-        } catch (\Exception $th) {
-            return response()->json([
-                'status' => false,
-                'statusCode' => 500,
-                'message' => $th->getMessage()
-            ]);
+        $check = DB::table('wakafs')->where('id', $id)->first();
+        if ($check) {
+            if (file_exists($check->image)) {
+                unlink($check->image);
+            }
+            try {
+                DB::table('wakafs')->where('id', $id)->delete();
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'message' => 'Berhasil menghapus data wakaf!'
+                ]);
+            } catch (\Exception $th) {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 500,
+                    'message' => $th->getMessage()
+                ]);
+            }
         }
     }
 

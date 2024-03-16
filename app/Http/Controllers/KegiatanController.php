@@ -6,8 +6,11 @@ use App\Models\Kegiatan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
 use Ramsey\Uuid\Uuid;
+
 
 class KegiatanController extends Controller
 {
@@ -50,11 +53,14 @@ class KegiatanController extends Controller
 
         if ($request->has('gambar_kegiatan')) {
             $file = $request->file('gambar_kegiatan');
-            $ext = $file->getClientOriginalExtension();
-            $name = time() . '-' . random_int(100, 999) . '.' . $ext;
+            $name = time() . '-' . random_int(100, 999) . '.webp';
             $path = 'storage/uploads/kegiatan/';
-            $file->move($path, $name);
-            $data['image'] = $path . $name;
+            $manager = ImageManager::gd();
+            $image = $manager->read($file);
+            $outputFile = $path . $name;
+            $image->save(quality: 10);
+            $image->save($outputFile);
+            $data['image'] = $outputFile;
         }
 
         try {
@@ -113,14 +119,16 @@ class KegiatanController extends Controller
 
         if ($request->has('gambar_kegiatan_edit')) {
             $file = $request->file('gambar_kegiatan_edit');
-            $ext = $file->getClientOriginalExtension();
-            $name = time() . '-' . random_int(100, 999) . '.' . $ext;
-            $path = 'storage/uploads/kegiatan/';
-            $file->move($path, $name);
-            if (File::exists($check_file->image)) {
-                File::delete($check_file->image);
+            $name = time() . '-' . random_int(100, 999) . '.webp';
+            $manager = ImageManager::gd();
+            $image = $manager->read($file);
+            $outputFile = "storage/uploads/kegiatan/$name";
+            $image->save(quality: 10);
+            $image->save($outputFile);
+            if (file_exists($check_file->image)) {
+                unlink($check_file->image);
             }
-            $dataUpdate['image'] = $path . $name;
+            $dataUpdate['image'] = $outputFile;
         }
 
         try {
@@ -144,8 +152,12 @@ class KegiatanController extends Controller
      */
     public function destroy(string $id)
     {
-        $check = Kegiatan::find($id)->first();
+        $check = Kegiatan::where('id', $id)->first();
         if ($check) {
+            if (file_exists($check->image)) {
+                unlink($check->image);
+            }
+
             try {
                 Kegiatan::where('id', $id)->delete();
                 return response()->json([
@@ -166,6 +178,23 @@ class KegiatanController extends Controller
                 'statusCode' => 500,
                 'message' => 'Data kegiatan tidak ditemukan!'
             ], 500);
+        }
+    }
+
+    public function test(Request $request)
+    {
+        $req = $request->query('id');
+        $check = Kegiatan::where('id', $req)->first();
+        if ($check) {
+            $replaced = str_replace('storage/uploads/kegiatan/', '', $check->image);
+            if (file_exists($check->image)) {
+
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => Storage::put("storage/uploads/kegiatan/", $replaced),
+                ], 200);
+            }
         }
     }
 }

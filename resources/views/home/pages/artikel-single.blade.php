@@ -7,7 +7,7 @@
             <div class="container position-relative">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h2>{{ $artikel[0]->title }}</h2>
+                        <h2>Artikel</h2>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <ol>
                     <li><a href="{{ route('/') }}">Beranda</a></li>
                     <li><a href="{{ route('artikel.landing_page') }}">Artikel</a></li>
-                    <li>Detail Artikel</li>
+                    <li style="cursor: none">{{ $artikel[0]->title }}</li>
                 </ol>
             </div>
         </nav>

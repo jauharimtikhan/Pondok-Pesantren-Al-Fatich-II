@@ -10,9 +10,6 @@ use Ramsey\Uuid\Uuid;
 class TransactionController extends Controller
 {
 
-
-
-
     public function create(Request $request)
     {
         $data = [
@@ -59,7 +56,7 @@ class TransactionController extends Controller
                 'last_amount' => $sum
             ];
             try {
-                DB::table('transactions')->where('donatur_id', $request->donatur_id)->update($data);
+                DB::table('transactions')->where('donatur_id', $request->donatur_id)->where('payment_id', $request->transaction_id)->update($data);
                 if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
                     DB::table('wakafs')->where('id', $request->wakaf_id)->update($data_lastAmount);
 
@@ -87,5 +84,10 @@ class TransactionController extends Controller
                 ]);
             }
         }
+    }
+
+    public function updateOrderId(Request $request)
+    {
+        $check_donatur = DB::table('donaturs')->where('phone', $request->phone)->first();
     }
 }

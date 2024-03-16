@@ -1,6 +1,12 @@
 @extends('home.layouts.app')
 @section('content')
-    <section id="render"></section>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="spinner-border text-success " id="loader" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+
+        <section id="render"></section>
+    </div>
 @endsection
 @push('js')
     <script type="text/javascript">
@@ -32,6 +38,9 @@
                     ])`)
                     updateStatus(tr_status, tr_id, data.data.gross_amount)
                 }
+            },
+            complete: function() {
+                $('#loader').addClass('d-none')
             },
             error: function(err) {
                 console.log(err);

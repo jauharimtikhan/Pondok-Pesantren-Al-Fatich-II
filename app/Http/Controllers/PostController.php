@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
 use Ramsey\Uuid\Uuid;
 
 class PostController extends Controller
@@ -40,10 +41,14 @@ class PostController extends Controller
 
     public function uploadImage(Request $request)
     {
-        $file = $request->file('file')->getClientOriginalName();
-        $fileName = time() . '-' . $file;
-        $path = $request->file('file')->storeAs('uploads/artikel/media', $fileName, 'public');
-        return response()->json(['location' => asset("storage/$path")]);
+        $file = $request->file('file');
+        $fileName = time() . '-' . random_int(100, 99999) . '.webp';
+        $outputFile = "storage/uploads/artikel/media/$fileName";
+        $manager = ImageManager::gd();
+        $image = $manager->read($file);
+        $image->save(quality: 10);
+        $image->save($outputFile, 10);
+        return response()->json(['location' => asset("storage/$outputFile")]);
     }
 
     public function create(Request $request)
@@ -86,10 +91,14 @@ class PostController extends Controller
         ];
 
         if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail')->getClientOriginalName();
-            $fileName = time() . '-' . $file;
-            $path = $request->file('thumbnail')->storeAs('uploads/artikel/thumbnail', $fileName, 'public');
-            $dataThumbnail['path'] = asset("storage/$path");
+            $file = $request->file('thumbnail');
+            $fileName = time() . '-' . random_int(100, 99999) . '.webp';
+            $outputFile = "storage/uploads/artikel/thumbnail/$fileName";
+            $manager = ImageManager::gd();
+            $image = $manager->read($file);
+            $image->save(quality: 10);
+            $image->save($outputFile);
+            $dataThumbnail['path'] = asset($outputFile);
         }
         try {
             Posts::create($data);
@@ -130,14 +139,18 @@ class PostController extends Controller
         ];
 
         if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail')->getClientOriginalName();
-            $fileName = time() . '-' . $file;
+            $file = $request->file('thumbnail');
+            $fileName = time() . '-' . random_int(100, 99999) . '.webp';
             $check = PostMedia::where('post_id', $ids)->first();
-            $path = $request->file('thumbnail')->storeAs('uploads/artikel/thumbnail', $fileName, 'public');
-            if ($check->path !== $path) {
-                Storage::delete($check->path);
+            $outputFile = "storage/uploads/artikel/thumbnail/$fileName";
+            $manager = ImageManager::gd();
+            $image = $manager->read($file);
+            $image->save(quality: 10);
+            $image->save($outputFile);
+            if (file_exists($check->path)) {
+                unlink($check->path);
             }
-            $dataThumbnail['path'] = $path;
+            $dataThumbnail['path'] = $outputFile;
         }
 
         try {
@@ -159,20 +172,26 @@ class PostController extends Controller
 
     public function destroy(string $id)
     {
+        $check = PostMedia::where('post_id', $id)->first();
 
-        try {
-            Posts::destroy($id);
-            return response()->json([
-                'status' => true,
-                'statusCode' => 200,
-                'message' => 'Berhasil menghapus artikel'
-            ], 200);
-        } catch (\Exception $th) {
-            return response()->json([
-                'status' => false,
-                'statusCode' => 500,
-                'message' => $th->getMessage()
-            ], 500);
+        if ($check) {
+            if (file_exists($check->path)) {
+                unlink($check->path);
+            }
+            try {
+                Posts::destroy($id);
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'message' => 'Berhasil menghapus artikel'
+                ], 200);
+            } catch (\Exception $th) {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 500,
+                    'message' => $th->getMessage()
+                ], 500);
+            }
         }
     }
 }
