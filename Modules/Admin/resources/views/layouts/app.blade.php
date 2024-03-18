@@ -39,13 +39,13 @@
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-wrapper active">
-                @include('admin::layouts\navbar')
-                @include('admin::layouts\sidebar')
+                @include('admin::layouts/navbar')
+                @include('admin::layouts/sidebar')
             </div>
         </div>
         <div id="main" class='layout-navbar navbar-fixed'>
             @yield('content')
-            @include('admin::layouts\footer')
+            @include('admin::layouts/footer')
         </div>
     </div>
 
@@ -146,43 +146,43 @@
 
         function ConvertRP(angka) {
             let reverse = angka.toString().split("").reverse().join("");
-            let ribuan = reverse.match(/\d{1,3}/g);
-            ribuan = ribuan.join(".").split("").reverse().join("");
-            return "Rp " + ribuan;
-        }
-
-        function formatRupiah(number) {
-            let result = "";
-
-            if (number >= 1000000000) {
-                const billion = Math.floor(number / 1000000000);
-                const million = Math.round((number % 1000000000) / 1000000);
-                if (million === 0) {
-                    result = `${billion} M`;
-                } else {
-                    result = `${billion}.${million} M`;
-                }
-            } else if (number >= 1000000) {
-                const million = Math.floor(number / 1000000);
-                const thousand = Math.round((number % 1000000) / 1000);
-                if (thousand === 0) {
-                    result = `${million} JT`;
-                } else {
-                    result = `${million}.${thousand} JT`;
-                }
-            } else if (number >= 1000) {
-                const thousand = Math.floor(number / 1000);
-                result = `${thousand} K`;
-            } else {
-                result = `${number}`;
+            let ribuan = reverse.match( //d{1,3}/g);
+                ribuan = ribuan.join(".").split("").reverse().join("");
+                return "Rp " + ribuan;
             }
 
-            return result;
-        }
+            function formatRupiah(number) {
+                let result = "";
 
-        function cleanMaskMoney(number) {
-            return number.maskMoney('unmasked')[0]
-        }
+                if (number >= 1000000000) {
+                    const billion = Math.floor(number / 1000000000);
+                    const million = Math.round((number % 1000000000) / 1000000);
+                    if (million === 0) {
+                        result = `${billion} M`;
+                    } else {
+                        result = `${billion}.${million} M`;
+                    }
+                } else if (number >= 1000000) {
+                    const million = Math.floor(number / 1000000);
+                    const thousand = Math.round((number % 1000000) / 1000);
+                    if (thousand === 0) {
+                        result = `${million} JT`;
+                    } else {
+                        result = `${million}.${thousand} JT`;
+                    }
+                } else if (number >= 1000) {
+                    const thousand = Math.floor(number / 1000);
+                    result = `${thousand} K`;
+                } else {
+                    result = `${number}`;
+                }
+
+                return result;
+            }
+
+            function cleanMaskMoney(number) {
+                return number.maskMoney('unmasked')[0]
+            }
     </script>
     @stack('js')
 

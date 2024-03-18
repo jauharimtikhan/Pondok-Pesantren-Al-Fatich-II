@@ -1,7 +1,7 @@
-@extends('admin::layouts\app', ['activePage' => 'Buat Artikel'])
+@extends('admin::layouts/app', ['activePage' => 'Buat Artikel'])
 
 @section('content')
-    @include('admin::layouts\header')
+    @include('admin::layouts/header')
 
     <div id="main-content">
 
@@ -245,7 +245,7 @@
 
         $('#title').keyup(function() {
             let title = $(this).val()
-            $('#slug').val(title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''))
+            $('#slug').val(title.toLowerCase().replace(/ /g, '-').replace(/[^/w-]+/g, ''))
         })
 
         $('#metadescription').select2({

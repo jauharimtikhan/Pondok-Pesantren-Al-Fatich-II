@@ -1,7 +1,7 @@
-@extends('admin::layouts\app', ['activePage' => 'artikel'])
+@extends('admin::layouts/app', ['activePage' => 'artikel'])
 
 @section('content')
-    @include('admin::layouts\header')
+    @include('admin::layouts/header')
 
     <div id="main-content">
 

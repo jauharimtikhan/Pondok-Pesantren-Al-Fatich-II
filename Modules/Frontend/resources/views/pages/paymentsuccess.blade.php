@@ -1,4 +1,4 @@
-@extends('frontend::layouts\app')
+@extends('frontend::layouts/app')
 @section('content')
     <div class="d-flex justify-content-center align-items-center">
         <div class="spinner-border text-success " id="loader" role="status">

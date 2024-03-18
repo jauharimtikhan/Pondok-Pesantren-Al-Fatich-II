@@ -1,4 +1,4 @@
-@extends('frontend::layouts\app')
+@extends('frontend::layouts/app')
 @section('content')
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">

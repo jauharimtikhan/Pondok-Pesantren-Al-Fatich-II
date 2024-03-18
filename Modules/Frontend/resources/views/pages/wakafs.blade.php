@@ -1,4 +1,4 @@
-@extends('frontend::layouts\app')
+@extends('frontend::layouts/app')
 
 @section('content')
     <div class="breadcrumbs">
@@ -27,7 +27,7 @@
         <div class="container" data-aos="fade-up">
             <div class="row gy-4 posts-list">
                 @foreach ($wakafs as $wakaf)
-                    @include('frontend::components\wakaf\single-wakaf', ['wakaf' => $wakaf])
+                    @include('frontend::components/wakaf/single-wakaf', ['wakaf' => $wakaf])
                 @endforeach
             </div>
         </div>

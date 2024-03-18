@@ -1,6 +1,6 @@
-@extends('frontend::layouts\app')
+@extends('frontend::layouts/app')
 @push('hero_section')
-    @include('frontend::components\home\banner')
+    @include('frontend::components/home/banner')
 @endpush
 
 @section('content')
@@ -109,13 +109,13 @@
             <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
 
-                    @include('frontend::components\home\testimoni')
-                    @include('frontend::components\home\testimoni')
-                    @include('frontend::components\home\testimoni')
-                    @include('frontend::components\home\testimoni')
-                    @include('frontend::components\home\testimoni')
-                    @include('frontend::components\home\testimoni')
-                    @include('frontend::components\home\testimoni')
+                    @include('frontend::components/home/testimoni')
+                    @include('frontend::components/home/testimoni')
+                    @include('frontend::components/home/testimoni')
+                    @include('frontend::components/home/testimoni')
+                    @include('frontend::components/home/testimoni')
+                    @include('frontend::components/home/testimoni')
+                    @include('frontend::components/home/testimoni')
 
                 </div>
                 <div class="swiper-pagination"></div>
@@ -138,7 +138,7 @@
 
                 <div class="row gy-4 portfolio-container">
                     @foreach ($kegiatans as $kegiatan)
-                        @include('frontend::components\home\kegiatan', ['kegiatan' => $kegiatan])
+                        @include('frontend::components/home/kegiatan', ['kegiatan' => $kegiatan])
                     @endforeach
 
 

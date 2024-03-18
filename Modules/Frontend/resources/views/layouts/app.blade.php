@@ -36,7 +36,7 @@
 <body>
 
     <!-- ======= Header ======= -->
-    @include('frontend::layouts\navbar')
+    @include('frontend::layouts/navbar')
     <!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
@@ -48,7 +48,7 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    @include('frontend::layouts\footer')
+    @include('frontend::layouts/footer')
     <!-- End Footer -->
 
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
@@ -83,7 +83,7 @@
         }
 
         function cleanNumber(number) {
-            const cleaned = number.replace(/[^\d,-]/g, '');
+            const cleaned = number.replace(/[^/d,-]/g, '');
             const integerNumber = parseInt(cleaned, 10);
             return integerNumber
         }

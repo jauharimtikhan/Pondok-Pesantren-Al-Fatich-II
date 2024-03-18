@@ -1,4 +1,4 @@
-@extends('frontend::layouts\app')
+@extends('frontend::layouts/app')
 
 @section('content')
     <!-- ======= Breadcrumbs ======= -->
@@ -30,7 +30,7 @@
         <div class="container" data-aos="fade-up">
             <div class="row gy-4 posts-list">
                 @foreach ($artikels as $artikel)
-                    @include('frontend::components\posts\artikels', ['artikel' => $artikel])
+                    @include('frontend::components/posts/artikels', ['artikel' => $artikel])
                 @endforeach
             </div>
         </div>
