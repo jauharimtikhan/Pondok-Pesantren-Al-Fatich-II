@@ -30,7 +30,7 @@ class PaymentController extends Controller
         $guzzele = new \GuzzleHttp\Client();
 
 
-        $response = $guzzele->request('GET', 'https://api.sandbox.midtrans.com/v2/' . $orderId . '/status', [
+        $response = $guzzele->request('GET', getenv('MIDTRANS_API_URL') . 'v2/' . $orderId . '/status', [
             'headers' => [
                 'accept' => 'application/json',
                 'Content-Type' => 'application/json',
@@ -315,12 +315,24 @@ class PaymentController extends Controller
         }
     }
 
-    public function success(Request $request): View
+    public function deleteTransaction(string $phone)
     {
-        $wakaf_id = $request->query('wakaf_id');
-        $donatur_id = $request->query('donatur_id');
-        $order_id = $request->query('order_id');
-        $last_amount = $request->query('last_amount');
-        return view('home.pages.paymentsuccess', compact('wakaf_id', 'donatur_id', 'order_id', 'last_amount'));
+        $checkUser = DB::table("donaturs")->where('phone', $phone)->first();
+
+        if ($checkUser) {
+            try {
+                DB::table("transactions")->where('donatur_id', $checkUser->id)->where('status', 'pending')->delete();
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+
+                ], 200);
+            } catch (\Exception $th) {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 400,
+                ], 400);
+            }
+        }
     }
 }

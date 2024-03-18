@@ -6,6 +6,9 @@
  *
  * @return response()
  */
+
+use Illuminate\Support\Facades\DB;
+
 if (!function_exists('Logged')) {
     function Logged()
     {
@@ -33,7 +36,7 @@ if (!function_exists('convertRp')) {
     {
         $number = intval($string);
         $formattedPrice = number_format($number, 2, ',', '.');
-        return "Rp" . $formattedPrice;
+        return "Rp " . $formattedPrice;
     }
 }
 
@@ -53,6 +56,19 @@ if (!function_exists("convertToWebp")) {
             }
         } else {
             return false;
+        }
+    }
+}
+
+if (!function_exists('checkRole')) {
+    function checkRole($role)
+    {
+        $user =  DB::table('users')->where('id', auth()->user()->id)->first();
+        switch ($user->role == $role) {
+            case $role:
+                return true;
+            default:
+                return false;
         }
     }
 }

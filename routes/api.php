@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\TransactionController;
-use App\Http\Controllers\WakafController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Modules\Frontend\App\Http\Controllers\WakafController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +22,7 @@ Route::middleware('LoggedOut')->group(function () {
         Route::post('/payment', 'getSnapToken');
         Route::get('/payment_status', 'getStatusPayment');
         Route::post('/payment/update_amount', 'updateLastAmount');
+        Route::post('/payment/delete_transaction/{phone}', 'deleteTransaction');
     });
 
     // Route Transaction
