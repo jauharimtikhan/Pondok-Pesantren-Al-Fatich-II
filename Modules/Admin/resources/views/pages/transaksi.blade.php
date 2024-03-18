@@ -18,9 +18,12 @@
                 <table class="table table-striped table-hover" id="tableTransaksi">
                     <thead>
                         <tr>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
-                            <th>Column 3</th>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Status</th>
+                            <th>Tanggal Dibuat</th>
+                            <th>Tanggal Diupdate</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
