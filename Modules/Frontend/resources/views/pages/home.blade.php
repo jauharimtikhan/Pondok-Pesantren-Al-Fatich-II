@@ -16,7 +16,7 @@
 
             <div class="row gy-4">
                 <div class="col-lg-6">
-                    <img src="{{ asset('assets-landing-page') }}/img/gallery (2).JPG" class="img-fluid rounded-4 mb-4"
+                    <img src="{{ asset('assets-landing-page') }}/img/gallery (2).webp" class="img-fluid rounded-4 mb-4"
                         alt="">
                     <p>Kegiatan rutin setelah shalat ashar </p>
                     <p>pengajian al-qur'an dengan di dampingi para ustadz dan ustadzah yang berpengalaman dalam bidangnya.
@@ -38,7 +38,7 @@
 
 
                         <div class="position-relative mt-4">
-                            <img src="{{ asset('assets-landing-page') }}/img/about-2.jpg" class="img-fluid rounded-4"
+                            <img src="{{ asset('assets-landing-page') }}/img/about-2.webp" class="img-fluid rounded-4"
                                 alt="">
                         </div>
                     </div>
