@@ -62,20 +62,20 @@
                 <div class="col-lg-6">
 
                     <div class="stats-item d-flex align-items-center">
-                        <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1"
-                            class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $donatur[0]->total_donatur }}"
+                            data-purecounter-duration="1" class="purecounter"></span>
                         <p><strong>Total Donatur</strong></p>
                     </div><!-- End Stats Item -->
 
                     <div class="stats-item d-flex align-items-center">
-                        <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
-                            class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $target_dana[0]->total }}"
+                            data-purecounter-duration="1" class="purecounter"></span>
                         <p><strong>Total Dana Terkumpul</strong></p>
                     </div><!-- End Stats Item -->
 
                     <div class="stats-item d-flex align-items-center">
-                        <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1"
-                            class="purecounter"></span>
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $target_dana[0]->target_dana }}"
+                            data-purecounter-duration="1" class="purecounter"></span>
                         <p><strong>Target Dana</strong></p>
                     </div><!-- End Stats Item -->
 
@@ -89,7 +89,7 @@
     <!-- ======= Call To Action Section ======= -->
     <section id="wakaf" class="call-to-action">
         <div class="container text-center" data-aos="zoom-out">
-            <h3>Bantu Kami Dengan Wakaf Online</h3>
+            <h3>Bantu Kami Dengan Wakaf</h3>
             <p class="text-break">Bantuan anda sangat berharga bagi kami yang membutuhkan-nya, <br> "Ketika Allah memberimu
                 nikmat secara finansial,
                 jangan tingkatkan standar hidupmu, akan tetapi tingkatkan standarmu dalam bersedekah."</p>
@@ -174,7 +174,8 @@
                             <li><i class="bi bi-check"></i> Amal Jariyah</li>
                             <li><i class="bi bi-check"></i> Mendapatkan Do'a dari para santri</li>
                         </ul>
-                        <div class="text-center"><a href="#" class="buy-btn">Wakaf Sekarang</a></div>
+                        <div class="text-center"><button type="button" onclick="pricing(300000)" class="buy-btn">Wakaf
+                                Sekarang</button></div>
                     </div>
                 </div><!-- End Pricing Item -->
 
@@ -191,7 +192,8 @@
                             <li><i class="bi bi-check"></i> Amal Jariyah</li>
                             <li><i class="bi bi-check"></i> Mendapatkan Do'a dari para santri</li>
                         </ul>
-                        <div class="text-center"><a href="#" class="buy-btn">Wakaf Sekarang</a></div>
+                        <div class="text-center"><button type="button" onclick="pricing(900000)" class="buy-btn">Wakaf
+                                Sekarang</button></div>
                     </div>
                 </div><!-- End Pricing Item -->
 
@@ -207,7 +209,8 @@
                             <li><i class="bi bi-check"></i> Amal Jariyah</li>
                             <li><i class="bi bi-check"></i> Mendapatkan Do'a dari para santri</li>
                         </ul>
-                        <div class="text-center"><a href="#" class="buy-btn">Wakaf Sekarang</a></div>
+                        <div class="text-center"><button type="button" onclick="pricing(900000)" class="buy-btn">Wakaf
+                                Sekarang</button></div>
                     </div>
                 </div><!-- End Pricing Item -->
 
@@ -292,4 +295,129 @@
 
         </div>
     </section><!-- End Contact Section -->
+
+
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div class="modal fade" id="modalpricing" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Wakaf Sekarang
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" class="form-checkout">
+                        @csrf
+                        <input type="hidden" name="total" id="totalpricing">
+                        <div class="form-group mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" name="nama" placeholder="Masukan Nama Lengkap Anda" id="nama"
+                                class="form-control" required autocomplete="on">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="phone" class="form-label">No.Whatsapp</label>
+                            <input type="tel" name="phone" placeholder="Masukan Nomor Whatsapp Anda"
+                                id="phone" class="form-control" required autocomplete="on">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Kembali
+                    </button>
+                    <button type="submit" class="btn btn-new-primary">Lanjut</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript" src="{{ getenv('MIDTRANS_URL') }}/snap/snap.js"
+        data-client-key="{{ getenv('MIDTRANS_CLIENT_KEY') }}"></script>
+    <script type="text/javascript">
+        let keys = localStorage.getItem("token")
+
+        function pricing(price) {
+            $('#modalpricing').modal('show')
+            $('#totalpricing').val(price)
+        }
+        $('.form-checkout').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '{{ getenv('API_URL') }}payment/direct',
+                method: 'post',
+                headers: {
+                    Authorization: `Bearer ${keys}`
+                },
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    $('button[type="submit"]').prop('disabled', true);
+                    $('button[type="submit"]').text('Loading...');
+                },
+                success: function(res) {
+                    if (res.statusCode == 200) {
+                        $('#modalpricing').modal('hide')
+                        snap.pay(res.snap_token, {
+                            onSuccess: function(result) {
+                                Toast(2000).fire({
+                                    icon: 'success',
+                                    title: 'Pembayaran Berhasil'
+                                }).then((success) => {
+                                    window.location.replace = result.finish_redirect
+                                })
+                                // console.log(result);
+                            },
+                            onPending: function(result) {
+                                Toast(2000).fire({
+                                    icon: 'error',
+                                    title: 'Pembayaran Tertunda'
+                                }).then((success) => {
+                                    window.location.replace = result.finish_redirect
+                                })
+                                console.log(result);
+                            },
+                            onError: function(result) {
+                                Toast(2000).fire({
+                                    icon: 'success',
+                                    title: 'Transaksi Error'
+                                }).then((success) => {
+                                    window.location.href = result.finish_redirect
+                                })
+                                // console.log(result);
+                            },
+                            onClose: function() {
+
+                                Toast(2000).fire({
+                                    icon: 'error',
+                                    title: 'Anda Mengakhiri Transaksi'
+                                });
+                                deleteTransaction($('#no_hp').val())
+                            }
+                        })
+                    }
+                },
+                complete: function() {
+                    $('button[type="submit"]').prop('disabled', false);
+                    $('button[type="submit"]').text('Lanjut');
+                },
+                error: function(err) {
+                    if (err.status == 400) {
+                        Toast(2000).fire({
+                            icon: 'error',
+                            title: err.responseJSON.message
+                        }).then((success) => {
+                            window.location.href = err.responseJSON.url
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+@endpush

@@ -19,6 +19,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.0/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/extensions/choices.js/public/assets/styles/choices.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -82,6 +83,7 @@
     <script src="{{ asset('assets') }}/static/js/pages/date-picker.js"></script>
     <script src="{{ asset('assets') }}/extensions/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
     <script src="{{ asset('assets') }}/extensions/jquery-maskmoney/dist/jquery.maskMoney.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script id="appjs" src="{{ asset('assets') }}/compiled/js/app.js"></script>
 
     <script>

@@ -23,6 +23,7 @@ Route::middleware('LoggedOut')->group(function () {
         Route::get('/payment_status', 'getStatusPayment');
         Route::post('/payment/update_amount', 'updateLastAmount');
         Route::post('/payment/delete_transaction/{phone}', 'deleteTransaction');
+        Route::post('/payment/direct', 'getSnapTokenDirect');
     });
 
     // Route Transaction

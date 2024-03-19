@@ -18,14 +18,18 @@ class LoggedOut
     {
         $authorize = $request->header("Authorization");
         $token = Tokens::where("token", $authorize)->first();
-        if ($token) {
-            return $next($request);
-        } else {
-            return response()->json([
-                'status' => false,
-                'statusCode' => 401,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
+        $allowedIp = $request->ip();
+        return response()->json([
+            'ip' => $allowedIp
+        ]);
+        // if ($token) {
+        //     return $next($request);
+        // } else {
+        //     return response()->json([
+        //         'status' => false,
+        //         'statusCode' => 401,
+        //         'message' => 'Unauthorized'
+        //     ], 401);
+        // }
     }
 }

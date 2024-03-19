@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Donatur;
 use App\Models\Transaction;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Midtrans\Snap;
@@ -68,6 +67,7 @@ class PaymentController extends Controller
         }
     }
 
+    // untuk pembayaran wakaf normal
     public function getSnapToken(Request $request)
     {
         $check_donatur = DB::table('donaturs')->where('phone', $request->phone)->first();
@@ -310,6 +310,133 @@ class PaymentController extends Controller
                             'snap_token' => 'kosong'
                         ], 400);
                     }
+                }
+            }
+        }
+    }
+
+    // untuk direct one pembayaran 
+    public function getSnapTokenDirect(Request $request)
+    {
+        $order_id = 'WAKAF-DIRECT-' . random_int(10000, 999999999);
+        $dataUser = DB::table('donaturs')->where('phone', $request->phone)->first();
+        if (!$dataUser) {
+            $data = [
+                'id' => Uuid::uuid4()->toString(),
+                'name' => $request->nama,
+                'phone' => $request->phone,
+                'wakaf_id' => 'WAKAF-DIRECT-' . random_int(10, 999),
+                'order_id' => $order_id,
+                'amount' => $request->total
+            ];
+
+            $tr = [
+                'id' => Uuid::uuid4()->toString(),
+                'donatur_id' => $data['id'],
+                'wakaf_id' => $data['wakaf_id'],
+                'status' => 'pending',
+            ];
+
+            Donatur::create($data);
+            Transaction::create($tr);
+
+            $params = [
+                'transaction_details' => [
+                    'order_id' => $order_id,
+                    'gross_amount' => $request->total,
+                ],
+                'customer_details' => [
+                    'first_name' => $request->nama,
+                    'phone' => $request->phone,
+                ],
+                'item_details' => [
+                    [
+                        'id'            => random_int(0, 100),
+                        'price'         => $request->total,
+                        'quantity'      => 1,
+                        'name'          => 'Wakaf kepada ' . config('app.name'),
+                        'brand'         => 'Wakaf',
+                        'category'      => 'Wakaf',
+                        'merchant_name' => config('app.name'),
+                    ]
+                ]
+            ];
+
+            $snapTokens = Snap::getSnapToken($params);
+            if ($snapTokens) {
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'snap_token' => $snapTokens
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 400,
+                    'snap_token' => null
+                ], 400);
+            }
+        } else {
+            $tr = [
+                'id' => Uuid::uuid4()->toString(),
+                'donatur_id' => $dataUser->id,
+                'wakaf_id' => $dataUser->wakaf_id,
+                'status' => 'pending',
+            ];
+            Transaction::create($tr);
+
+            $checkPayment = DB::table('transactions')->where('donatur_id', $dataUser->id)->where('status', 'pending')->first();
+
+            if ($checkPayment) {
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 400,
+                    'message' => 'Anda sudah melakukan transaksi',
+                    'url' => getenv('FRONTEND_URL') . '?donatur_id=' . $dataUser->id . '&order_id=' . $dataUser->order_id
+                ], 400);
+            } else {
+                $updateOrderId = [
+                    'order_id' => $order_id
+                ];
+                Donatur::where('id', $dataUser->id)->update($updateOrderId);
+
+                $doubleCheckDonatur = DB::table('donaturs')->where('id', $dataUser->id)->first();
+
+                $params = [
+                    'transaction_details' => [
+                        'order_id' => $doubleCheckDonatur->order_id,
+                        'gross_amount' => $request->total,
+                    ],
+                    'customer_details' => [
+                        'first_name' => $request->nama,
+                        'phone' => $request->phone,
+                    ],
+                    'item_details' => [
+                        [
+                            'id'            => random_int(0, 100),
+                            'price'         => $request->total,
+                            'quantity'      => 1,
+                            'name'          => 'Wakaf kepada ' . config('app.name'),
+                            'brand'         => 'Wakaf',
+                            'category'      => 'Wakaf',
+                            'merchant_name' => config('app.name'),
+                        ]
+                    ]
+                ];
+
+                $snapTokens = Snap::getSnapToken($params);
+                if ($snapTokens) {
+                    return response()->json([
+                        'status' => true,
+                        'statusCode' => 200,
+                        'snap_token' => $snapTokens
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'statusCode' => 400,
+                        'snap_token' => null
+                    ], 400);
                 }
             }
         }

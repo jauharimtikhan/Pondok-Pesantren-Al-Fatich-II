@@ -183,9 +183,9 @@
             $.ajax({
                 url: '{{ getenv('API_URL') }}payment',
                 method: 'post',
-                async: true,
+
                 headers: {
-                    'Authorization': 'Bearer {{ getenv('API_KEY') }}'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
                 data: new FormData(this),
                 processData: false,
@@ -288,7 +288,7 @@
                 url: '{{ getenv('API_URL') }}payment/delete_transaction/' + id,
                 method: 'post',
                 headers: {
-                    'Authorization': 'Bearer {{ getenv('API_KEY') }}'
+                    'Authorization': 'Bearer' + localStorage.getItem('token')
                 },
                 data: {
                     _token: '{{ csrf_token() }}'

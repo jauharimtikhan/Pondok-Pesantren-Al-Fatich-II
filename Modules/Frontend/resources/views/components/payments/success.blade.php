@@ -2,7 +2,7 @@
     <div class="container g-5 d-flex justify-content-center">
         <div class="payment-success-card">
             <i class="bi bi-check-circle-fill"></i>
-            <h1>Berhasil</h1>
+            <h1>Sukses</h1>
             <h2>Total
                 <b>
                     {{ $gross_amount }}

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kegiatan;
 use App\Models\PostMedia;
 use App\Models\Posts;
+use App\Models\Wakaf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,11 @@ class LandingPageController extends Controller
     public function index(): View
     {
         $kegiatans = Kegiatan::orderBy('created_at', 'asc')->limit(12)->get();
-        return view('frontend::pages/home', compact('kegiatans'));
+        $sql = "SELECT SUM(target) AS target_dana, SUM(last_amount) AS total FROM wakafs";
+        $target_dana = DB::select($sql);
+        $sqls = "SELECT COUNT(id) AS total_donatur FROM donaturs";
+        $donatur = DB::select($sqls);
+        return view('frontend::pages/home', compact('kegiatans', 'target_dana', 'donatur'));
     }
 
     public function artikel(): View

@@ -57,6 +57,7 @@
     {{-- <div id="preloader"></div> --}}
 
     <!-- Vendor JS Files -->
+
     <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('assets-landing-page') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -66,6 +67,7 @@
     <script src="{{ asset('assets-landing-page') }}/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="{{ asset('assets-landing-page') }}/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="{{ asset('assets-landing-page') }}/js/main.js"></script>
+    <script src="{{ asset('assets-landing-page') }}/js/auth.js"></script>
     <script type="text/javascript">
         function Toast(duration) {
             const Toast = Swal.mixin({
@@ -83,7 +85,7 @@
         }
 
         function cleanNumber(number) {
-            const cleaned = number.replace(/[^/d,-]/g, '');
+            const cleaned = number.replace(/\D/g, '');
             const integerNumber = parseInt(cleaned, 10);
             return integerNumber
         }
