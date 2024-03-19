@@ -15,6 +15,6 @@ class PaymentController extends Controller
         $donatur_id = $request->query('donatur_id');
         $order_id = $request->query('order_id');
         $last_amount = $request->query('last_amount');
-        return view('frontend::pages\paymentsuccess', compact('wakaf_id', 'donatur_id', 'order_id', 'last_amount'));
+        return view('frontend::pages/paymentsuccess', compact('wakaf_id', 'donatur_id', 'order_id', 'last_amount'));
     }
 }

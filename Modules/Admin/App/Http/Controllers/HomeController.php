@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $sql = "SELECT SUM(last_amount) as total FROM wakafs";
         $earn = DB::select($sql);
-        return view('admin::pages.home', compact('earn'));
+        return view('admin::pages/home', compact('earn'));
     }
 
     public function visitor()

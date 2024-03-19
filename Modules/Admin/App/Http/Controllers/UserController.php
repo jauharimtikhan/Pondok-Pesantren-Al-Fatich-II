@@ -15,7 +15,7 @@ class UserController extends Controller
     public function store()
     {
         $users = User::all();
-        return view("admin::pages\user", compact("users"));
+        return view("admin::pages/user", compact("users"));
     }
 
     public function get()

@@ -15,7 +15,7 @@ class DonaturController extends Controller
         JOIN wakafs w ON d.wakaf_id = w.id";
 
         $wakafs = DB::select($sql);
-        return view('admin::pages\donatur', compact('wakafs'));
+        return view('admin::pages/donatur', compact('wakafs'));
     }
 
     public function getDetails(string $id)

@@ -16,11 +16,11 @@ class SettingsController extends Controller
      */
     public function index(): View
     {
-        return view('admin::pages\settings');
+        return view('admin::pages/settings');
     }
     public function changePassword(): View
     {
-        return view('admin::pages\change_password');
+        return view('admin::pages/change_password');
     }
 
     /**

@@ -14,7 +14,7 @@ class ProgramController extends Controller
 {
     public function index(): View
     {
-        return view('admin::pages\program');
+        return view('admin::pages/program');
     }
 
     public function get()

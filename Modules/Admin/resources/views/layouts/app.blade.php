@@ -146,43 +146,43 @@
 
         function ConvertRP(angka) {
             let reverse = angka.toString().split("").reverse().join("");
-            let ribuan = reverse.match( //d{1,3}/g);
-                ribuan = ribuan.join(".").split("").reverse().join("");
-                return "Rp " + ribuan;
-            }
+            let ribuan = reverse.match(/\d{1,3}/g);
+            ribuan = ribuan.join(".").split("").reverse().join("");
+            return "Rp " + ribuan;
+        }
 
-            function formatRupiah(number) {
-                let result = "";
+        function formatRupiah(number) {
+            let result = "";
 
-                if (number >= 1000000000) {
-                    const billion = Math.floor(number / 1000000000);
-                    const million = Math.round((number % 1000000000) / 1000000);
-                    if (million === 0) {
-                        result = `${billion} M`;
-                    } else {
-                        result = `${billion}.${million} M`;
-                    }
-                } else if (number >= 1000000) {
-                    const million = Math.floor(number / 1000000);
-                    const thousand = Math.round((number % 1000000) / 1000);
-                    if (thousand === 0) {
-                        result = `${million} JT`;
-                    } else {
-                        result = `${million}.${thousand} JT`;
-                    }
-                } else if (number >= 1000) {
-                    const thousand = Math.floor(number / 1000);
-                    result = `${thousand} K`;
+            if (number >= 1000000000) {
+                const billion = Math.floor(number / 1000000000);
+                const million = Math.round((number % 1000000000) / 1000000);
+                if (million === 0) {
+                    result = `${billion} M`;
                 } else {
-                    result = `${number}`;
+                    result = `${billion}.${million} M`;
                 }
-
-                return result;
+            } else if (number >= 1000000) {
+                const million = Math.floor(number / 1000000);
+                const thousand = Math.round((number % 1000000) / 1000);
+                if (thousand === 0) {
+                    result = `${million} JT`;
+                } else {
+                    result = `${million}.${thousand} JT`;
+                }
+            } else if (number >= 1000) {
+                const thousand = Math.floor(number / 1000);
+                result = `${thousand} K`;
+            } else {
+                result = `${number}`;
             }
 
-            function cleanMaskMoney(number) {
-                return number.maskMoney('unmasked')[0]
-            }
+            return result;
+        }
+
+        function cleanMaskMoney(number) {
+            return number.maskMoney('unmasked')[0]
+        }
     </script>
     @stack('js')
 

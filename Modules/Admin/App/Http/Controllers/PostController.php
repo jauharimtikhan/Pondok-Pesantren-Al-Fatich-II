@@ -21,13 +21,13 @@ class PostController extends Controller
         FROM posts p JOIN users u ON p.user_id = u.id JOIN categories c ON p.category_id = c.id";
 
         $posts = DB::select($sql);
-        return view('admin::pages\post', compact('posts'));
+        return view('admin::pages/post', compact('posts'));
     }
 
 
     public function addView(): View
     {
-        return view('admin::components\post\add');
+        return view('admin::components/post/add');
     }
 
     public function editView(string $id): View
@@ -37,7 +37,7 @@ class PostController extends Controller
         JOIN categories c ON c.id = p.category_id
         JOIN users u ON u.id = p.user_id WHERE p.id = '$id'";
         $artikel = DB::select($all);
-        return view('admin::components\post\edit', compact('artikel'));
+        return view('admin::components/post/edit', compact('artikel'));
     }
 
     public function uploadImage(Request $request)
