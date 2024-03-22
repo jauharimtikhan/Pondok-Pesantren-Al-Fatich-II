@@ -339,7 +339,7 @@ class PaymentController extends Controller
                 'id' => Uuid::uuid4()->toString(),
                 'name' => $request->nama,
                 'phone' => $request->phone,
-                'wakaf_id' => 'WAKAF-DIRECT-' . random_int(10, 999),
+                'wakaf_id' => 'WAKAF-DIRECT-' . $request->total,
                 'order_id' => $order_id,
                 'amount' => $request->total
             ];
@@ -391,13 +391,7 @@ class PaymentController extends Controller
                 ], 400);
             }
         } else {
-            $tr = [
-                'id' => Uuid::uuid4()->toString(),
-                'donatur_id' => $dataUser->id,
-                'wakaf_id' => $dataUser->wakaf_id,
-                'status' => 'pending',
-            ];
-            Transaction::create($tr);
+
 
             $checkPayment = DB::table('transactions')->where('donatur_id', $dataUser->id)->where('status', 'pending')->first();
 
@@ -409,6 +403,13 @@ class PaymentController extends Controller
                     'url' => getenv('FRONTEND_URL') . '?donatur_id=' . $dataUser->id . '&order_id=' . $dataUser->order_id
                 ], 400);
             } else {
+                $tr = [
+                    'id' => Uuid::uuid4()->toString(),
+                    'donatur_id' => $dataUser->id,
+                    'wakaf_id' => 'WAKAF-DIRECT-' . $request->total,
+                    'status' => 'pending',
+                ];
+                Transaction::create($tr);
                 $updateOrderId = [
                     'order_id' => $order_id
                 ];
@@ -462,7 +463,7 @@ class PaymentController extends Controller
 
         if ($checkUser) {
             try {
-                DB::table("transactions")->where('donatur_id', $checkUser->id)->where('status', 'pending')->delete();
+                DB::table("transactions")->where('donatur_id', $checkUser->id)->where('payment_id', null)->where('status', 'pending')->delete();
                 return response()->json([
                     'status' => true,
                     'statusCode' => 200,

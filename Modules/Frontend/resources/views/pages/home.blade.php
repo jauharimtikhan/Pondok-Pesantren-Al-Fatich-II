@@ -192,7 +192,7 @@
                             <li><i class="bi bi-check"></i> Amal Jariyah</li>
                             <li><i class="bi bi-check"></i> Mendapatkan Do'a dari para santri</li>
                         </ul>
-                        <div class="text-center"><button type="button" onclick="pricing(900000)" class="buy-btn">Wakaf
+                        <div class="text-center"><button type="button" onclick="pricing(600000)" class="buy-btn">Wakaf
                                 Sekarang</button></div>
                     </div>
                 </div><!-- End Pricing Item -->
@@ -398,7 +398,7 @@
                                     icon: 'error',
                                     title: 'Anda Mengakhiri Transaksi'
                                 });
-                                deleteTransaction($('#no_hp').val())
+                                deleteTransaction($('#phone').val())
                             }
                         })
                     }
@@ -419,5 +419,21 @@
                 }
             })
         })
+
+        function deleteTransaction(phone) {
+            $.ajax({
+                url: '{{ getenv('API_URL') }}payment/delete_transaction/' + phone,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(res) {
+
+                }
+            })
+        }
     </script>
 @endpush
