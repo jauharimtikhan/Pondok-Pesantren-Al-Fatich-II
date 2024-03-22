@@ -179,6 +179,17 @@
     </div>
     {{-- End Modal Add Kategori --}}
 @endsection
+<?php
+$assetsImage = $artikel[0]->path;
+$replace = 'http://localhost:8000/';
+if (getenv('ASSET_URL') !== $replace) {
+    if (strpos($assetsImage, $replace) !== false) {
+        $newAsset = str_replace($replace, getenv('ASSET_URL') . '/', $assetsImage);
+    } else {
+        $newAsset = $assetsImage;
+    }
+}
+?>
 @push('js')
     <script type="text/javascript">
         $(document).ready(function() {
@@ -206,7 +217,7 @@
                         resolve(type);
                     }),
                 storeAsFile: true,
-            }).addFile(`{{ asset($artikel[0]->path) }}`)
+            }).addFile(`{{ $newAsset }}`)
 
             $('#featured').change((e) => {
                 const state = e.target.checked;

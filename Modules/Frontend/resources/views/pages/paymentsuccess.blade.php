@@ -18,7 +18,7 @@
             url: '{{ getenv('API_URL') }}payment_status?order_id={{ $order_id }}',
             method: 'get',
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
 
             },
             success: function(data) {
@@ -73,7 +73,7 @@
                 url: '{{ getenv('API_URL') }}payment/update',
                 method: 'post',
                 headers: {
-                    'Authorization': 'Bearer {{ getenv('API_KEY') }}',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 },
                 data: {
                     donatur_id: '{{ $donatur_id }}',

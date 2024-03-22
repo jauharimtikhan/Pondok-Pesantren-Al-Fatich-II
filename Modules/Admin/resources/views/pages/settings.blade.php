@@ -36,9 +36,9 @@
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                @include('components.settings.setting-app')
-                @include('components.settings.setting-db')
-                @include('components.settings.etc')
+                @include('admin::components/settings/setting-app')
+                @include('admin::components/settings/setting-db')
+                @include('admin::components/settings/etc')
             </div>
         </section>
 

@@ -1,6 +1,6 @@
 <div class="col-xl-4 col-md-6">
     <article>
-        <div class="post-img">
+        <div class="post-img ">
             <a href="{{ route('artikelById.landing_page', $artikel->artikel_id) }}">
                 <img src="{{ $artikel->path }}" alt="" class="img-fluid">
             </a>

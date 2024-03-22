@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\GuzzleException;
 use App\Http\Controllers\Controller;
 use App\Models\Donatur;
 use App\Models\Transaction;
+use Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Midtrans\Snap;
@@ -26,22 +30,32 @@ class PaymentController extends Controller
     {
         $params = $request->query('order_id');
         $orderId = $params;
-        $guzzele = new \GuzzleHttp\Client();
+        $guzzele = new Client(['http_errors' => false]);
 
-
-        $response = $guzzele->request('GET', getenv('MIDTRANS_API_URL') . 'v2/' . $orderId . '/status', [
-            'headers' => [
-                'accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic ' . base64_encode(config('services.midtrans.serverKey') . ':')
-            ]
-        ]);
-        if ($response->getStatusCode() == 200) {
+        try {
+            $response = $guzzele->request('GET', getenv('MIDTRANS_API_URL') . 'v2/' . $orderId . '/status', [
+                'headers' => [
+                    'accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic ' . base64_encode(config('services.midtrans.serverKey') . ':')
+                ]
+            ]);
+            $responseData = json_decode($response->getBody(), true);
+            if ($responseData == null) {
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => $response->getStatusCode(),
+                    'data' => 'Transaksi Tidak Ditemukan'
+                ], $response->getStatusCode());
+            }
             return response()->json([
                 'status' => true,
-                'statusCode' => 200,
-                'data' => json_decode($response->getBody())
-            ]);
+                'statusCode' => $response->getStatusCode(),
+                'data' => $responseData
+            ], $response->getStatusCode());
+        } catch (BadResponseException $th) {
+
+            throw new Exception('Transaksi Tidak Ditemukan', $th->getCode());
         }
     }
 
@@ -454,7 +468,7 @@ class PaymentController extends Controller
                     'statusCode' => 200,
 
                 ], 200);
-            } catch (\Exception $th) {
+            } catch (Exception $th) {
                 return response()->json([
                     'status' => false,
                     'statusCode' => 400,

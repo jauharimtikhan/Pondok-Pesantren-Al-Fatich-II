@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     // Route Home
     Route::controller(HomeController::class)->group(function () {
         Route::get('/home', 'index')->name('home');
-        Route::get('/visitor', 'visitor')->name('home.visitor');
+        Route::get('/home/get_donaturs_chart', 'getDataDonatur')->name('home.get.donaturs.chart');
     });
 
     // Route User
@@ -121,5 +121,10 @@ Route::middleware('auth')->group(function () {
     // Route Transaksi
     Route::controller(TransactionController::class)->group(function () {
         Route::get('/transaksi', 'index')->name('transaction');
+        Route::get('/transaksi/get', 'getTransactions')->name('transaction.get');
+        Route::delete('/transaksi/delete/{id}', 'deleteTransaction')->name('transaction.delete');
+        Route::post('/transaksi/bulkDelete', 'bulkDeleteTransaction')->name('transaction.bulkDelete');
     });
 });
+
+Route::get('/testing/data', [HomeController::class, 'getDataDonatur']);

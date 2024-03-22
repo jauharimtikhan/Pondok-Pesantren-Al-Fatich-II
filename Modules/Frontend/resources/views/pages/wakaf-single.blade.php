@@ -41,11 +41,7 @@
                                 {{ $details_wakaf[0]->description }}
                             </p>
 
-                            <blockquote>
-                                <p>
-                                    Iklan Google Ads
-                                </p>
-                            </blockquote>
+
                             <h2>Benefit</h2>
                             <p>
                                 {{ $details_wakaf[0]->benefit }}
@@ -112,21 +108,21 @@
                 const billion = Math.floor(number / 1000000000);
                 const million = Math.round((number % 1000000000) / 1000000);
                 if (million === 0) {
-                    result = `${billion}M`;
+                    result = `${billion} M`;
                 } else {
-                    result = `${billion}.${million}M`;
+                    result = `${billion}.${million} M`;
                 }
             } else if (number >= 1000000) {
                 const million = Math.floor(number / 1000000);
-                const thousand = Math.round((number % 1000000) / 1000);
+                const thousand = Math.round((number % 1000000) / 100000);
                 if (thousand === 0) {
-                    result = `${million}JT`;
+                    result = `${million} JT`;
                 } else {
-                    result = `${million}.${thousand}JT`;
+                    result = `${million}.${thousand} JT`;
                 }
             } else if (number >= 1000) {
                 const thousand = Math.floor(number / 1000);
-                result = `${thousand}K`;
+                result = `${thousand} K`;
             } else {
                 result = `${number}`;
             }

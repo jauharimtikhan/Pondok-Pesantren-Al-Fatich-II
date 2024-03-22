@@ -72,3 +72,17 @@ if (!function_exists('checkRole')) {
         }
     }
 }
+
+if (!function_exists('addClassToImg')) {
+    function addClassToImg($matches)
+    {
+        $imgTag = $matches[0];
+        $existingAttributes = $matches[1];
+        // Tambahkan atribut class jika belum ada
+        if (strpos($existingAttributes, 'class=') === false) {
+            return str_replace('<img', '<img class="img-fluid rounded" width="100%" height="100%" ' . $existingAttributes, $imgTag);
+        } else {
+            return $imgTag; // Atribut class sudah ada, tidak perlu ditambahkan kembali
+        }
+    }
+}

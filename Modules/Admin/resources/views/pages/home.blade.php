@@ -32,10 +32,61 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Grafik Donatur</h5>
+                </div>
+                <div class="card-body">
+                    <div style="width: 80%; margin: auto;">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </div>
 @endsection
 @push('js')
-    <script></script>
+    <script>
+        let ctx = document.getElementById('barChart').getContext('2d');
+
+        $.ajax({
+            url: '{{ route('home.get.donaturs.chart') }}',
+            method: 'GET',
+            success: function(res) {
+                let dt = []
+                let to = []
+                $.each(res.data, function(key, val) {
+                    dt.push(key)
+                    to.push(val)
+                })
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dt,
+                        datasets: [{
+                            label: 'Total Donatur',
+                            data: to,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                suggestedMax: 100
+                            }
+                        },
+
+                    }
+                });
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    </script>
 @endpush

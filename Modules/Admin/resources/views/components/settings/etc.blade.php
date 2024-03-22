@@ -14,6 +14,7 @@
                             <option value="TINYMCE">TinyMCE Api Key</option>
                             <option value="MIDTRANS">Midtrans</option>
                             <option value="LOG">Log Debug Setting</option>
+                            <option value="ALLOWED_IP">Allowed Ip</option>
                         </select>
                     </div>
                 </div>

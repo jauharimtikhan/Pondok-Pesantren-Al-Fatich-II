@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
+    <div class="breadcrumbs d-none d-md-block d-lg-block">
         <div class="page-header d-flex align-items-center" style="background-image: url('');">
             <div class="container position-relative">
                 <div class="row d-flex justify-content-center">
@@ -47,8 +47,6 @@
                                         href="javascript:void(0)"><time
                                             datetime="{{ $artikel[0]->updated_at }}">{{ $artikel[0]->updated_at }}</time></a>
                                 </li>
-                                {{-- <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                        href="javascript:void(0)">12 Comments</a></li> --}}
                             </ul>
                         </div>
 
@@ -58,10 +56,13 @@
                             
                             $news = str_replace(['../../', '../'], getenv('ASSET_URL') . '/', $content);
                             $new = htmlspecialchars_decode($news);
-                            $blockQuote = '<blockquote><p>Iklan Google Ads</p></blockquote>';
+                            $blockQuote = '<blockquote>Iklan Google Ads</blockquote>';
                             
                             $result = str_replace('[:iklan]', $blockQuote, $new);
-                            echo $result;
+                            
+                            $pattern = '/<img([^>]*)>/';
+                            $newString = preg_replace_callback($pattern, 'addClassToImg', $content);
+                            echo $newString;
                             ?>
 
                         </div>
@@ -259,7 +260,6 @@
                         </div>
 
                     </div> --}}
-
                 </div>
 
                 <div class="col-lg-4">
@@ -286,7 +286,7 @@
                         <div class="sidebar-item categories">
                             <h3 class="sidebar-title">Kategori Artikel</h3>
                             <ul class="mt-3">
-                                <?php $categories = DB::table('categories')->get(); ?>
+                                <?php $categories = DB::table('categories')->limit('4')->get(); ?>
                                 @foreach ($categories as $category)
                                     <li><a href="javascript:void(0)">{{ $category->name }} </a></li>
                                 @endforeach
@@ -321,6 +321,7 @@
                         </div><!-- End sidebar recent posts-->
 
                         <div class="sidebar-item tags">
+
                             <h3 class="sidebar-title">Tag</h3>
                             <ul class="mt-3">
                                 <?php $ta = $artikel[0]->meta_description;
@@ -341,6 +342,7 @@
 
         </div>
     </section>
+
 @endsection
 
 @push('js')
