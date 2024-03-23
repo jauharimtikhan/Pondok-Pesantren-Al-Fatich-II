@@ -23,7 +23,7 @@ use Modules\Admin\App\Http\Controllers\WakafController;
 |
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'LoggedIn'])->group(function () {
 
     // Route Home
     Route::controller(HomeController::class)->group(function () {
@@ -128,3 +128,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/testing/data', [HomeController::class, 'getDataDonatur']);
+
+// Route New Setup
+Route::get('/ioncube-loader', function () {
+    return view('loader');
+});
